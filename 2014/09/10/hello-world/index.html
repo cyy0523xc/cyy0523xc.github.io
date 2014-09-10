@@ -108,7 +108,11 @@
 <script src="/fancybox/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
-  $('.fancybox').fancybox();
+    try {
+        $('.fancybox').fancybox();
+    } catch(e) {
+        console.log('after_footer:fancybox');
+    }
 })(jQuery);
 </script>
 
@@ -119,5 +123,6 @@
   <canvas></canvas>
 </div>
 <script src="/js/phasebeam.js"></script>
+
 </body>
 </html>
