@@ -1,0 +1,139 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>R编码规范 | 数据之路</title>
+  <meta name="author" content="Alex Cai">
+
+  
+  <meta name="description" content="编码规范
+google：http://google-styleguide.googlecode.com/svn/trunk/Rguide.xml
+中文版：http://www.road2stat.com/rstyle/rstyle.html
+https://docs.google.com/docum">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="数据之路" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">R编码规范</h1>
+  
+
+    <time datetime="2013-08-27T16:00:00.000Z">
+  <span class="day">28</span><span class="month">Aug</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="编码规范">编码规范</h2>
+<p>google：<a href="http://google-styleguide.googlecode.com/svn/trunk/Rguide.xml" target="_blank" rel="external">http://google-styleguide.googlecode.com/svn/trunk/Rguide.xml</a></p>
+<p>中文版：<a href="http://www.road2stat.com/rstyle/rstyle.html" target="_blank" rel="external">http://www.road2stat.com/rstyle/rstyle.html</a></p>
+<p><a href="https://docs.google.com/document/d/1esDVxyWvH8AsX-VJa-8oqWaHLs4stGlIbk8kLc5VlII/edit" target="_blank" rel="external">https://docs.google.com/document/d/1esDVxyWvH8AsX-VJa-8oqWaHLs4stGlIbk8kLc5VlII/edit</a></p>
+<h3 id="补充规范">补充规范</h3>
+<h4 id="变量的特殊前缀">变量的特殊前缀</h4>
+<ul>
+<li>tmp：   临时变量</li>
+<li>p:      函数参数</li>
+</ul>
+<h4 id="变量的后缀">变量的后缀</h4>
+<p>后缀通常用来表示变量的类型，如：</p>
+<ul>
+<li>lst，tb，vec, ft等</li>
+<li>fn: 函数变量, 通常在例如tapply等函数中使用</li>
+</ul>
+<h2 id="技巧">技巧</h2>
+<ol>
+<li>在shell直接运行R脚本</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/Rscript --slave</span></div><div class="line">argv &lt;- commandArgs(TRUE)</div><div class="line">x &lt;- as.numeric(argv[<span class="number">1</span>])</div></pre></td></tr></table></figure>
+
+<p>然后：sudo chmod +x file.r</p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/R/">R</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2014 Alex Cai
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+    try {
+        $('.fancybox').fancybox();
+    } catch(e) {
+        console.log('after_footer:fancybox');
+    }
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+
+</body>
+</html>

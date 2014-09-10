@@ -1,0 +1,655 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Archives: 2013/8 | 数据之路</title>
+  <meta name="author" content="Alex Cai">
+
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="数据之路" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner">
+
+<header id="archive-header">
+  <h1 class="alignleft">Archives: 2013/8</h1>
+  <div class="search alignright">
+    <form action="http://google.com/search" method="get" accept-charset="utf-8">
+      <input type="search" name="q" results="0" placeholder="Search">
+      <input type="hidden" name="q" value="site:yoursite.com">
+    </form>
+  </div>
+</header>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2013/08/30/2013-08-30-使用R来获取网易公开课的下载地址/">使用R来获取网易公开课的下载地址</a></h1>
+  
+
+    <time datetime="2013-08-29T16:00:00.000Z">
+  <span class="day">30</span><span class="month">Aug</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <p>今天看到一个网易公开课的课程，想把它们下载下来，所以写了一个脚本去分析页面结构，把title和url解析出来。</p>
+<p>脚本见<a href="https://github.com/cyy0523xc/R/blob/master/lib/cai_get_download_url.r" target="_blank" rel="external">https://github.com/cyy0523xc/R/blob/master/lib/cai_get_download_url.r</a></p>
+<p>其他页面的数据应该也是一样的。</p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/R/">R</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2013/08/30/2013-08-30-rsync命令/">rsync命令</a></h1>
+  
+
+    <time datetime="2013-08-29T16:00:00.000Z">
+  <span class="day">30</span><span class="month">Aug</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <p>从远程服务器复制文件到本地服务器以前通常会使用scp命令，例如：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -<span class="constant">P</span> <span class="number">3000</span> user<span class="variable">@host</span><span class="symbol">:/data2/bak/</span><span class="number">20130801</span>/part-* <span class="regexp">/home/windows</span><span class="regexp">/data/</span><span class="number">20130825</span>/</div></pre></td></tr></table></figure>
+
+<p>不过用脚本跑的时候，发现得到的文件不齐全，有些文件不知道为什么没有下载到本地，所以寻找可以不覆盖更新的命令。本以为scp有这样的参数的，不过没发现。后来就使用rsync命令了，如：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rsync -aPuv <span class="string">'-e ssh -p 3000'</span> user<span class="variable">@host</span><span class="symbol">:/data2/bak/</span><span class="number">20130825</span>/part-* <span class="regexp">/home/windows</span><span class="regexp">/data/</span><span class="number">20130825</span>/</div></pre></td></tr></table></figure>
+
+<p>rsync的参数解释：</p>
+<ul>
+<li>P：显示进度条信息</li>
+<li>u：update，只返回不同的文件</li>
+</ul>
+<p>扩展：<a href="http://www.howtocn.org/rsync:use_rsync" target="_blank" rel="external">http://www.howtocn.org/rsync:use_rsync</a></p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/linux/">linux</a><a href="/tags/rsync/">rsync</a><a href="/tags/scp/">scp</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2013/08/28/2013-08-28-r资源列表/">R资源列表</a></h1>
+  
+
+    <time datetime="2013-08-27T16:00:00.000Z">
+  <span class="day">28</span><span class="month">Aug</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="文档">文档</h2>
+<p>R扩展：<a href="http://cran.r-project.org/doc/manuals/R-exts.html" target="_blank" rel="external">http://cran.r-project.org/doc/manuals/R-exts.html</a></p>
+<h2 id="文章">文章</h2>
+<p>炼数成金 R中国用户组<a href="http://r.dataguru.cn/" target="_blank" rel="external">http://r.dataguru.cn/</a><br>编写R包C扩展的核心指引<a href="http://www.dataguru.cn/article-1178-1.html" target="_blank" rel="external">http://www.dataguru.cn/article-1178-1.html</a><br>关于在R programming中避免显式循环的一些方法<a href="http://www.dataguru.cn/article-3284-1.html" target="_blank" rel="external">http://www.dataguru.cn/article-3284-1.html</a></p>
+<h2 id="书籍刊物">书籍刊物</h2>
+<p>数据科学<a href="http://kan.weibo.com/kan/3444217594966746" target="_blank" rel="external">http://kan.weibo.com/kan/3444217594966746</a><br>R语言小站<a href="http://kan.weibo.com/kan/3484733640942053" target="_blank" rel="external">http://kan.weibo.com/kan/3484733640942053</a></p>
+<h2 id="课程">课程</h2>
+<p>北美18名校的数据挖掘，数据分析，人工智能及机器学习课程汇总<a href="http://kan.weibo.com/con/3547413957114530?_from=text" target="_blank" rel="external">http://kan.weibo.com/con/3547413957114530?_from=text</a></p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/R/">R</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2013/08/28/2013-08-28-r编码规范/">R编码规范</a></h1>
+  
+
+    <time datetime="2013-08-27T16:00:00.000Z">
+  <span class="day">28</span><span class="month">Aug</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="编码规范">编码规范</h2>
+<p>google：<a href="http://google-styleguide.googlecode.com/svn/trunk/Rguide.xml" target="_blank" rel="external">http://google-styleguide.googlecode.com/svn/trunk/Rguide.xml</a></p>
+<p>中文版：<a href="http://www.road2stat.com/rstyle/rstyle.html" target="_blank" rel="external">http://www.road2stat.com/rstyle/rstyle.html</a></p>
+<p><a href="https://docs.google.com/document/d/1esDVxyWvH8AsX-VJa-8oqWaHLs4stGlIbk8kLc5VlII/edit" target="_blank" rel="external">https://docs.google.com/document/d/1esDVxyWvH8AsX-VJa-8oqWaHLs4stGlIbk8kLc5VlII/edit</a></p>
+<h3 id="补充规范">补充规范</h3>
+<h4 id="变量的特殊前缀">变量的特殊前缀</h4>
+<ul>
+<li>tmp：   临时变量</li>
+<li>p:      函数参数</li>
+</ul>
+<h4 id="变量的后缀">变量的后缀</h4>
+<p>后缀通常用来表示变量的类型，如：</p>
+<ul>
+<li>lst，tb，vec, ft等</li>
+<li>fn: 函数变量, 通常在例如tapply等函数中使用</li>
+</ul>
+<h2 id="技巧">技巧</h2>
+<ol>
+<li>在shell直接运行R脚本</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/Rscript --slave</span></div><div class="line">argv &lt;- commandArgs(TRUE)</div><div class="line">x &lt;- as.numeric(argv[<span class="number">1</span>])</div></pre></td></tr></table></figure>
+
+<p>然后：sudo chmod +x file.r</p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/R/">R</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2013/08/21/2013-08-21-移动广告数据挖掘/">移动广告数据挖掘</a></h1>
+  
+
+    <time datetime="2013-08-20T16:00:00.000Z">
+  <span class="day">21</span><span class="month">Aug</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <p>从有米遇到的实际情况，来谈自己对移动广告数据挖掘的一点认识。</p>
+<h2 id="为什么需要数据挖掘？">为什么需要数据挖掘？</h2>
+<blockquote>
+<p>我知道我广告费的一半浪费掉了，但是我不知道哪一半。</p>
+</blockquote>
+<p>这是某位大师说的话，事实上的确如此，可能还不止一半。</p>
+<p>对于我们来说，数据挖掘就是用来指导或者实现广告的精准投放，提升广告的转化率，从而提升开发者收益，形成平台的良性循环。</p>
+<hr>
+<h2 id="什么时候需要数据挖掘？">什么时候需要数据挖掘？</h2>
+<p>在我看来，数据挖掘应该是一种<strong>锦上添花</strong>，而非雪中送炭。广告的转化率对于我们来说是至关重要的，所以我们会重点关注这方面数据。对于积分墙（介绍：<a href="http://www.youmi.net/page/product/#wall" target="_blank" rel="external">http://www.youmi.net/page/product/#wall</a>），大家也许会觉得，用户是奔着积分去下应用的，转化率会很高，不过中间还是有很多因数使得用户没有完成步骤，我们数据挖掘的核心任务就是要把影响转化率的主要因数找出来，以驱动产品改进决策。对于我们来说，可能看见钉子就想锤，看见数据就想挖，但是这样未必总是好的。对于一个企业来说，特别是各种资源都相对紧张的初创企业，做一件事情的成本和收益永远是其要考虑的，毫无疑问，数据挖掘是需要付出成本的，包括时间成本和人力成本等。作为企业决策者就需要衡量投入的成本和获得的收益是否符合增长的预期？如果把这部分的成本放到其他方面会不会获得更好的收益？</p>
+<p>上周末听郭同学讲了这么个情况：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">数据挖掘服务对于小电商肯定是需要的，但是对于小电商，他们的样本数太少，而且对于他们企业来说，主要矛盾并不是怎么挖掘提升转化率，而是怎么开拓新用户。</div></pre></td></tr></table></figure>
+
+<p>具体从有米的实际情况来说，也是这样的。我们是国内第一家移动广告平台，到现在已经三年多，但是真正的数据挖掘也是最近才开始的。并不是我们不重视数据挖掘，只是有很多现实的情况：</p>
+<ul>
+<li>媒介流量是否足够大</li>
+<li>广告量是否足够多（如果广告量不够，那么就算挖掘的模型再完美，那很可能就是无米之炊，很难用来指导广告投放）</li>
+<li>公司资源是否允许（在创业的前三年，市场在迅速的扩大，公司也在快速的扩张，内部的各种资源都紧张，自然要放在解决主要矛盾上）</li>
+</ul>
+<p>基于这些情况，我们的重心也自然不在数据挖掘上，当然也不是完全没有数据挖掘，简单的还是有的。</p>
+<p>所以，对企业来说，特别是初创企业，数据挖掘很多时候是重要不紧急的任务。</p>
+<hr>
+<h2 id="是否需要高深的算法？">是否需要高深的算法？</h2>
+<p>对这个问题，常常让我想起大学时参加的数学建模竞赛：全国赛的时候，大家可能都喜欢使用那些看起来很高深的算法，例如神经网络，遗传算法之类；不过到了美国赛道时候，我们使用的模型并不复杂。一个模型的好与不好，我觉得并不是用算法的复杂度来衡量的，在满足现实条件时，能解决实际问题的模型，就是好的模型。我们关注的是解决问题本身，而不是算法。</p>
+<p><strong><em>好的模型通常是简单，而且应该易于理解的。</em></strong></p>
+<p>对我们来说，高深的挖掘技术，暂时也还没有用上，不过可以列举一些简单有效的案例给大家。</p>
+<hr>
+<h2 id="怎么进行数据挖掘？">怎么进行数据挖掘？</h2>
+<p>这里最重要的一步就是要把每一个步骤到下一个步骤的转化率计算出来，这些计算都很简单，下面给出两个实例（数据是经过简化的）。</p>
+<h3 id="积分墙不同接入点下的转化率分析">积分墙不同接入点下的转化率分析</h3>
+<blockquote>
+<p><a href="https://docs.google.com/spreadsheet/ccc?key=0AtdtDh06pqwEdGZUZWQzVFd1OG43UHpXVzA2SnE3dWc&amp;usp=sharing" target="_blank" rel="external">https://docs.google.com/spreadsheet/ccc?key=0AtdtDh06pqwEdGZUZWQzVFd1OG43UHpXVzA2SnE3dWc&amp;usp=sharing</a></p>
+</blockquote>
+<p>从数据或者图像至少可以看出几个问题：</p>
+<ul>
+<li>从启动安装到安装完成这一步的转化率明显比其他步骤低很多</li>
+<li>展示到点击的这个转化率也普遍不高</li>
+<li>从请求到展示这个步骤中，在cmwap的环境下特别低</li>
+<li>从启动下载到下载完成，在cmnet和cmwap环境下也明显偏低</li>
+<li>在wifi环境下，可以看到有两个转化率是明显比总的转化率高的，但是其他的却没有。</li>
+</ul>
+<p>看出了问题，我们再跟问题去寻找问题发生的原因。。。</p>
+<h3 id="积分墙下安装包大小对在不同网络环境下的影响">积分墙下安装包大小对在不同网络环境下的影响</h3>
+<p>数据如下：</p>
+<blockquote>
+<p><a href="https://docs.google.com/spreadsheet/ccc?key=0AtdtDh06pqwEdDlacnZ6YVdBT1pLRy1UR1NfMDV6YkE&amp;usp=sharing" target="_blank" rel="external">https://docs.google.com/spreadsheet/ccc?key=0AtdtDh06pqwEdDlacnZ6YVdBT1pLRy1UR1NfMDV6YkE&amp;usp=sharing</a></p>
+</blockquote>
+<p>从这份数据我们也可以得出一些产品或者投放上的优化建议，不过这次重点不关注这个。从图像上看，包的大小和转化率基本呈线性关系。有了这个线性模型，我们就可以去计算，怎么分配不同的广告包，以达到我们收益的最大化。</p>
+<hr>
+<h2 id="扩展阅读">扩展阅读</h2>
+<ul>
+<li>个性化推荐：<a href="http://v.qq.com/cover/q/q3w7h1htxh4uppg.html" target="_blank" rel="external">http://v.qq.com/cover/q/q3w7h1htxh4uppg.html</a></li>
+<li>计算广告学：<a href="http://sheetoo.com/app/course/ov?course_id=200" target="_blank" rel="external">http://sheetoo.com/app/course/ov?course_id=200</a></li>
+</ul>
+<blockquote>
+<p>这两个都是视频，值得看。</p>
+</blockquote>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/移动互联网/">移动互联网</a><a href="/tags/广告/">广告</a><a href="/tags/数据挖掘/">数据挖掘</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2013/08/20/2013-08-20-function.lapply/">R function lapply</a></h1>
+  
+
+    <time datetime="2013-08-19T16:00:00.000Z">
+  <span class="day">20</span><span class="month">Aug</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <blockquote>
+<p>包括函数：lapply, sapply, vapply</p>
+</blockquote>
+<h2 id="lapply">lapply</h2>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lapply(X, FUN, <span class="keyword">...</span>)</div></pre></td></tr></table></figure>
+
+<p>该函数会返回一个长度和X参数的长度相同的列表，其中每个元素都是X参数在FUN函数作用下的结果。</p>
+<h3 id="实现源码">实现源码</h3>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> (X, FUN, <span class="keyword">...</span>) </div><div class="line">{</div><div class="line">    FUN &lt;- match.fun(FUN)</div><div class="line">    <span class="keyword">if</span> (!is.vector(X) || is.object(X))    <span class="comment"># 如果不是向量（列表等也是向量），则会先转成list</span></div><div class="line">        X &lt;- as.list(X)</div><div class="line">    .Internal(lapply(X, FUN))   <span class="comment"># 直接调用C核心的函数</span></div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h3 id="实例">实例</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">&gt; a</div><div class="line">     [,<span class="number">1</span>] [,<span class="number">2</span>]</div><div class="line">[<span class="number">1</span>,]    <span class="number">1</span>    <span class="number">3</span></div><div class="line">[<span class="number">2</span>,]    <span class="number">2</span>    <span class="number">4</span></div><div class="line"></div><div class="line">&gt; lapply(a, <span class="function"><span class="keyword">function</span><span class="params">(x)</span></span>x^<span class="number">2</span>)  # length(a) == <span class="number">4</span></div><div class="line"><span class="string">[[1]]</span></div><div class="line">[<span class="number">1</span>] <span class="number">1</span></div><div class="line"></div><div class="line"><span class="string">[[2]]</span></div><div class="line">[<span class="number">1</span>] <span class="number">4</span></div><div class="line"></div><div class="line"><span class="string">[[3]]</span></div><div class="line">[<span class="number">1</span>] <span class="number">9</span></div><div class="line"></div><div class="line"><span class="string">[[4]]</span></div><div class="line">[<span class="number">1</span>] <span class="number">16</span></div><div class="line"></div><div class="line">&gt; d</div><div class="line">$a</div><div class="line">[<span class="number">1</span>] <span class="number">1</span> <span class="number">2</span></div><div class="line"></div><div class="line">$b</div><div class="line">[<span class="number">1</span>] <span class="number">3</span> <span class="number">4</span> <span class="number">5</span></div><div class="line"></div><div class="line">&gt; lapply(d, sum)  # length(d) == <span class="number">2</span></div><div class="line">$a</div><div class="line">[<span class="number">1</span>] <span class="number">3</span></div><div class="line"></div><div class="line">$b</div><div class="line">[<span class="number">1</span>] <span class="number">12</span></div></pre></td></tr></table></figure>
+
+<p>一个实际的例子：一次性加载某个目录下的R文件</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">CaiSource &lt;- <span class="keyword">function</span>(x, p.path) {</div><div class="line">  <span class="keyword">source</span>(paste(p.path, x, sep=<span class="string">""</span>))</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment"># lib.path是指定的目录</span></div><div class="line">lapply(list.files(path=lib.path, pattern=<span class="string">'\\.[rR]$'</span>), CaiSource, lib.path)</div></pre></td></tr></table></figure>
+
+<h2 id="sapply">sapply</h2>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sapply(X, FUN, <span class="keyword">...</span>, simplify = <span class="literal">TRUE</span>, USE.NAMES = <span class="literal">TRUE</span>)</div></pre></td></tr></table></figure>
+
+<p>sapply是对lapply的封装，实现代码：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> (X, FUN, <span class="keyword">...</span>, simplify = <span class="literal">TRUE</span>, USE.NAMES = <span class="literal">TRUE</span>) </div><div class="line">{</div><div class="line">    FUN &lt;- match.fun(FUN)</div><div class="line">    answer &lt;- lapply(X = X, FUN = FUN, <span class="keyword">...</span>)     <span class="comment"># 直接调用lapply</span></div><div class="line">    <span class="keyword">if</span> (USE.NAMES && is.character(X) && is.null(names(answer))) </div><div class="line">        names(answer) &lt;- X   <span class="comment"># USE。NAMES参数</span></div><div class="line">    <span class="keyword">if</span> (!identical(simplify, <span class="literal">FALSE</span>) && length(answer)) </div><div class="line">        simplify2array(answer, higher = (simplify == <span class="string">"array"</span>))  <span class="comment"># simplify参数，默认会转换成array</span></div><div class="line">    <span class="keyword">else</span> answer</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h2 id="vapply">vapply</h2>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vapply(X, FUN, FUN.VALUE, <span class="keyword">...</span>, USE.NAMES = <span class="literal">TRUE</span>)</div></pre></td></tr></table></figure>
+
+<p>该函数和sapply类似</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> (X, FUN, FUN.VALUE, <span class="keyword">...</span>, USE.NAMES = <span class="literal">TRUE</span>) </div><div class="line">{</div><div class="line">    FUN &lt;- match.fun(FUN)</div><div class="line">    <span class="keyword">if</span> (!is.vector(X) || is.object(X))   <span class="comment"># 对数据进行预处理</span></div><div class="line">        X &lt;- as.list(X)</div><div class="line">    .Internal(vapply(X, FUN, FUN.VALUE, USE.NAMES))</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>FUN.VALUE的值定义是？</p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/R/">R</a><a href="/tags/lapply/">lapply</a><a href="/tags/向量化运算/">向量化运算</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2013/08/20/2013-08-20-function.tapply/">R function tapply</a></h1>
+  
+
+    <time datetime="2013-08-19T16:00:00.000Z">
+  <span class="day">20</span><span class="month">Aug</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="tapply">tapply</h2>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tapply(X, INDEX, FUN = <span class="literal">NULL</span>, <span class="keyword">...</span>, simplify = <span class="literal">TRUE</span>)</div></pre></td></tr></table></figure>
+
+<p>把变量X（通常为向量）通过函数FUN作用在INDEX这个因子变量上，返回值可以根据simplify参数设置。simplify = T（默认）返回array，simplify = F则返回list。</p>
+<h3 id="实例">实例</h3>
+<p>计算各个省份的人均收入</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&gt; ins &lt;- <span class="keyword">list</span>(year=c(<span class="number">2011</span>, <span class="number">2012</span>, <span class="number">2012</span>, <span class="number">2013</span>, <span class="number">2013</span>), province=c(<span class="string">"GZ"</span>, <span class="string">"GZ"</span>, <span class="string">"BG"</span>, <span class="string">"BG"</span>, <span class="string">"GZ"</span>), income=c(<span class="number">10</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">12</span>, <span class="number">15</span>))  <span class="comment"># 定义数据</span></div><div class="line">&gt; ins</div><div class="line"><span class="variable">$year</span></div><div class="line">[<span class="number">1</span>] <span class="number">2011</span> <span class="number">2012</span> <span class="number">2012</span> <span class="number">2013</span> <span class="number">2013</span></div><div class="line"></div><div class="line"><span class="variable">$province</span></div><div class="line">[<span class="number">1</span>] <span class="string">"GZ"</span> <span class="string">"GZ"</span> <span class="string">"BG"</span> <span class="string">"BG"</span> <span class="string">"GZ"</span></div><div class="line"></div><div class="line"><span class="variable">$income</span></div><div class="line">[<span class="number">1</span>] <span class="number">10</span> <span class="number">12</span> <span class="number">13</span> <span class="number">12</span> <span class="number">15</span></div><div class="line"></div><div class="line">&gt; tapply(ins<span class="variable">$income</span>, ins<span class="variable">$province</span>, mean)</div><div class="line">      BG       GZ </div><div class="line"><span class="number">12.50000</span> <span class="number">12.33333</span></div></pre></td></tr></table></figure>
+
+<p>计算各个省份在各个年份的平均收入</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="function">tapply</span>(<span class="tag">ins</span><span class="variable">$income</span>, <span class="function">list</span>(<span class="tag">ins</span><span class="variable">$province</span>, <span class="tag">ins</span><span class="variable">$year</span>), mean)</div><div class="line">   2011 2012 2013</div><div class="line">BG   NA   13   12</div><div class="line">GZ   10   12   15</div></pre></td></tr></table></figure>
+
+<h3 id="源码">源码</h3>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> (X, INDEX, FUN = <span class="literal">NULL</span>, <span class="keyword">...</span>, simplify = <span class="literal">TRUE</span>) </div><div class="line">{</div><div class="line">    FUN &lt;- <span class="keyword">if</span> (!is.null(FUN)) </div><div class="line">        match.fun(FUN)</div><div class="line">    <span class="keyword">if</span> (!is.list(INDEX))           <span class="comment"># 如果分组因子不是list，则自动转为list</span></div><div class="line">        INDEX &lt;- list(INDEX)</div><div class="line">    nI &lt;- length(INDEX)</div><div class="line">    <span class="keyword">if</span> (!nI) </div><div class="line">        <span class="keyword">stop</span>(<span class="string">"'INDEX' is of length zero"</span>)</div><div class="line">    namelist &lt;- vector(<span class="string">"list"</span>, nI)</div><div class="line">    names(namelist) &lt;- names(INDEX)</div><div class="line">    extent &lt;- integer(nI) </div><div class="line">    nx &lt;- length(X)</div><div class="line">    one &lt;- <span class="number">1L</span></div><div class="line">    group &lt;- rep.int(one, nx)     <span class="comment"># 构造一个重复向量</span></div><div class="line">    ngroup &lt;- one</div><div class="line">    <span class="keyword">for</span> (i <span class="keyword">in</span> seq_along(INDEX)) {   <span class="comment"># 对分组因子列表的下标进行循环处理</span></div><div class="line">        index &lt;- as.factor(INDEX[[i]])</div><div class="line">        <span class="keyword">if</span> (length(index) != nx) </div><div class="line">            <span class="keyword">stop</span>(<span class="string">"arguments must have same length"</span>)</div><div class="line">        namelist[[i]] &lt;- levels(index)</div><div class="line">        extent[i] &lt;- nlevels(index)</div><div class="line">        </div><div class="line">        <span class="comment"># 注意这里计算分组的算法：计算组合后的分组情况</span></div><div class="line">        group &lt;- group + ngroup * (as.integer(index) - one)</div><div class="line">        ngroup &lt;- ngroup * nlevels(index)</div><div class="line">    }</div><div class="line">    <span class="keyword">if</span> (is.null(FUN)) </div><div class="line">        <span class="keyword">return</span>(group)</div><div class="line">        </div><div class="line">    <span class="comment"># 分组数据，完成映射（FUN）</span></div><div class="line">    ans &lt;- lapply(X = split(X, group), FUN = FUN, <span class="keyword">...</span>)   <span class="comment"># split按照分组因子切割变量X</span></div><div class="line">    index &lt;- as.integer(names(ans))</div><div class="line">    <span class="keyword">if</span> (simplify && all(unlist(lapply(ans, length)) == <span class="number">1L</span>)) {</div><div class="line">        ansmat &lt;- array(dim = extent, dimnames = namelist)</div><div class="line">        ans &lt;- unlist(ans, recursive = <span class="literal">FALSE</span>)</div><div class="line">    }</div><div class="line">    <span class="keyword">else</span> {</div><div class="line">        ansmat &lt;- array(vector(<span class="string">"list"</span>, prod(extent)), dim = extent, </div><div class="line">            dimnames = namelist)</div><div class="line">    }</div><div class="line">    <span class="keyword">if</span> (length(index)) {</div><div class="line">        names(ans) &lt;- <span class="literal">NULL</span></div><div class="line">        ansmat[index] &lt;- ans</div><div class="line">    }</div><div class="line">    ansmat</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>这个源码有可以优化的地方，例如循环体里面的：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">namelist[[i]] &lt;- levels(index)</div><div class="line">extent[i] &lt;- nlevels(index)</div><div class="line">ngroup &lt;- ngroup * nlevels(index)</div></pre></td></tr></table></figure>
+
+<p>实际上nlevels(index)只是对levels(index)取length，所以这三行代码实质上调用了levels函数三次（在一次循环体里面），调用nlevels和length两次。可以修改成这样：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">namelist[[i]] &lt;- levels(index)</div><div class="line">extent[i] &lt;- length(namelist[[i]])</div><div class="line">ngroup &lt;- ngroup * extent[i]</div></pre></td></tr></table></figure>
+
+<blockquote>
+<p>有时间的话，可以考虑把tapply改成C语言实现</p>
+</blockquote>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/R/">R</a><a href="/tags/tapply/">tapply</a><a href="/tags/向量化运算/">向量化运算</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2013/08/20/2013-08-20-function.apply/">R function apply</a></h1>
+  
+
+    <time datetime="2013-08-19T16:00:00.000Z">
+  <span class="day">20</span><span class="month">Aug</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="apply">apply</h2>
+<p>   apply(X, MARGIN, FUN, …)</p>
+<h3 id="参数说明">参数说明</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">X:         array or matrix</div><div class="line">MARGIN:    <span class="number">1</span>表示按行计算，<span class="number">2</span>表示按列计算，c(<span class="number">1</span>, <span class="number">2</span>)表示对行和列同时作用，就会对每个元素都产生作用</div><div class="line">FUN:       作用函数</div><div class="line"><span class="keyword">...</span>:       作用函数的参数</div></pre></td></tr></table></figure>
+
+<h3 id="实例">实例</h3>
+<p>按行计算</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&gt; <span class="tag">a</span></div><div class="line"><span class="attr_selector">[,1]</span> <span class="attr_selector">[,2]</span> <span class="attr_selector">[,3]</span> <span class="attr_selector">[,4]</span></div><div class="line"><span class="attr_selector">[1,]</span> 1 3 2 1</div><div class="line"><span class="attr_selector">[2,]</span> 2 1 3 2</div><div class="line">&gt; <span class="function">apply</span>(<span class="tag">a</span>, 1, <span class="function">function</span>(x)<span class="function">sum</span>(x))     # 可以简化成：<span class="function">apply</span>(<span class="tag">a</span>, 1, sum)</div><div class="line"><span class="attr_selector">[1]</span> 7 8</div></pre></td></tr></table></figure>
+
+<p>按列计算</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&gt; <span class="function">apply</span>(<span class="tag">a</span>, 2, <span class="function">function</span>(x)<span class="function">sum</span>(x))</div><div class="line"><span class="attr_selector">[1]</span> 3 4 5 3</div></pre></td></tr></table></figure>
+
+<p>行列同时作用</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="function">apply</span>(<span class="tag">a</span>, <span class="function">c</span>(1,2), <span class="function">function</span>(x)<span class="function">sum</span>(x))</div><div class="line"><span class="attr_selector">[,1]</span> <span class="attr_selector">[,2]</span> <span class="attr_selector">[,3]</span> <span class="attr_selector">[,4]</span></div><div class="line"><span class="attr_selector">[1,]</span> 1 3 2 1</div><div class="line"><span class="attr_selector">[2,]</span> 2 1 3 2</div></pre></td></tr></table></figure>
+
+<p>扩展参数</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="function">apply</span>(<span class="tag">a</span>, 1, <span class="function">function</span>(x, t)x+t, 10)    # </div><div class="line"><span class="attr_selector">[,1]</span> <span class="attr_selector">[,2]</span></div><div class="line"><span class="attr_selector">[1,]</span> 11 12</div><div class="line"><span class="attr_selector">[2,]</span> 13 11</div><div class="line"><span class="attr_selector">[3,]</span> 12 13</div><div class="line"><span class="attr_selector">[4,]</span> 11 12</div></pre></td></tr></table></figure>
+
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/R/">R</a><a href="/tags/apply/">apply</a><a href="/tags/向量化运算/">向量化运算</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2013/08/13/2013-08-13-一段R程序的优化/">一段R程序的优化</a></h1>
+  
+
+    <time datetime="2013-08-12T16:00:00.000Z">
+  <span class="day">13</span><span class="month">Aug</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="R性能优化">R性能优化</h2>
+<p>原程序：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">CaiAnalyseEiMac &lt;- <span class="keyword">function</span>(x) {</div><div class="line">  <span class="comment"># 分析应用中，一个mac对应多个imei地址的情况</span></div><div class="line">  <span class="comment">#</span></div><div class="line">  <span class="comment"># Args:</span></div><div class="line">  <span class="comment">#   x: list类型，待分析数据</span></div><div class="line">  <span class="comment">#     x$aid: 应用ID，格式例如：aid=23。（下面的格式也类同）</span></div><div class="line">  <span class="comment">#     x$ei:  imei列表</span></div><div class="line">  <span class="comment">#     x$mac: mac列表</span></div><div class="line">  <span class="comment"># Return:</span></div><div class="line">  <span class="comment">#   list，对应多个imei的mac的占比</span></div><div class="line">  </div><div class="line">  <span class="comment"># 格式化应用数据</span></div><div class="line">  x$aid &lt;- substr(x$aid, <span class="number">5</span>, <span class="number">100</span>)</div><div class="line">  n &lt;- length(x$aid)</div><div class="line">  aid.lst &lt;- unique(x$aid)</div><div class="line">  </div><div class="line">  <span class="comment"># 计算总体一个mac对应多个imei的情况</span></div><div class="line">  </div><div class="line">  <span class="comment"># 初始化</span></div><div class="line">  tmp.lst &lt;- list()</div><div class="line">  mac.unique &lt;- unique(x$mac)</div><div class="line">  <span class="keyword">for</span> (mac <span class="keyword">in</span> mac.unique) {</div><div class="line">    tmp.lst[[mac]] &lt;- c()</div><div class="line">  }</div><div class="line">  </div><div class="line">  <span class="comment"># 把imei都加入mac列表</span></div><div class="line">  <span class="keyword">for</span> (i <span class="keyword">in</span> <span class="number">1</span>:n) {</div><div class="line">    tmp.lst[[x$mac[i]]] &lt;- c(tmp.lst[[x$mac[i]]], x$ei[i])</div><div class="line">  }</div><div class="line">  </div><div class="line">  <span class="comment"># 汇总唯一值的个数</span></div><div class="line">  tmp.lst &lt;- lapply(tmp.lst, FUN=<span class="keyword">function</span>(x){<span class="keyword">return</span>(length(unique(x)))})</div><div class="line">  </div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>因为数据量比较大，在工作的机器上跑的时间超过半小时。。。。主要原因有两个：</p>
+<ul>
+<li>copy-on-change，这是R的机制，循环里有大量的修改list操作；</li>
+<li>R的循环效率比较低</li>
+</ul>
+<p>后来发现tapply函数可以达到目的，主要代码如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tmp.lst &lt;- tapply(x<span class="variable">$mac</span>, x<span class="variable">$ei</span>, <span class="function"><span class="keyword">function</span><span class="params">(x)</span><span class="title">length</span><span class="params">(unique<span class="params">(x)</span>)</span>)</span></div></pre></td></tr></table></figure>
+
+<p>非常的简洁，而且时间消耗就几秒而已。</p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/R/">R</a><a href="/tags/性能优化/">性能优化</a><a href="/tags/tapply/">tapply</a><a href="/tags/向量化运算/">向量化运算</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+  
+
+  <nav id="pagenavi">
+  
+  
+  <div class="clearfix"></div>
+</nav>
+</div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2014 Alex Cai
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+    try {
+        $('.fancybox').fancybox();
+    } catch(e) {
+        console.log('after_footer:fancybox');
+    }
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+
+</body>
+</html>
