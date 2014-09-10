@@ -1,0 +1,13 @@
+categories: 分类
+search: 搜索
+tags: Tags
+tagcloud: Tag Cloud
+tweets: Tweets
+prev: Prev
+next: Next
+comment: Comments
+archive_a: 文章 
+archive_b: "文章: %s"
+category: "分类: %s"
+tag: "Tag: %s"
+page: Page %d
