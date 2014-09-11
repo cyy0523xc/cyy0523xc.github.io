@@ -5,14 +5,14 @@
 # Site
 title: 数据之路
 subtitle: 心有沉香，何惧浮世 
-description: 心有沉香，何惧浮世 
+description: 心有沉香，何惧浮世！ 
 author: Alex Cai
 email: cyy0523xc@gmail.com
 language: zh-CN
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://cyy0523xc.github.io 
 root: /
 permalink: :year/:month/:day/:title/
 tag_dir: tags
@@ -84,11 +84,13 @@ theme: phase
 exclude_generator:
 
 # Deployment
-## Docs: http://hexo.io/docs/deployment.html
+
 deploy:
 - type: github 
   repo: https://github.com/cyy0523xc/cyy0523xc.github.io.git
   branch: master 
-- type: heroku
-  repo:  git@heroku.com:cyy0523xc.git 
+#- type: heroku
+#  repo:  git@heroku.com:cyy0523xc.git 
 
+plugins:
+- hexo-generator-feed
