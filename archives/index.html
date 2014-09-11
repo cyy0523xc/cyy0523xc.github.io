@@ -79,8 +79,25 @@
   </header>
   <div class="entry-content">
     
-      <h3 id="自定义页面">自定义页面</h3>
+      <h3 id="插入数学公式">插入数学公式</h3>
+<p>Mathjax的语法和LaTeX一致，在markdown中直接插入即可(注意上面我们修改了mathjax默认的inlineMath选项)，下面举些例子，更多语法请参考 <a href="http://www.lsv.ens-cachan.fr/~markey/LaTeX/doc/Companion-chapter8.pdf" target="_blank" rel="external">LaTeX Higher Mathematics</a>：</p>
+<p>插入方程组:</p>
+<p>\begin{aligned}<br>\dot{x} &amp; = \sigma(y-x) \\<br>\dot{y} &amp; = \rho x - y - xz \\<br>\dot{z} &amp; = -\beta z + xy<br>\end{aligned}</p>
+<p>插入矩阵：</p>
+<p>\begin{bmatrix}<br>1 &amp; 2\\<br>3 &amp; 4<br>\end{bmatrix}</p>
+<p>薛定谔方程：</p>
+<p>$$ i\hbar\frac{\partial \psi}{\partial t}<br>= \frac{-\hbar^2}{2m} \left(<br>\frac{\partial^2}{\partial x^2}</p>
+<ul>
+<li>\frac{\partial^2}{\partial y^2}</li>
+<li>\frac{\partial^2}{\partial z^2}<br>\right<br>) \psi + V \psi. $$</li>
+</ul>
+<h3 id="自定义页面">自定义页面</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo n page <span class="string">"about"</span></div></pre></td></tr></table></figure>
+
+<h3 id="加载慢的问题">加载慢的问题</h3>
+<p>通常是因为加载外部资源超时，例如google开放的jquery库等。修改即可。</p>
+<h3 id="常用命令">常用命令</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">hexo clean  <span class="comment"># deploy到github时，有时需要先运行该命令，例如修改样式时</span></div><div class="line">hexo g</div><div class="line">hexo d</div><div class="line">hexo s</div><div class="line">hexo n <span class="string">"title"</span>   <span class="comment"># 生成文章</span></div></pre></td></tr></table></figure>
 
 
     
@@ -535,7 +552,7 @@
   <header>
     
   
-    <h1 class="title"><a href="/2013/08/30/2013-08-30-使用R来获取网易公开课的下载地址/">使用R来获取网易公开课的下载地址</a></h1>
+    <h1 class="title"><a href="/2013/08/30/2013-08-30-rsync命令/">rsync命令</a></h1>
   
 
     <time datetime="2013-08-29T16:00:00.000Z">
@@ -544,9 +561,18 @@
   </header>
   <div class="entry-content">
     
-      <p>今天看到一个网易公开课的课程，想把它们下载下来，所以写了一个脚本去分析页面结构，把title和url解析出来。</p>
-<p>脚本见<a href="https://github.com/cyy0523xc/R/blob/master/lib/cai_get_download_url.r" target="_blank" rel="external">https://github.com/cyy0523xc/R/blob/master/lib/cai_get_download_url.r</a></p>
-<p>其他页面的数据应该也是一样的。</p>
+      <p>从远程服务器复制文件到本地服务器以前通常会使用scp命令，例如：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -<span class="constant">P</span> <span class="number">3000</span> user<span class="variable">@host</span><span class="symbol">:/data2/bak/</span><span class="number">20130801</span>/part-* <span class="regexp">/home/windows</span><span class="regexp">/data/</span><span class="number">20130825</span>/</div></pre></td></tr></table></figure>
+
+<p>不过用脚本跑的时候，发现得到的文件不齐全，有些文件不知道为什么没有下载到本地，所以寻找可以不覆盖更新的命令。本以为scp有这样的参数的，不过没发现。后来就使用rsync命令了，如：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rsync -aPuv <span class="string">'-e ssh -p 3000'</span> user<span class="variable">@host</span><span class="symbol">:/data2/bak/</span><span class="number">20130825</span>/part-* <span class="regexp">/home/windows</span><span class="regexp">/data/</span><span class="number">20130825</span>/</div></pre></td></tr></table></figure>
+
+<p>rsync的参数解释：</p>
+<ul>
+<li>P：显示进度条信息</li>
+<li>u：update，只返回不同的文件</li>
+</ul>
+<p>扩展：<a href="http://www.howtocn.org/rsync:use_rsync" target="_blank" rel="external">http://www.howtocn.org/rsync:use_rsync</a></p>
 
     
     
@@ -554,7 +580,7 @@
       
       
   <div class="tags">
-<a href="/tags/R/">R</a></div>
+<a href="/tags/linux/">linux</a><a href="/tags/rsync/">rsync</a><a href="/tags/scp/">scp</a></div>
 
       
     </footer>
@@ -610,6 +636,39 @@
   <canvas></canvas>
 </div>
 <script src="/js/phasebeam.js"></script>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
 
 </body>
 </html>

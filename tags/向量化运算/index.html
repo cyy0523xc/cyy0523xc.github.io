@@ -70,6 +70,66 @@
   <header>
     
   
+    <h1 class="title"><a href="/2013/08/20/2013-08-20-function.apply/">R function apply</a></h1>
+  
+
+    <time datetime="2013-08-19T16:00:00.000Z">
+  <span class="day">20</span><span class="month">8月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="apply">apply</h2>
+<p>   apply(X, MARGIN, FUN, …)</p>
+<h3 id="参数说明">参数说明</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">X:         array or matrix</div><div class="line">MARGIN:    <span class="number">1</span>表示按行计算，<span class="number">2</span>表示按列计算，c(<span class="number">1</span>, <span class="number">2</span>)表示对行和列同时作用，就会对每个元素都产生作用</div><div class="line">FUN:       作用函数</div><div class="line"><span class="keyword">...</span>:       作用函数的参数</div></pre></td></tr></table></figure>
+
+<h3 id="实例">实例</h3>
+<p>按行计算</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&gt; <span class="tag">a</span></div><div class="line"><span class="attr_selector">[,1]</span> <span class="attr_selector">[,2]</span> <span class="attr_selector">[,3]</span> <span class="attr_selector">[,4]</span></div><div class="line"><span class="attr_selector">[1,]</span> 1 3 2 1</div><div class="line"><span class="attr_selector">[2,]</span> 2 1 3 2</div><div class="line">&gt; <span class="function">apply</span>(<span class="tag">a</span>, 1, <span class="function">function</span>(x)<span class="function">sum</span>(x))     # 可以简化成：<span class="function">apply</span>(<span class="tag">a</span>, 1, sum)</div><div class="line"><span class="attr_selector">[1]</span> 7 8</div></pre></td></tr></table></figure>
+
+<p>按列计算</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&gt; <span class="function">apply</span>(<span class="tag">a</span>, 2, <span class="function">function</span>(x)<span class="function">sum</span>(x))</div><div class="line"><span class="attr_selector">[1]</span> 3 4 5 3</div></pre></td></tr></table></figure>
+
+<p>行列同时作用</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="function">apply</span>(<span class="tag">a</span>, <span class="function">c</span>(1,2), <span class="function">function</span>(x)<span class="function">sum</span>(x))</div><div class="line"><span class="attr_selector">[,1]</span> <span class="attr_selector">[,2]</span> <span class="attr_selector">[,3]</span> <span class="attr_selector">[,4]</span></div><div class="line"><span class="attr_selector">[1,]</span> 1 3 2 1</div><div class="line"><span class="attr_selector">[2,]</span> 2 1 3 2</div></pre></td></tr></table></figure>
+
+<p>扩展参数</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="function">apply</span>(<span class="tag">a</span>, 1, <span class="function">function</span>(x, t)x+t, 10)    # </div><div class="line"><span class="attr_selector">[,1]</span> <span class="attr_selector">[,2]</span></div><div class="line"><span class="attr_selector">[1,]</span> 11 12</div><div class="line"><span class="attr_selector">[2,]</span> 13 11</div><div class="line"><span class="attr_selector">[3,]</span> 12 13</div><div class="line"><span class="attr_selector">[4,]</span> 11 12</div></pre></td></tr></table></figure>
+
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/R/">R</a><a href="/tags/apply/">apply</a><a href="/tags/向量化运算/">向量化运算</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
     <h1 class="title"><a href="/2013/08/20/2013-08-20-function.tapply/">R function tapply</a></h1>
   
 
@@ -110,66 +170,6 @@
       
   <div class="tags">
 <a href="/tags/R/">R</a><a href="/tags/tapply/">tapply</a><a href="/tags/向量化运算/">向量化运算</a></div>
-
-      
-    </footer>
-    
-  </div>
-  
-</article>
-  
-    <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <header>
-    
-  
-    <h1 class="title"><a href="/2013/08/20/2013-08-20-function.apply/">R function apply</a></h1>
-  
-
-    <time datetime="2013-08-19T16:00:00.000Z">
-  <span class="day">20</span><span class="month">8月</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <h2 id="apply">apply</h2>
-<p>   apply(X, MARGIN, FUN, …)</p>
-<h3 id="参数说明">参数说明</h3>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">X:         array or matrix</div><div class="line">MARGIN:    <span class="number">1</span>表示按行计算，<span class="number">2</span>表示按列计算，c(<span class="number">1</span>, <span class="number">2</span>)表示对行和列同时作用，就会对每个元素都产生作用</div><div class="line">FUN:       作用函数</div><div class="line"><span class="keyword">...</span>:       作用函数的参数</div></pre></td></tr></table></figure>
-
-<h3 id="实例">实例</h3>
-<p>按行计算</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&gt; <span class="tag">a</span></div><div class="line"><span class="attr_selector">[,1]</span> <span class="attr_selector">[,2]</span> <span class="attr_selector">[,3]</span> <span class="attr_selector">[,4]</span></div><div class="line"><span class="attr_selector">[1,]</span> 1 3 2 1</div><div class="line"><span class="attr_selector">[2,]</span> 2 1 3 2</div><div class="line">&gt; <span class="function">apply</span>(<span class="tag">a</span>, 1, <span class="function">function</span>(x)<span class="function">sum</span>(x))     # 可以简化成：<span class="function">apply</span>(<span class="tag">a</span>, 1, sum)</div><div class="line"><span class="attr_selector">[1]</span> 7 8</div></pre></td></tr></table></figure>
-
-<p>按列计算</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&gt; <span class="function">apply</span>(<span class="tag">a</span>, 2, <span class="function">function</span>(x)<span class="function">sum</span>(x))</div><div class="line"><span class="attr_selector">[1]</span> 3 4 5 3</div></pre></td></tr></table></figure>
-
-<p>行列同时作用</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="function">apply</span>(<span class="tag">a</span>, <span class="function">c</span>(1,2), <span class="function">function</span>(x)<span class="function">sum</span>(x))</div><div class="line"><span class="attr_selector">[,1]</span> <span class="attr_selector">[,2]</span> <span class="attr_selector">[,3]</span> <span class="attr_selector">[,4]</span></div><div class="line"><span class="attr_selector">[1,]</span> 1 3 2 1</div><div class="line"><span class="attr_selector">[2,]</span> 2 1 3 2</div></pre></td></tr></table></figure>
-
-<p>扩展参数</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="function">apply</span>(<span class="tag">a</span>, 1, <span class="function">function</span>(x, t)x+t, 10)    # </div><div class="line"><span class="attr_selector">[,1]</span> <span class="attr_selector">[,2]</span></div><div class="line"><span class="attr_selector">[1,]</span> 11 12</div><div class="line"><span class="attr_selector">[2,]</span> 13 11</div><div class="line"><span class="attr_selector">[3,]</span> 12 13</div><div class="line"><span class="attr_selector">[4,]</span> 11 12</div></pre></td></tr></table></figure>
-
-
-    
-    
-    <footer class="meta">
-      
-      
-  <div class="tags">
-<a href="/tags/R/">R</a><a href="/tags/apply/">apply</a><a href="/tags/向量化运算/">向量化运算</a></div>
 
       
     </footer>
@@ -349,6 +349,39 @@
   <canvas></canvas>
 </div>
 <script src="/js/phasebeam.js"></script>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
 
 </body>
 </html>
