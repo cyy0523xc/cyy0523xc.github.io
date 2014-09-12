@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>文章: 2014/9 | 数据明月</title>
+  <title>失控 | 数据明月</title>
   <meta name="author" content="Alex Cai">
 
   
@@ -42,7 +42,7 @@
   <div id="content" class="inner">
 
 <header id="archive-header">
-  <h1 class="alignleft">文章: 2014/9</h1>
+  <h1 class="alignleft">Tag: 失控</h1>
   <div class="search alignright">
     <form action="http://google.com/search" method="get" accept-charset="utf-8">
       <input type="search" name="q" results="0" placeholder="搜索">
@@ -156,115 +156,6 @@
       
   <div class="tags">
 <a href="/tags/读书笔记/">读书笔记</a><a href="/tags/失控/">失控</a></div>
-
-      
-    </footer>
-    
-  </div>
-  
-</article>
-  
-    <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <header>
-    
-  
-    <h1 class="title"><a href="/2014/09/12/vim中替换-M符号/">vim中替换^M符号</a></h1>
-  
-
-    <time datetime="2014-09-12T09:14:32.000Z">
-  <span class="day">12</span><span class="month">9月</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <p>在使用git pull时，发生文件冲突，合并冲突时，发现行尾显示了很多 <strong>^M</strong> 的符号。这是一个特殊符号，可以使用替换：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">:%s/^M$//g</div></pre></td></tr></table></figure>
-
-<p>注意：命令中的 <strong>^M</strong> 需要用“ <strong>CTRL-V CTRL-M</strong> ” 生成。</p>
-
-    
-    
-    <footer class="meta">
-      
-      
-  <div class="tags">
-<a href="/tags/vim/">vim</a><a href="/tags/linux/">linux</a></div>
-
-      
-    </footer>
-    
-  </div>
-  
-</article>
-  
-    <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <header>
-    
-  
-    <h1 class="title"><a href="/2014/09/11/hexo记录/">hexo记录</a></h1>
-  
-
-    <time datetime="2014-09-11T03:19:30.000Z">
-  <span class="day">11</span><span class="month">9月</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <h3 id="插入数学公式">插入数学公式</h3>
-<p>Mathjax的语法和LaTeX一致，在markdown中直接插入即可(注意上面我们修改了mathjax默认的inlineMath选项)，下面举些例子，更多语法请参考 <a href="http://www.lsv.ens-cachan.fr/~markey/LaTeX/doc/Companion-chapter8.pdf" target="_blank" rel="external">LaTeX Higher Mathematics</a>：</p>
-<p><a href="http://blog.163.com/goldman2000@126/blog/static/167296895201221242646561/" target="_blank" rel="external">LaTeX入门</a></p>
-<p>插入方程组:</p>
-<p>\begin{aligned}<br>\dot{x} &amp; = \sigma(y-x) \\<br>\dot{y} &amp; = \rho x - y - xz \\<br>\dot{z} &amp; = -\beta z + xy<br>\end{aligned}</p>
-<p>插入矩阵：</p>
-<p>\begin{bmatrix}<br>1 &amp; 2\\<br>3 &amp; 4<br>\end{bmatrix}</p>
-<p>薛定谔方程：</p>
-<p>$$ \hbar\frac{\partial \psi}{\partial t}<br>= \frac{-\hbar^2}{2m} \left(<br>\frac{\partial^2}{\partial x^2}</p>
-<ul>
-<li>\frac{\partial^2}{\partial y^2}</li>
-<li>\frac{\partial^2}{\partial z^2}<br>\right<br>) \psi + V \psi. $$</li>
-</ul>
-<h3 id="自定义页面">自定义页面</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo n page <span class="string">"about"</span></div></pre></td></tr></table></figure>
-
-<h3 id="加载慢的问题">加载慢的问题</h3>
-<p>通常是因为加载外部资源超时，例如google开放的jquery库等。修改即可。</p>
-<h3 id="常用命令">常用命令</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">hexo clean  <span class="comment"># deploy到github时，有时需要先运行该命令，例如修改样式时</span></div><div class="line">hexo g</div><div class="line">hexo d</div><div class="line">hexo s</div><div class="line">hexo n <span class="string">"title"</span>   <span class="comment"># 生成文章</span></div></pre></td></tr></table></figure>
-
-
-    
-    
-    <footer class="meta">
-      
-      
-  <div class="tags">
-<a href="/tags/hexo/">hexo</a></div>
 
       
     </footer>
