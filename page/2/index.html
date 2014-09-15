@@ -57,6 +57,60 @@
   <header>
     
   
+    <h1 class="title"><a href="/2013/09/05/2013-09-05-R中vector和names函数/">R中vector和names函数</a></h1>
+  
+
+    <time datetime="2013-09-04T16:00:00.000Z">
+  <span class="day">5</span><span class="month">9月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="问题">问题</h2>
+<p>源数据保存在文件中，格式如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">28</span>&<span class="variable">at=</span><span class="number">7</span>&<span class="variable">cid=</span>mDamz1b7WRJZ</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">29</span>&<span class="variable">at=</span><span class="number">3</span>&<span class="variable">cid=</span>Q4ETETM9Hjx0</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">39</span>&<span class="variable">at=</span><span class="number">0</span>&<span class="variable">cid=</span>ytBSubxEaFN6</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">40</span>&<span class="variable">at=</span><span class="number">3</span>&<span class="variable">cid=</span>mDamz1b7WRJZ</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">42</span>&<span class="variable">at=</span><span class="number">6</span>&<span class="variable">cid=</span>ytBSubxEaFN6</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">42</span>&<span class="variable">at=</span><span class="number">3</span>&<span class="variable">cid=</span>mDamz1b7WRJZ</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">45</span>&<span class="variable">at=</span><span class="number">0</span>&<span class="variable">cid=</span><span class="number">66</span>OwWFuVBMSS</div></pre></td></tr></table></figure>
+
+<p>需要生成一个list，其下标是数据的字段名：drt，at，cid</p>
+<h2 id="解决">解决</h2>
+<p>开始写成这样，很别扭的代码：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">x &lt;- scan(filename, what=<span class="string">""</span>, sep=<span class="string">"&"</span>, nlines=<span class="number">1</span>)</div><div class="line">fields.name &lt;- sapply(x, FUN=<span class="keyword">function</span>(x){strsplit(x, split=<span class="string">"="</span>)[[<span class="number">1</span>]][<span class="number">1</span>]})</div><div class="line">names(fields.name) &lt;- <span class="literal">NULL</span></div><div class="line">names(fields.name) &lt;- fields.name</div><div class="line">fields.name &lt;- as.list(fields.name)</div></pre></td></tr></table></figure>
+
+<p>借鉴tapply的源码，改成这样：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">x &lt;- scan(filename, what=<span class="string">""</span>, sep=<span class="string">"&"</span>, nlines=<span class="number">1</span>)</div><div class="line">fields.name &lt;- sapply(x, FUN=<span class="keyword">function</span>(x){strsplit(x, split=<span class="string">"="</span>)[[<span class="number">1</span>]][<span class="number">1</span>]})</div><div class="line">tmp.fields.name &lt;- vector(<span class="string">"list"</span>, length(fields.name))    <span class="comment"># 生成一个空的list</span></div><div class="line">names(tmp.fields.name) &lt;- fields.name</div></pre></td></tr></table></figure>
+
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/R/">R</a><a href="/tags/vector/">vector</a><a href="/tags/names/">names</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
     <h1 class="title"><a href="/2013/09/02/2013-09-02-BlueKai模式研究/">BlueKai模式研究</a></h1>
   
 
@@ -594,66 +648,13 @@
   
 </article>
 
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <header>
-    
-  
-    <h1 class="title"><a href="/2013/08/13/2013-08-13-一段R程序的优化/">一段R程序的优化</a></h1>
-  
-
-    <time datetime="2013-08-12T16:00:00.000Z">
-  <span class="day">13</span><span class="month">8月</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <h2 id="R性能优化">R性能优化</h2>
-<p>原程序：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">CaiAnalyseEiMac &lt;- <span class="keyword">function</span>(x) {</div><div class="line">  <span class="comment"># 分析应用中，一个mac对应多个imei地址的情况</span></div><div class="line">  <span class="comment">#</span></div><div class="line">  <span class="comment"># Args:</span></div><div class="line">  <span class="comment">#   x: list类型，待分析数据</span></div><div class="line">  <span class="comment">#     x$aid: 应用ID，格式例如：aid=23。（下面的格式也类同）</span></div><div class="line">  <span class="comment">#     x$ei:  imei列表</span></div><div class="line">  <span class="comment">#     x$mac: mac列表</span></div><div class="line">  <span class="comment"># Return:</span></div><div class="line">  <span class="comment">#   list，对应多个imei的mac的占比</span></div><div class="line">  </div><div class="line">  <span class="comment"># 格式化应用数据</span></div><div class="line">  x$aid &lt;- substr(x$aid, <span class="number">5</span>, <span class="number">100</span>)</div><div class="line">  n &lt;- length(x$aid)</div><div class="line">  aid.lst &lt;- unique(x$aid)</div><div class="line">  </div><div class="line">  <span class="comment"># 计算总体一个mac对应多个imei的情况</span></div><div class="line">  </div><div class="line">  <span class="comment"># 初始化</span></div><div class="line">  tmp.lst &lt;- list()</div><div class="line">  mac.unique &lt;- unique(x$mac)</div><div class="line">  <span class="keyword">for</span> (mac <span class="keyword">in</span> mac.unique) {</div><div class="line">    tmp.lst[[mac]] &lt;- c()</div><div class="line">  }</div><div class="line">  </div><div class="line">  <span class="comment"># 把imei都加入mac列表</span></div><div class="line">  <span class="keyword">for</span> (i <span class="keyword">in</span> <span class="number">1</span>:n) {</div><div class="line">    tmp.lst[[x$mac[i]]] &lt;- c(tmp.lst[[x$mac[i]]], x$ei[i])</div><div class="line">  }</div><div class="line">  </div><div class="line">  <span class="comment"># 汇总唯一值的个数</span></div><div class="line">  tmp.lst &lt;- lapply(tmp.lst, FUN=<span class="keyword">function</span>(x){<span class="keyword">return</span>(length(unique(x)))})</div><div class="line">  </div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>因为数据量比较大，在工作的机器上跑的时间超过半小时。。。。主要原因有两个：</p>
-<ul>
-<li>copy-on-change，这是R的机制，循环里有大量的修改list操作；</li>
-<li>R的循环效率比较低</li>
-</ul>
-<p>后来发现tapply函数可以达到目的，主要代码如下：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tmp.lst &lt;- tapply(x<span class="variable">$mac</span>, x<span class="variable">$ei</span>, <span class="function"><span class="keyword">function</span><span class="params">(x)</span><span class="title">length</span><span class="params">(unique<span class="params">(x)</span>)</span>)</span></div></pre></td></tr></table></figure>
-
-<p>非常的简洁，而且时间消耗就几秒而已。</p>
-
-    
-    
-    <footer class="meta">
-      
-      
-  <div class="tags">
-<a href="/tags/R/">R</a><a href="/tags/性能优化/">性能优化</a><a href="/tags/tapply/">tapply</a><a href="/tags/向量化运算/">向量化运算</a></div>
-
-      
-    </footer>
-    
-  </div>
-  
-</article>
-
 
 <nav id="pagenavi">
   
     <a href="/" class="alignleft prev">Prev</a>
   
+  
+    <a href="/page/3/" class="alignright next">Next</a>
   
   <div class="clearfix"></div>
 </nav></div>
