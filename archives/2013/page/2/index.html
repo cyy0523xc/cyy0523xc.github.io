@@ -1,0 +1,389 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Page 2 | 文章: 2013 | 数据明月</title>
+  <meta name="author" content="Alex Cai">
+
+  
+  <meta name="description" content="心有沉香，何惧浮世！">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="数据明月" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="site-name">
+    数据明月 
+    <span>心有沉香，何惧浮世！</span>
+</div>
+
+<nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="http://github.com/cyy0523xc/">Github</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+  </ul>
+</nav>
+</header>
+  <div id="content" class="inner">
+
+<header id="archive-header">
+  <h1 class="alignleft">文章: 2013</h1>
+  <div class="search alignright">
+    <form action="http://google.com/search" method="get" accept-charset="utf-8">
+      <input type="search" name="q" results="0" placeholder="搜索">
+      <input type="hidden" name="q" value="site:cyy0523xc.github.io">
+    </form>
+  </div>
+</header>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2013/08/20/2013-08-20-function.lapply/">R function lapply</a></h1>
+  
+
+    <time datetime="2013-08-19T16:00:00.000Z">
+  <span class="day">20</span><span class="month">8月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <blockquote>
+<p>包括函数：lapply, sapply, vapply</p>
+</blockquote>
+<h2 id="lapply">lapply</h2>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lapply(X, FUN, <span class="keyword">...</span>)</div></pre></td></tr></table></figure>
+
+<p>该函数会返回一个长度和X参数的长度相同的列表，其中每个元素都是X参数在FUN函数作用下的结果。</p>
+<h3 id="实现源码">实现源码</h3>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> (X, FUN, <span class="keyword">...</span>) </div><div class="line">{</div><div class="line">    FUN &lt;- match.fun(FUN)</div><div class="line">    <span class="keyword">if</span> (!is.vector(X) || is.object(X))    <span class="comment"># 如果不是向量（列表等也是向量），则会先转成list</span></div><div class="line">        X &lt;- as.list(X)</div><div class="line">    .Internal(lapply(X, FUN))   <span class="comment"># 直接调用C核心的函数</span></div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h3 id="实例">实例</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">&gt; a</div><div class="line">     [,<span class="number">1</span>] [,<span class="number">2</span>]</div><div class="line">[<span class="number">1</span>,]    <span class="number">1</span>    <span class="number">3</span></div><div class="line">[<span class="number">2</span>,]    <span class="number">2</span>    <span class="number">4</span></div><div class="line"></div><div class="line">&gt; lapply(a, <span class="function"><span class="keyword">function</span><span class="params">(x)</span></span>x^<span class="number">2</span>)  # length(a) == <span class="number">4</span></div><div class="line"><span class="string">[[1]]</span></div><div class="line">[<span class="number">1</span>] <span class="number">1</span></div><div class="line"></div><div class="line"><span class="string">[[2]]</span></div><div class="line">[<span class="number">1</span>] <span class="number">4</span></div><div class="line"></div><div class="line"><span class="string">[[3]]</span></div><div class="line">[<span class="number">1</span>] <span class="number">9</span></div><div class="line"></div><div class="line"><span class="string">[[4]]</span></div><div class="line">[<span class="number">1</span>] <span class="number">16</span></div><div class="line"></div><div class="line">&gt; d</div><div class="line">$a</div><div class="line">[<span class="number">1</span>] <span class="number">1</span> <span class="number">2</span></div><div class="line"></div><div class="line">$b</div><div class="line">[<span class="number">1</span>] <span class="number">3</span> <span class="number">4</span> <span class="number">5</span></div><div class="line"></div><div class="line">&gt; lapply(d, sum)  # length(d) == <span class="number">2</span></div><div class="line">$a</div><div class="line">[<span class="number">1</span>] <span class="number">3</span></div><div class="line"></div><div class="line">$b</div><div class="line">[<span class="number">1</span>] <span class="number">12</span></div></pre></td></tr></table></figure>
+
+<p>一个实际的例子：一次性加载某个目录下的R文件</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">CaiSource &lt;- <span class="keyword">function</span>(x, p.path) {</div><div class="line">  <span class="keyword">source</span>(paste(p.path, x, sep=<span class="string">""</span>))</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment"># lib.path是指定的目录</span></div><div class="line">lapply(list.files(path=lib.path, pattern=<span class="string">'\\.[rR]$'</span>), CaiSource, lib.path)</div></pre></td></tr></table></figure>
+
+<h2 id="sapply">sapply</h2>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sapply(X, FUN, <span class="keyword">...</span>, simplify = <span class="literal">TRUE</span>, USE.NAMES = <span class="literal">TRUE</span>)</div></pre></td></tr></table></figure>
+
+<p>sapply是对lapply的封装，实现代码：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> (X, FUN, <span class="keyword">...</span>, simplify = <span class="literal">TRUE</span>, USE.NAMES = <span class="literal">TRUE</span>) </div><div class="line">{</div><div class="line">    FUN &lt;- match.fun(FUN)</div><div class="line">    answer &lt;- lapply(X = X, FUN = FUN, <span class="keyword">...</span>)     <span class="comment"># 直接调用lapply</span></div><div class="line">    <span class="keyword">if</span> (USE.NAMES && is.character(X) && is.null(names(answer))) </div><div class="line">        names(answer) &lt;- X   <span class="comment"># USE。NAMES参数</span></div><div class="line">    <span class="keyword">if</span> (!identical(simplify, <span class="literal">FALSE</span>) && length(answer)) </div><div class="line">        simplify2array(answer, higher = (simplify == <span class="string">"array"</span>))  <span class="comment"># simplify参数，默认会转换成array</span></div><div class="line">    <span class="keyword">else</span> answer</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h2 id="vapply">vapply</h2>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vapply(X, FUN, FUN.VALUE, <span class="keyword">...</span>, USE.NAMES = <span class="literal">TRUE</span>)</div></pre></td></tr></table></figure>
+
+<p>该函数和sapply类似</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> (X, FUN, FUN.VALUE, <span class="keyword">...</span>, USE.NAMES = <span class="literal">TRUE</span>) </div><div class="line">{</div><div class="line">    FUN &lt;- match.fun(FUN)</div><div class="line">    <span class="keyword">if</span> (!is.vector(X) || is.object(X))   <span class="comment"># 对数据进行预处理</span></div><div class="line">        X &lt;- as.list(X)</div><div class="line">    .Internal(vapply(X, FUN, FUN.VALUE, USE.NAMES))</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>FUN.VALUE的值定义是？</p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/R/">R</a><a href="/tags/lapply/">lapply</a><a href="/tags/向量化运算/">向量化运算</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2013/08/20/2013-08-20-function.tapply/">R function tapply</a></h1>
+  
+
+    <time datetime="2013-08-19T16:00:00.000Z">
+  <span class="day">20</span><span class="month">8月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="tapply">tapply</h2>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tapply(X, INDEX, FUN = <span class="literal">NULL</span>, <span class="keyword">...</span>, simplify = <span class="literal">TRUE</span>)</div></pre></td></tr></table></figure>
+
+<p>把变量X（通常为向量）通过函数FUN作用在INDEX这个因子变量上，返回值可以根据simplify参数设置。simplify = T（默认）返回array，simplify = F则返回list。</p>
+<h3 id="实例">实例</h3>
+<p>计算各个省份的人均收入</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&gt; ins &lt;- <span class="keyword">list</span>(year=c(<span class="number">2011</span>, <span class="number">2012</span>, <span class="number">2012</span>, <span class="number">2013</span>, <span class="number">2013</span>), province=c(<span class="string">"GZ"</span>, <span class="string">"GZ"</span>, <span class="string">"BG"</span>, <span class="string">"BG"</span>, <span class="string">"GZ"</span>), income=c(<span class="number">10</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">12</span>, <span class="number">15</span>))  <span class="comment"># 定义数据</span></div><div class="line">&gt; ins</div><div class="line"><span class="variable">$year</span></div><div class="line">[<span class="number">1</span>] <span class="number">2011</span> <span class="number">2012</span> <span class="number">2012</span> <span class="number">2013</span> <span class="number">2013</span></div><div class="line"></div><div class="line"><span class="variable">$province</span></div><div class="line">[<span class="number">1</span>] <span class="string">"GZ"</span> <span class="string">"GZ"</span> <span class="string">"BG"</span> <span class="string">"BG"</span> <span class="string">"GZ"</span></div><div class="line"></div><div class="line"><span class="variable">$income</span></div><div class="line">[<span class="number">1</span>] <span class="number">10</span> <span class="number">12</span> <span class="number">13</span> <span class="number">12</span> <span class="number">15</span></div><div class="line"></div><div class="line">&gt; tapply(ins<span class="variable">$income</span>, ins<span class="variable">$province</span>, mean)</div><div class="line">      BG       GZ </div><div class="line"><span class="number">12.50000</span> <span class="number">12.33333</span></div></pre></td></tr></table></figure>
+
+<p>计算各个省份在各个年份的平均收入</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="function">tapply</span>(<span class="tag">ins</span><span class="variable">$income</span>, <span class="function">list</span>(<span class="tag">ins</span><span class="variable">$province</span>, <span class="tag">ins</span><span class="variable">$year</span>), mean)</div><div class="line">   2011 2012 2013</div><div class="line">BG   NA   13   12</div><div class="line">GZ   10   12   15</div></pre></td></tr></table></figure>
+
+<h3 id="源码">源码</h3>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> (X, INDEX, FUN = <span class="literal">NULL</span>, <span class="keyword">...</span>, simplify = <span class="literal">TRUE</span>) </div><div class="line">{</div><div class="line">    FUN &lt;- <span class="keyword">if</span> (!is.null(FUN)) </div><div class="line">        match.fun(FUN)</div><div class="line">    <span class="keyword">if</span> (!is.list(INDEX))           <span class="comment"># 如果分组因子不是list，则自动转为list</span></div><div class="line">        INDEX &lt;- list(INDEX)</div><div class="line">    nI &lt;- length(INDEX)</div><div class="line">    <span class="keyword">if</span> (!nI) </div><div class="line">        <span class="keyword">stop</span>(<span class="string">"'INDEX' is of length zero"</span>)</div><div class="line">    namelist &lt;- vector(<span class="string">"list"</span>, nI)</div><div class="line">    names(namelist) &lt;- names(INDEX)</div><div class="line">    extent &lt;- integer(nI) </div><div class="line">    nx &lt;- length(X)</div><div class="line">    one &lt;- <span class="number">1L</span></div><div class="line">    group &lt;- rep.int(one, nx)     <span class="comment"># 构造一个重复向量</span></div><div class="line">    ngroup &lt;- one</div><div class="line">    <span class="keyword">for</span> (i <span class="keyword">in</span> seq_along(INDEX)) {   <span class="comment"># 对分组因子列表的下标进行循环处理</span></div><div class="line">        index &lt;- as.factor(INDEX[[i]])</div><div class="line">        <span class="keyword">if</span> (length(index) != nx) </div><div class="line">            <span class="keyword">stop</span>(<span class="string">"arguments must have same length"</span>)</div><div class="line">        namelist[[i]] &lt;- levels(index)</div><div class="line">        extent[i] &lt;- nlevels(index)</div><div class="line">        </div><div class="line">        <span class="comment"># 注意这里计算分组的算法：计算组合后的分组情况</span></div><div class="line">        group &lt;- group + ngroup * (as.integer(index) - one)</div><div class="line">        ngroup &lt;- ngroup * nlevels(index)</div><div class="line">    }</div><div class="line">    <span class="keyword">if</span> (is.null(FUN)) </div><div class="line">        <span class="keyword">return</span>(group)</div><div class="line">        </div><div class="line">    <span class="comment"># 分组数据，完成映射（FUN）</span></div><div class="line">    ans &lt;- lapply(X = split(X, group), FUN = FUN, <span class="keyword">...</span>)   <span class="comment"># split按照分组因子切割变量X</span></div><div class="line">    index &lt;- as.integer(names(ans))</div><div class="line">    <span class="keyword">if</span> (simplify && all(unlist(lapply(ans, length)) == <span class="number">1L</span>)) {</div><div class="line">        ansmat &lt;- array(dim = extent, dimnames = namelist)</div><div class="line">        ans &lt;- unlist(ans, recursive = <span class="literal">FALSE</span>)</div><div class="line">    }</div><div class="line">    <span class="keyword">else</span> {</div><div class="line">        ansmat &lt;- array(vector(<span class="string">"list"</span>, prod(extent)), dim = extent, </div><div class="line">            dimnames = namelist)</div><div class="line">    }</div><div class="line">    <span class="keyword">if</span> (length(index)) {</div><div class="line">        names(ans) &lt;- <span class="literal">NULL</span></div><div class="line">        ansmat[index] &lt;- ans</div><div class="line">    }</div><div class="line">    ansmat</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>这个源码有可以优化的地方，例如循环体里面的：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">namelist[[i]] &lt;- levels(index)</div><div class="line">extent[i] &lt;- nlevels(index)</div><div class="line">ngroup &lt;- ngroup * nlevels(index)</div></pre></td></tr></table></figure>
+
+<p>实际上nlevels(index)只是对levels(index)取length，所以这三行代码实质上调用了levels函数三次（在一次循环体里面），调用nlevels和length两次。可以修改成这样：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">namelist[[i]] &lt;- levels(index)</div><div class="line">extent[i] &lt;- length(namelist[[i]])</div><div class="line">ngroup &lt;- ngroup * extent[i]</div></pre></td></tr></table></figure>
+
+<blockquote>
+<p>有时间的话，可以考虑把tapply改成C语言实现</p>
+</blockquote>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/R/">R</a><a href="/tags/tapply/">tapply</a><a href="/tags/向量化运算/">向量化运算</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2013/08/20/2013-08-20-function.apply/">R function apply</a></h1>
+  
+
+    <time datetime="2013-08-19T16:00:00.000Z">
+  <span class="day">20</span><span class="month">8月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="apply">apply</h2>
+<p>   apply(X, MARGIN, FUN, …)</p>
+<h3 id="参数说明">参数说明</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">X:         array or matrix</div><div class="line">MARGIN:    <span class="number">1</span>表示按行计算，<span class="number">2</span>表示按列计算，c(<span class="number">1</span>, <span class="number">2</span>)表示对行和列同时作用，就会对每个元素都产生作用</div><div class="line">FUN:       作用函数</div><div class="line"><span class="keyword">...</span>:       作用函数的参数</div></pre></td></tr></table></figure>
+
+<h3 id="实例">实例</h3>
+<p>按行计算</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&gt; <span class="tag">a</span></div><div class="line"><span class="attr_selector">[,1]</span> <span class="attr_selector">[,2]</span> <span class="attr_selector">[,3]</span> <span class="attr_selector">[,4]</span></div><div class="line"><span class="attr_selector">[1,]</span> 1 3 2 1</div><div class="line"><span class="attr_selector">[2,]</span> 2 1 3 2</div><div class="line">&gt; <span class="function">apply</span>(<span class="tag">a</span>, 1, <span class="function">function</span>(x)<span class="function">sum</span>(x))     # 可以简化成：<span class="function">apply</span>(<span class="tag">a</span>, 1, sum)</div><div class="line"><span class="attr_selector">[1]</span> 7 8</div></pre></td></tr></table></figure>
+
+<p>按列计算</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&gt; <span class="function">apply</span>(<span class="tag">a</span>, 2, <span class="function">function</span>(x)<span class="function">sum</span>(x))</div><div class="line"><span class="attr_selector">[1]</span> 3 4 5 3</div></pre></td></tr></table></figure>
+
+<p>行列同时作用</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="function">apply</span>(<span class="tag">a</span>, <span class="function">c</span>(1,2), <span class="function">function</span>(x)<span class="function">sum</span>(x))</div><div class="line"><span class="attr_selector">[,1]</span> <span class="attr_selector">[,2]</span> <span class="attr_selector">[,3]</span> <span class="attr_selector">[,4]</span></div><div class="line"><span class="attr_selector">[1,]</span> 1 3 2 1</div><div class="line"><span class="attr_selector">[2,]</span> 2 1 3 2</div></pre></td></tr></table></figure>
+
+<p>扩展参数</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="function">apply</span>(<span class="tag">a</span>, 1, <span class="function">function</span>(x, t)x+t, 10)    # </div><div class="line"><span class="attr_selector">[,1]</span> <span class="attr_selector">[,2]</span></div><div class="line"><span class="attr_selector">[1,]</span> 11 12</div><div class="line"><span class="attr_selector">[2,]</span> 13 11</div><div class="line"><span class="attr_selector">[3,]</span> 12 13</div><div class="line"><span class="attr_selector">[4,]</span> 11 12</div></pre></td></tr></table></figure>
+
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/R/">R</a><a href="/tags/apply/">apply</a><a href="/tags/向量化运算/">向量化运算</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2013/08/13/2013-08-13-一段R程序的优化/">一段R程序的优化</a></h1>
+  
+
+    <time datetime="2013-08-12T16:00:00.000Z">
+  <span class="day">13</span><span class="month">8月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="R性能优化">R性能优化</h2>
+<p>原程序：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">CaiAnalyseEiMac &lt;- <span class="keyword">function</span>(x) {</div><div class="line">  <span class="comment"># 分析应用中，一个mac对应多个imei地址的情况</span></div><div class="line">  <span class="comment">#</span></div><div class="line">  <span class="comment"># Args:</span></div><div class="line">  <span class="comment">#   x: list类型，待分析数据</span></div><div class="line">  <span class="comment">#     x$aid: 应用ID，格式例如：aid=23。（下面的格式也类同）</span></div><div class="line">  <span class="comment">#     x$ei:  imei列表</span></div><div class="line">  <span class="comment">#     x$mac: mac列表</span></div><div class="line">  <span class="comment"># Return:</span></div><div class="line">  <span class="comment">#   list，对应多个imei的mac的占比</span></div><div class="line">  </div><div class="line">  <span class="comment"># 格式化应用数据</span></div><div class="line">  x$aid &lt;- substr(x$aid, <span class="number">5</span>, <span class="number">100</span>)</div><div class="line">  n &lt;- length(x$aid)</div><div class="line">  aid.lst &lt;- unique(x$aid)</div><div class="line">  </div><div class="line">  <span class="comment"># 计算总体一个mac对应多个imei的情况</span></div><div class="line">  </div><div class="line">  <span class="comment"># 初始化</span></div><div class="line">  tmp.lst &lt;- list()</div><div class="line">  mac.unique &lt;- unique(x$mac)</div><div class="line">  <span class="keyword">for</span> (mac <span class="keyword">in</span> mac.unique) {</div><div class="line">    tmp.lst[[mac]] &lt;- c()</div><div class="line">  }</div><div class="line">  </div><div class="line">  <span class="comment"># 把imei都加入mac列表</span></div><div class="line">  <span class="keyword">for</span> (i <span class="keyword">in</span> <span class="number">1</span>:n) {</div><div class="line">    tmp.lst[[x$mac[i]]] &lt;- c(tmp.lst[[x$mac[i]]], x$ei[i])</div><div class="line">  }</div><div class="line">  </div><div class="line">  <span class="comment"># 汇总唯一值的个数</span></div><div class="line">  tmp.lst &lt;- lapply(tmp.lst, FUN=<span class="keyword">function</span>(x){<span class="keyword">return</span>(length(unique(x)))})</div><div class="line">  </div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>因为数据量比较大，在工作的机器上跑的时间超过半小时。。。。主要原因有两个：</p>
+<ul>
+<li>copy-on-change，这是R的机制，循环里有大量的修改list操作；</li>
+<li>R的循环效率比较低</li>
+</ul>
+<p>后来发现tapply函数可以达到目的，主要代码如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tmp.lst &lt;- tapply(x<span class="variable">$mac</span>, x<span class="variable">$ei</span>, <span class="function"><span class="keyword">function</span><span class="params">(x)</span><span class="title">length</span><span class="params">(unique<span class="params">(x)</span>)</span>)</span></div></pre></td></tr></table></figure>
+
+<p>非常的简洁，而且时间消耗就几秒而已。</p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/R/">R</a><a href="/tags/性能优化/">性能优化</a><a href="/tags/tapply/">tapply</a><a href="/tags/向量化运算/">向量化运算</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+  
+
+  <nav id="pagenavi">
+  
+    <a href="/archives/2013/" class="alignleft prev">Prev</a>
+  
+  
+  <div class="clearfix"></div>
+</nav>
+</div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2014 Alex Cai
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+    try {
+        $('.fancybox').fancybox();
+    } catch(e) {
+        console.log('after_footer:fancybox');
+    }
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>scp | 数据明月</title>
+  <meta name="author" content="Alex Cai">
+
+  
+  <meta name="description" content="心有沉香，何惧浮世！">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="数据明月" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="site-name">
+    数据明月 
+    <span>心有沉香，何惧浮世！</span>
+</div>
+
+<nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="http://github.com/cyy0523xc/">Github</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+  </ul>
+</nav>
+</header>
+  <div id="content" class="inner">
+
+<header id="archive-header">
+  <h1 class="alignleft">Tag: scp</h1>
+  <div class="search alignright">
+    <form action="http://google.com/search" method="get" accept-charset="utf-8">
+      <input type="search" name="q" results="0" placeholder="搜索">
+      <input type="hidden" name="q" value="site:cyy0523xc.github.io">
+    </form>
+  </div>
+</header>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2013/08/30/2013-08-30-rsync命令/">rsync命令</a></h1>
+  
+
+    <time datetime="2013-08-29T16:00:00.000Z">
+  <span class="day">30</span><span class="month">8月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <p>从远程服务器复制文件到本地服务器以前通常会使用scp命令，例如：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -<span class="constant">P</span> <span class="number">3000</span> user<span class="variable">@host</span><span class="symbol">:/data2/bak/</span><span class="number">20130801</span>/part-* <span class="regexp">/home/windows</span><span class="regexp">/data/</span><span class="number">20130825</span>/</div></pre></td></tr></table></figure>
+
+<p>不过用脚本跑的时候，发现得到的文件不齐全，有些文件不知道为什么没有下载到本地，所以寻找可以不覆盖更新的命令。本以为scp有这样的参数的，不过没发现。后来就使用rsync命令了，如：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rsync -aPuv <span class="string">'-e ssh -p 3000'</span> user<span class="variable">@host</span><span class="symbol">:/data2/bak/</span><span class="number">20130825</span>/part-* <span class="regexp">/home/windows</span><span class="regexp">/data/</span><span class="number">20130825</span>/</div></pre></td></tr></table></figure>
+
+<p>rsync的参数解释：</p>
+<ul>
+<li>P：显示进度条信息</li>
+<li>u：update，只返回不同的文件</li>
+</ul>
+<p>扩展：<a href="http://www.howtocn.org/rsync:use_rsync" target="_blank" rel="external">http://www.howtocn.org/rsync:use_rsync</a></p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/linux/">linux</a><a href="/tags/rsync/">rsync</a><a href="/tags/scp/">scp</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+  
+
+  <nav id="pagenavi">
+  
+  
+  <div class="clearfix"></div>
+</nav>
+</div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2014 Alex Cai
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+    try {
+        $('.fancybox').fancybox();
+    } catch(e) {
+        console.log('after_footer:fancybox');
+    }
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+</body>
+</html>

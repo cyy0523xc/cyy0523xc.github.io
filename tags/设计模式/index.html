@@ -1,0 +1,190 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>设计模式 | 数据明月</title>
+  <meta name="author" content="Alex Cai">
+
+  
+  <meta name="description" content="心有沉香，何惧浮世！">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="数据明月" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="site-name">
+    数据明月 
+    <span>心有沉香，何惧浮世！</span>
+</div>
+
+<nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="http://github.com/cyy0523xc/">Github</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+  </ul>
+</nav>
+</header>
+  <div id="content" class="inner">
+
+<header id="archive-header">
+  <h1 class="alignleft">Tag: 设计模式</h1>
+  <div class="search alignright">
+    <form action="http://google.com/search" method="get" accept-charset="utf-8">
+      <input type="search" name="q" results="0" placeholder="搜索">
+      <input type="hidden" name="q" value="site:cyy0523xc.github.io">
+    </form>
+  </div>
+</header>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2014/09/16/使用PHP近似实现AOP/">使用PHP近似实现AOP</a></h1>
+  
+
+    <time datetime="2014-09-16T06:26:15.000Z">
+  <span class="day">16</span><span class="month">9月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="AOP介绍">AOP介绍</h2>
+<p><strong>面向切面编程</strong> ：Aspect Oriented Programming(AOP)，是Spring框架中的一个重要内容。利用AOP可以对业务逻辑的各个部分进行隔离，从而使得业务逻辑各部分之间的耦合度降低，提高程序的可重用性，同时提高了开发的效率。</p>
+<ul>
+<li>AOP是OOP的延续。</li>
+<li>主要的功能是：日志记录，性能统计，安全控制，事务处理，异常处理等等。</li>
+<li>主要的意图是：将日志记录，性能统计，安全控制，事务处理，异常处理等代码从业务逻辑代码中划分出来，通过对这些行为的分离，我们希望可以将它们独立到非指导业务逻辑的方法中，进而改变这些行为的时候不影响业务逻辑的代码。</li>
+</ul>
+<h2 id="PHP实现">PHP实现</h2>
+<p>现在版本的php并没有内置的AOP实现，不过我们还是可以通过一些魔术函数来近似实现。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** </span></div><div class="line"> * 业务逻辑类的包装类</div><div class="line"> *<span class="phpdoc"> @author</span> cyy0523xc@gmail.com</div><div class="line"> */</div><div class="line"><span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">AOP</span></span></div><div class="line">{</div><div class="line">    <span class="keyword">private</span> <span class="variable">$instance</span>;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">(<span class="variable">$instance</span>)</span></span></div><div class="line">    {</div><div class="line">        <span class="variable">$this</span><span class="variable">-&gt;instance</span> = <span class="variable">$instance</span>;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__call</span><span class="params">(<span class="variable">$method</span>, <span class="variable">$params</span>)</span></span></div><div class="line">    {</div><div class="line">        <span class="keyword">if</span> (!<span class="variable">$this</span><span class="variable">-&gt;__methodExists</span>(<span class="variable">$method</span>)) {</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="string">"Call undefinded method "</span> . get_class(<span class="variable">$this</span><span class="variable">-&gt;instance</span>) . <span class="string">"::$method"</span>);</div><div class="line">        }</div><div class="line"></div><div class="line">        <span class="comment">// 调用前置函数</span></div><div class="line">        <span class="keyword">if</span> (<span class="variable">$this</span><span class="variable">-&gt;__methodExists</span>(<span class="string">'before'</span>)) {</div><div class="line">            <span class="variable">$this</span><span class="variable">-&gt;__callMethod</span>(<span class="string">'before'</span>);</div><div class="line">        }</div><div class="line"></div><div class="line">        <span class="comment">// 调用业务函数</span></div><div class="line">        <span class="variable">$return</span> = <span class="variable">$this</span><span class="variable">-&gt;__callMethod</span>(<span class="variable">$method</span>, <span class="variable">$params</span>);</div><div class="line"></div><div class="line">        <span class="comment">// 调用后置函数</span></div><div class="line">        <span class="keyword">if</span> (<span class="variable">$this</span><span class="variable">-&gt;__methodExists</span>(<span class="string">'after'</span>)) {</div><div class="line">            <span class="variable">$this</span><span class="variable">-&gt;__callMethod</span>(<span class="string">'after'</span>);</div><div class="line">        }</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> <span class="variable">$return</span>;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 判断方法是否存在</div><div class="line">     * 使用双下划线前缀主要是为了避免冲突</div><div class="line">     *<span class="phpdoc"> @param</span> string $method 方法名</div><div class="line">     *<span class="phpdoc"> @return</span> mixed</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">__methodExists</span><span class="params">(<span class="variable">$method</span>)</span></span></div><div class="line">    {</div><div class="line">        <span class="keyword">return</span> method_exists(<span class="variable">$this</span><span class="variable">-&gt;instance</span>, <span class="variable">$method</span>);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 调用方法</div><div class="line">     *<span class="phpdoc"> @param</span> string $method 方法名</div><div class="line">     *<span class="phpdoc"> @param</span> array  $params 参数数组</div><div class="line">     *<span class="phpdoc"> @return</span> mixed</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">__callMethod</span><span class="params">(<span class="variable">$method</span>, array <span class="variable">$params</span> = null)</span></span></div><div class="line">    {</div><div class="line">        <span class="variable">$callBack</span> = <span class="keyword">array</span>(</div><div class="line">            <span class="variable">$this</span><span class="variable">-&gt;instance</span>,</div><div class="line">            <span class="variable">$method</span></div><div class="line">        );</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> === <span class="variable">$params</span>) {</div><div class="line">            <span class="keyword">return</span> call_user_func(<span class="variable">$callBack</span>);</div><div class="line">        } <span class="keyword">else</span> {</div><div class="line">            <span class="keyword">return</span> call_user_func_array(<span class="variable">$callBack</span>, <span class="variable">$params</span>);</div><div class="line">        }</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>完整代码见：<a href="https://github.com/cyy0523xc/code/raw/master/php/test/aop.php" target="_blank" rel="external">https://github.com/cyy0523xc/code/raw/master/php/test/aop.php</a> </p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/PHP/">PHP</a><a href="/tags/AOP/">AOP</a><a href="/tags/设计模式/">设计模式</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+  
+
+  <nav id="pagenavi">
+  
+  
+  <div class="clearfix"></div>
+</nav>
+</div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2014 Alex Cai
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+    try {
+        $('.fancybox').fancybox();
+    } catch(e) {
+        console.log('after_footer:fancybox');
+    }
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+</body>
+</html>
