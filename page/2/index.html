@@ -57,44 +57,27 @@
   <header>
     
   
-    <h1 class="title"><a href="/2013/09/05/2013-09-05-sed命令/">sed命令</a></h1>
+    <h1 class="title"><a href="/2013/08/30/2013-08-30-rsync命令/">rsync命令</a></h1>
   
 
-    <time datetime="2013-09-04T16:00:00.000Z">
-  <span class="day">5</span><span class="month">9月</span>
+    <time datetime="2013-08-29T16:00:00.000Z">
+  <span class="day">30</span><span class="month">8月</span>
 </time>
   </header>
   <div class="entry-content">
     
-      <h2 id="问题">问题</h2>
-<p>源数据：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">28</span>&<span class="variable">at=</span><span class="number">7</span>&<span class="variable">cid=</span>mDamz1b7WRJZ</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">29</span>&<span class="variable">at=</span><span class="number">3</span>&<span class="variable">cid=</span>Q4ETETM9Hjx0</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">39</span>&<span class="variable">at=</span><span class="number">0</span>&<span class="variable">cid=</span>ytBSubxEaFN6</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">40</span>&<span class="variable">at=</span><span class="number">3</span>&<span class="variable">cid=</span>mDamz1b7WRJZ</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">42</span>&<span class="variable">at=</span><span class="number">6</span>&<span class="variable">cid=</span>ytBSubxEaFN6</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">42</span>&<span class="variable">at=</span><span class="number">3</span>&<span class="variable">cid=</span>mDamz1b7WRJZ</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">45</span>&<span class="variable">at=</span><span class="number">0</span>&<span class="variable">cid=</span><span class="number">66</span>OwWFuVBMSS</div></pre></td></tr></table></figure>
+      <p>从远程服务器复制文件到本地服务器以前通常会使用scp命令，例如：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -<span class="constant">P</span> <span class="number">3000</span> user<span class="variable">@host</span><span class="symbol">:/data2/bak/</span><span class="number">20130801</span>/part-* <span class="regexp">/home/windows</span><span class="regexp">/data/</span><span class="number">20130825</span>/</div></pre></td></tr></table></figure>
 
-<p>希望把drt字段中的+号及后面的替换掉：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sed 's/<span class="command">\+</span><span class="special">[</span><span class="command">\d</span>:<span class="special">]</span>+<span class="special">&</span>/<span class="special">&</span>/g'</div></pre></td></tr></table></figure>
+<p>不过用脚本跑的时候，发现得到的文件不齐全，有些文件不知道为什么没有下载到本地，所以寻找可以不覆盖更新的命令。本以为scp有这样的参数的，不过没发现。后来就使用rsync命令了，如：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rsync -aPuv <span class="string">'-e ssh -p 3000'</span> user<span class="variable">@host</span><span class="symbol">:/data2/bak/</span><span class="number">20130825</span>/part-* <span class="regexp">/home/windows</span><span class="regexp">/data/</span><span class="number">20130825</span>/</div></pre></td></tr></table></figure>
 
-<p>结果就是死活不工作。。。</p>
-<h2 id="解决">解决</h2>
-<p>原来&amp;在sed中也是元字符，之前从来没注意到这个，和普通正则还差异多多。最后就只是一个转义符的事情：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sed 's/<span class="command">\+</span>/<span class="command">\&</span>/g'</div></pre></td></tr></table></figure>
-
-<p>关于&amp;的说明：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">保存搜索字符用来替换其他字符，如s/love<span class="javadoc">/**&**/</span>，love这成**love**。</div></pre></td></tr></table></figure>
-
-<p>还有：</p>
+<p>rsync的参数解释：</p>
 <ul>
-<li>sed的元字符里原来没有+号的。。。</li>
-<li>\d发现也是无效的</li>
+<li>P：显示进度条信息</li>
+<li>u：update，只返回不同的文件</li>
 </ul>
-<p>最终就变成了：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sed 's/+<span class="special">[</span>0-9:<span class="special">]</span>*<span class="command">\&</span>/<span class="command">\&</span>/g'</div></pre></td></tr></table></figure>
-
-<h2 id="附录">附录</h2>
-<ul>
-<li>sed的元字符：<a href="http://tsnc.zhongaokao.com/tsnc_wgrj/doc/sed.htm#id2810450" target="_blank" rel="external">http://tsnc.zhongaokao.com/tsnc_wgrj/doc/sed.htm#id2810450</a></li>
-<li>sed manual：<a href="http://www.gnu.org/software/sed/manual/sed.html" target="_blank" rel="external">http://www.gnu.org/software/sed/manual/sed.html</a></li>
-<li>grep、sed、awk、perl等对正则表达式的支持的差别：<a href="http://blog.csdn.net/zouxue138/article/details/8620799" target="_blank" rel="external">http://blog.csdn.net/zouxue138/article/details/8620799</a></li>
-</ul>
+<p>扩展：<a href="http://www.howtocn.org/rsync:use_rsync" target="_blank" rel="external">http://www.howtocn.org/rsync:use_rsync</a></p>
 
     
     
@@ -102,106 +85,7 @@
       
       
   <div class="tags">
-<a href="/tags/linux/">linux</a><a href="/tags/sed/">sed</a></div>
-
-      
-    </footer>
-    
-  </div>
-  
-</article>
-
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <header>
-    
-  
-    <h1 class="title"><a href="/2013/09/05/2013-09-05-R中vector和names函数/">R中vector和names函数</a></h1>
-  
-
-    <time datetime="2013-09-04T16:00:00.000Z">
-  <span class="day">5</span><span class="month">9月</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <h2 id="问题">问题</h2>
-<p>源数据保存在文件中，格式如下：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">28</span>&<span class="variable">at=</span><span class="number">7</span>&<span class="variable">cid=</span>mDamz1b7WRJZ</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">29</span>&<span class="variable">at=</span><span class="number">3</span>&<span class="variable">cid=</span>Q4ETETM9Hjx0</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">39</span>&<span class="variable">at=</span><span class="number">0</span>&<span class="variable">cid=</span>ytBSubxEaFN6</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">40</span>&<span class="variable">at=</span><span class="number">3</span>&<span class="variable">cid=</span>mDamz1b7WRJZ</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">42</span>&<span class="variable">at=</span><span class="number">6</span>&<span class="variable">cid=</span>ytBSubxEaFN6</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">42</span>&<span class="variable">at=</span><span class="number">3</span>&<span class="variable">cid=</span>mDamz1b7WRJZ</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">45</span>&<span class="variable">at=</span><span class="number">0</span>&<span class="variable">cid=</span><span class="number">66</span>OwWFuVBMSS</div></pre></td></tr></table></figure>
-
-<p>需要生成一个list，其下标是数据的字段名：drt，at，cid</p>
-<h2 id="解决">解决</h2>
-<p>开始写成这样，很别扭的代码：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">x &lt;- scan(filename, what=<span class="string">""</span>, sep=<span class="string">"&"</span>, nlines=<span class="number">1</span>)</div><div class="line">fields.name &lt;- sapply(x, FUN=<span class="keyword">function</span>(x){strsplit(x, split=<span class="string">"="</span>)[[<span class="number">1</span>]][<span class="number">1</span>]})</div><div class="line">names(fields.name) &lt;- <span class="literal">NULL</span></div><div class="line">names(fields.name) &lt;- fields.name</div><div class="line">fields.name &lt;- as.list(fields.name)</div></pre></td></tr></table></figure>
-
-<p>借鉴tapply的源码，改成这样：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">x &lt;- scan(filename, what=<span class="string">""</span>, sep=<span class="string">"&"</span>, nlines=<span class="number">1</span>)</div><div class="line">fields.name &lt;- sapply(x, FUN=<span class="keyword">function</span>(x){strsplit(x, split=<span class="string">"="</span>)[[<span class="number">1</span>]][<span class="number">1</span>]})</div><div class="line">tmp.fields.name &lt;- vector(<span class="string">"list"</span>, length(fields.name))    <span class="comment"># 生成一个空的list</span></div><div class="line">names(tmp.fields.name) &lt;- fields.name</div></pre></td></tr></table></figure>
-
-
-    
-    
-    <footer class="meta">
-      
-      
-  <div class="tags">
-<a href="/tags/R/">R</a><a href="/tags/vector/">vector</a><a href="/tags/names/">names</a></div>
-
-      
-    </footer>
-    
-  </div>
-  
-</article>
-
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <header>
-    
-  
-    <h1 class="title"><a href="/2013/09/02/2013-09-02-BlueKai模式研究/">BlueKai模式研究</a></h1>
-  
-
-    <time datetime="2013-09-01T16:00:00.000Z">
-  <span class="day">2</span><span class="month">9月</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <h2 id="产品">产品</h2>
-<h2 id="附录">附录</h2>
-<p><a href="http://www.bluekai.com/" target="_blank" rel="external">http://www.bluekai.com/</a><br><a href="http://www.iamniu.com/2013/03/30/about-bluekai/" target="_blank" rel="external">http://www.iamniu.com/2013/03/30/about-bluekai/</a></p>
-
-    
-    
-    <footer class="meta">
-      
-      
-  <div class="tags">
-<a href="/tags/DMP/">DMP</a></div>
+<a href="/tags/linux/">linux</a><a href="/tags/rsync/">rsync</a><a href="/tags/scp/">scp</a></div>
 
       
     </footer>
@@ -272,27 +156,38 @@
   <header>
     
   
-    <h1 class="title"><a href="/2013/08/30/2013-08-30-rsync命令/">rsync命令</a></h1>
+    <h1 class="title"><a href="/2013/08/28/2013-08-28-r编码规范/">R编码规范</a></h1>
   
 
-    <time datetime="2013-08-29T16:00:00.000Z">
-  <span class="day">30</span><span class="month">8月</span>
+    <time datetime="2013-08-27T16:00:00.000Z">
+  <span class="day">28</span><span class="month">8月</span>
 </time>
   </header>
   <div class="entry-content">
     
-      <p>从远程服务器复制文件到本地服务器以前通常会使用scp命令，例如：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -<span class="constant">P</span> <span class="number">3000</span> user<span class="variable">@host</span><span class="symbol">:/data2/bak/</span><span class="number">20130801</span>/part-* <span class="regexp">/home/windows</span><span class="regexp">/data/</span><span class="number">20130825</span>/</div></pre></td></tr></table></figure>
-
-<p>不过用脚本跑的时候，发现得到的文件不齐全，有些文件不知道为什么没有下载到本地，所以寻找可以不覆盖更新的命令。本以为scp有这样的参数的，不过没发现。后来就使用rsync命令了，如：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rsync -aPuv <span class="string">'-e ssh -p 3000'</span> user<span class="variable">@host</span><span class="symbol">:/data2/bak/</span><span class="number">20130825</span>/part-* <span class="regexp">/home/windows</span><span class="regexp">/data/</span><span class="number">20130825</span>/</div></pre></td></tr></table></figure>
-
-<p>rsync的参数解释：</p>
+      <h2 id="编码规范">编码规范</h2>
+<p>google：<a href="http://google-styleguide.googlecode.com/svn/trunk/Rguide.xml" target="_blank" rel="external">http://google-styleguide.googlecode.com/svn/trunk/Rguide.xml</a></p>
+<p>中文版：<a href="http://www.road2stat.com/rstyle/rstyle.html" target="_blank" rel="external">http://www.road2stat.com/rstyle/rstyle.html</a></p>
+<p><a href="https://docs.google.com/document/d/1esDVxyWvH8AsX-VJa-8oqWaHLs4stGlIbk8kLc5VlII/edit" target="_blank" rel="external">https://docs.google.com/document/d/1esDVxyWvH8AsX-VJa-8oqWaHLs4stGlIbk8kLc5VlII/edit</a></p>
+<h3 id="补充规范">补充规范</h3>
+<h4 id="变量的特殊前缀">变量的特殊前缀</h4>
 <ul>
-<li>P：显示进度条信息</li>
-<li>u：update，只返回不同的文件</li>
+<li>tmp：   临时变量</li>
+<li>p:      函数参数</li>
 </ul>
-<p>扩展：<a href="http://www.howtocn.org/rsync:use_rsync" target="_blank" rel="external">http://www.howtocn.org/rsync:use_rsync</a></p>
+<h4 id="变量的后缀">变量的后缀</h4>
+<p>后缀通常用来表示变量的类型，如：</p>
+<ul>
+<li>lst，tb，vec, ft等</li>
+<li>fn: 函数变量, 通常在例如tapply等函数中使用</li>
+</ul>
+<h2 id="技巧">技巧</h2>
+<ol>
+<li>在shell直接运行R脚本</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/Rscript --slave</span></div><div class="line">argv &lt;- commandArgs(TRUE)</div><div class="line">x &lt;- as.numeric(argv[<span class="number">1</span>])</div></pre></td></tr></table></figure>
+
+<p>然后：sudo chmod +x file.r</p>
 
     
     
@@ -300,7 +195,7 @@
       
       
   <div class="tags">
-<a href="/tags/linux/">linux</a><a href="/tags/rsync/">rsync</a><a href="/tags/scp/">scp</a></div>
+<a href="/tags/R/">R</a></div>
 
       
     </footer>
@@ -343,71 +238,6 @@
 <p>数据科学<a href="http://kan.weibo.com/kan/3444217594966746" target="_blank" rel="external">http://kan.weibo.com/kan/3444217594966746</a><br>R语言小站<a href="http://kan.weibo.com/kan/3484733640942053" target="_blank" rel="external">http://kan.weibo.com/kan/3484733640942053</a></p>
 <h2 id="课程">课程</h2>
 <p>北美18名校的数据挖掘，数据分析，人工智能及机器学习课程汇总<a href="http://kan.weibo.com/con/3547413957114530?_from=text" target="_blank" rel="external">http://kan.weibo.com/con/3547413957114530?_from=text</a></p>
-
-    
-    
-    <footer class="meta">
-      
-      
-  <div class="tags">
-<a href="/tags/R/">R</a></div>
-
-      
-    </footer>
-    
-  </div>
-  
-</article>
-
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <header>
-    
-  
-    <h1 class="title"><a href="/2013/08/28/2013-08-28-r编码规范/">R编码规范</a></h1>
-  
-
-    <time datetime="2013-08-27T16:00:00.000Z">
-  <span class="day">28</span><span class="month">8月</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <h2 id="编码规范">编码规范</h2>
-<p>google：<a href="http://google-styleguide.googlecode.com/svn/trunk/Rguide.xml" target="_blank" rel="external">http://google-styleguide.googlecode.com/svn/trunk/Rguide.xml</a></p>
-<p>中文版：<a href="http://www.road2stat.com/rstyle/rstyle.html" target="_blank" rel="external">http://www.road2stat.com/rstyle/rstyle.html</a></p>
-<p><a href="https://docs.google.com/document/d/1esDVxyWvH8AsX-VJa-8oqWaHLs4stGlIbk8kLc5VlII/edit" target="_blank" rel="external">https://docs.google.com/document/d/1esDVxyWvH8AsX-VJa-8oqWaHLs4stGlIbk8kLc5VlII/edit</a></p>
-<h3 id="补充规范">补充规范</h3>
-<h4 id="变量的特殊前缀">变量的特殊前缀</h4>
-<ul>
-<li>tmp：   临时变量</li>
-<li>p:      函数参数</li>
-</ul>
-<h4 id="变量的后缀">变量的后缀</h4>
-<p>后缀通常用来表示变量的类型，如：</p>
-<ul>
-<li>lst，tb，vec, ft等</li>
-<li>fn: 函数变量, 通常在例如tapply等函数中使用</li>
-</ul>
-<h2 id="技巧">技巧</h2>
-<ol>
-<li>在shell直接运行R脚本</li>
-</ol>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/Rscript --slave</span></div><div class="line">argv &lt;- commandArgs(TRUE)</div><div class="line">x &lt;- as.numeric(argv[<span class="number">1</span>])</div></pre></td></tr></table></figure>
-
-<p>然后：sudo chmod +x file.r</p>
 
     
     
@@ -515,6 +345,77 @@
       
   <div class="tags">
 <a href="/tags/移动互联网/">移动互联网</a><a href="/tags/广告/">广告</a><a href="/tags/数据挖掘/">数据挖掘</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2013/08/20/2013-08-20-function.lapply/">R function lapply</a></h1>
+  
+
+    <time datetime="2013-08-19T16:00:00.000Z">
+  <span class="day">20</span><span class="month">8月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <blockquote>
+<p>包括函数：lapply, sapply, vapply</p>
+</blockquote>
+<h2 id="lapply">lapply</h2>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lapply(X, FUN, <span class="keyword">...</span>)</div></pre></td></tr></table></figure>
+
+<p>该函数会返回一个长度和X参数的长度相同的列表，其中每个元素都是X参数在FUN函数作用下的结果。</p>
+<h3 id="实现源码">实现源码</h3>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> (X, FUN, <span class="keyword">...</span>) </div><div class="line">{</div><div class="line">    FUN &lt;- match.fun(FUN)</div><div class="line">    <span class="keyword">if</span> (!is.vector(X) || is.object(X))    <span class="comment"># 如果不是向量（列表等也是向量），则会先转成list</span></div><div class="line">        X &lt;- as.list(X)</div><div class="line">    .Internal(lapply(X, FUN))   <span class="comment"># 直接调用C核心的函数</span></div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h3 id="实例">实例</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">&gt; a</div><div class="line">     [,<span class="number">1</span>] [,<span class="number">2</span>]</div><div class="line">[<span class="number">1</span>,]    <span class="number">1</span>    <span class="number">3</span></div><div class="line">[<span class="number">2</span>,]    <span class="number">2</span>    <span class="number">4</span></div><div class="line"></div><div class="line">&gt; lapply(a, <span class="function"><span class="keyword">function</span><span class="params">(x)</span></span>x^<span class="number">2</span>)  # length(a) == <span class="number">4</span></div><div class="line"><span class="string">[[1]]</span></div><div class="line">[<span class="number">1</span>] <span class="number">1</span></div><div class="line"></div><div class="line"><span class="string">[[2]]</span></div><div class="line">[<span class="number">1</span>] <span class="number">4</span></div><div class="line"></div><div class="line"><span class="string">[[3]]</span></div><div class="line">[<span class="number">1</span>] <span class="number">9</span></div><div class="line"></div><div class="line"><span class="string">[[4]]</span></div><div class="line">[<span class="number">1</span>] <span class="number">16</span></div><div class="line"></div><div class="line">&gt; d</div><div class="line">$a</div><div class="line">[<span class="number">1</span>] <span class="number">1</span> <span class="number">2</span></div><div class="line"></div><div class="line">$b</div><div class="line">[<span class="number">1</span>] <span class="number">3</span> <span class="number">4</span> <span class="number">5</span></div><div class="line"></div><div class="line">&gt; lapply(d, sum)  # length(d) == <span class="number">2</span></div><div class="line">$a</div><div class="line">[<span class="number">1</span>] <span class="number">3</span></div><div class="line"></div><div class="line">$b</div><div class="line">[<span class="number">1</span>] <span class="number">12</span></div></pre></td></tr></table></figure>
+
+<p>一个实际的例子：一次性加载某个目录下的R文件</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">CaiSource &lt;- <span class="keyword">function</span>(x, p.path) {</div><div class="line">  <span class="keyword">source</span>(paste(p.path, x, sep=<span class="string">""</span>))</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment"># lib.path是指定的目录</span></div><div class="line">lapply(list.files(path=lib.path, pattern=<span class="string">'\\.[rR]$'</span>), CaiSource, lib.path)</div></pre></td></tr></table></figure>
+
+<h2 id="sapply">sapply</h2>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sapply(X, FUN, <span class="keyword">...</span>, simplify = <span class="literal">TRUE</span>, USE.NAMES = <span class="literal">TRUE</span>)</div></pre></td></tr></table></figure>
+
+<p>sapply是对lapply的封装，实现代码：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> (X, FUN, <span class="keyword">...</span>, simplify = <span class="literal">TRUE</span>, USE.NAMES = <span class="literal">TRUE</span>) </div><div class="line">{</div><div class="line">    FUN &lt;- match.fun(FUN)</div><div class="line">    answer &lt;- lapply(X = X, FUN = FUN, <span class="keyword">...</span>)     <span class="comment"># 直接调用lapply</span></div><div class="line">    <span class="keyword">if</span> (USE.NAMES && is.character(X) && is.null(names(answer))) </div><div class="line">        names(answer) &lt;- X   <span class="comment"># USE。NAMES参数</span></div><div class="line">    <span class="keyword">if</span> (!identical(simplify, <span class="literal">FALSE</span>) && length(answer)) </div><div class="line">        simplify2array(answer, higher = (simplify == <span class="string">"array"</span>))  <span class="comment"># simplify参数，默认会转换成array</span></div><div class="line">    <span class="keyword">else</span> answer</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h2 id="vapply">vapply</h2>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vapply(X, FUN, FUN.VALUE, <span class="keyword">...</span>, USE.NAMES = <span class="literal">TRUE</span>)</div></pre></td></tr></table></figure>
+
+<p>该函数和sapply类似</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> (X, FUN, FUN.VALUE, <span class="keyword">...</span>, USE.NAMES = <span class="literal">TRUE</span>) </div><div class="line">{</div><div class="line">    FUN &lt;- match.fun(FUN)</div><div class="line">    <span class="keyword">if</span> (!is.vector(X) || is.object(X))   <span class="comment"># 对数据进行预处理</span></div><div class="line">        X &lt;- as.list(X)</div><div class="line">    .Internal(vapply(X, FUN, FUN.VALUE, USE.NAMES))</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>FUN.VALUE的值定义是？</p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/R/">R</a><a href="/tags/lapply/">lapply</a><a href="/tags/向量化运算/">向量化运算</a></div>
 
       
     </footer>
@@ -648,13 +549,66 @@
   
 </article>
 
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2013/08/13/2013-08-13-一段R程序的优化/">一段R程序的优化</a></h1>
+  
+
+    <time datetime="2013-08-12T16:00:00.000Z">
+  <span class="day">13</span><span class="month">8月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="R性能优化">R性能优化</h2>
+<p>原程序：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">CaiAnalyseEiMac &lt;- <span class="keyword">function</span>(x) {</div><div class="line">  <span class="comment"># 分析应用中，一个mac对应多个imei地址的情况</span></div><div class="line">  <span class="comment">#</span></div><div class="line">  <span class="comment"># Args:</span></div><div class="line">  <span class="comment">#   x: list类型，待分析数据</span></div><div class="line">  <span class="comment">#     x$aid: 应用ID，格式例如：aid=23。（下面的格式也类同）</span></div><div class="line">  <span class="comment">#     x$ei:  imei列表</span></div><div class="line">  <span class="comment">#     x$mac: mac列表</span></div><div class="line">  <span class="comment"># Return:</span></div><div class="line">  <span class="comment">#   list，对应多个imei的mac的占比</span></div><div class="line">  </div><div class="line">  <span class="comment"># 格式化应用数据</span></div><div class="line">  x$aid &lt;- substr(x$aid, <span class="number">5</span>, <span class="number">100</span>)</div><div class="line">  n &lt;- length(x$aid)</div><div class="line">  aid.lst &lt;- unique(x$aid)</div><div class="line">  </div><div class="line">  <span class="comment"># 计算总体一个mac对应多个imei的情况</span></div><div class="line">  </div><div class="line">  <span class="comment"># 初始化</span></div><div class="line">  tmp.lst &lt;- list()</div><div class="line">  mac.unique &lt;- unique(x$mac)</div><div class="line">  <span class="keyword">for</span> (mac <span class="keyword">in</span> mac.unique) {</div><div class="line">    tmp.lst[[mac]] &lt;- c()</div><div class="line">  }</div><div class="line">  </div><div class="line">  <span class="comment"># 把imei都加入mac列表</span></div><div class="line">  <span class="keyword">for</span> (i <span class="keyword">in</span> <span class="number">1</span>:n) {</div><div class="line">    tmp.lst[[x$mac[i]]] &lt;- c(tmp.lst[[x$mac[i]]], x$ei[i])</div><div class="line">  }</div><div class="line">  </div><div class="line">  <span class="comment"># 汇总唯一值的个数</span></div><div class="line">  tmp.lst &lt;- lapply(tmp.lst, FUN=<span class="keyword">function</span>(x){<span class="keyword">return</span>(length(unique(x)))})</div><div class="line">  </div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>因为数据量比较大，在工作的机器上跑的时间超过半小时。。。。主要原因有两个：</p>
+<ul>
+<li>copy-on-change，这是R的机制，循环里有大量的修改list操作；</li>
+<li>R的循环效率比较低</li>
+</ul>
+<p>后来发现tapply函数可以达到目的，主要代码如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tmp.lst &lt;- tapply(x<span class="variable">$mac</span>, x<span class="variable">$ei</span>, <span class="function"><span class="keyword">function</span><span class="params">(x)</span><span class="title">length</span><span class="params">(unique<span class="params">(x)</span>)</span>)</span></div></pre></td></tr></table></figure>
+
+<p>非常的简洁，而且时间消耗就几秒而已。</p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/R/">R</a><a href="/tags/性能优化/">性能优化</a><a href="/tags/tapply/">tapply</a><a href="/tags/向量化运算/">向量化运算</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
 
 <nav id="pagenavi">
   
     <a href="/" class="alignleft prev">Prev</a>
   
-  
-    <a href="/page/3/" class="alignright next">Next</a>
   
   <div class="clearfix"></div>
 </nav></div>
@@ -696,37 +650,6 @@
   <canvas></canvas>
 </div>
 <script src="/js/phasebeam.js"></script>
-
-<!-- mathjax config similar to math.stackexchange -->
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
 
 
 
