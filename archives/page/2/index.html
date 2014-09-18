@@ -68,6 +68,67 @@
   <header>
     
   
+    <h1 class="title"><a href="/2013/09/06/2013-09-06-R语言的小技巧/">R语言的小技巧</a></h1>
+  
+
+    <time datetime="2013-09-05T16:00:00.000Z">
+  <span class="day">6</span><span class="month">9月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h3 id="ifelse和if_…_else_…不同">ifelse和if … else …不同</h3>
+<p>认为相同，主要是受到之前经验的影响，不过这里的ifelse是向量化的运算，返回值的长度会和test的长度一致。可以看ifelse的源码：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> (test, yes, no) </div><div class="line">{</div><div class="line">    <span class="keyword">if</span> (is.atomic(test)) </div><div class="line">        storage.mode(test) &lt;- <span class="string">"logical"</span></div><div class="line">    <span class="keyword">else</span> test &lt;- <span class="keyword">if</span> (isS4(test)) </div><div class="line">        as(test, <span class="string">"logical"</span>)</div><div class="line">    <span class="keyword">else</span> as.logical(test)</div><div class="line">    ans &lt;- test</div><div class="line">    ok &lt;- !(nas &lt;- is.na(test))</div><div class="line">    <span class="keyword">if</span> (any(test[ok])) </div><div class="line">        ans[test & ok] &lt;- rep(yes, length.out = length(ans))[test & </div><div class="line">            ok]</div><div class="line">    <span class="keyword">if</span> (any(!test[ok])) </div><div class="line">        ans[!test & ok] &lt;- rep(no, length.out = length(ans))[!test & </div><div class="line">            ok]</div><div class="line">    ans[nas] &lt;- <span class="literal">NA</span></div><div class="line">    ans</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; ifelse(c(<span class="literal">T</span>, <span class="literal">F</span>, <span class="literal">T</span>), c(<span class="number">1</span>,<span class="number">2</span>), c(<span class="number">5</span>,<span class="number">6</span>))  <span class="comment"># 长度不够，则会自动补充</span></div><div class="line">[<span class="number">1</span>] <span class="number">1</span> <span class="number">6</span> <span class="number">1</span></div></pre></td></tr></table></figure>
+
+<h3 id="install_RCurld的问题">install RCurld的问题</h3>
+<p>在ubuntu12.04上安装：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">install.packages(<span class="string">"RCurl"</span>)</div></pre></td></tr></table></figure>
+
+<p>提示：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">checking <span class="keyword">for</span> curl-config... no</div><div class="line">Cannot <span class="keyword">find</span> curl-config</div><div class="line">ERROR: configuration failed <span class="keyword">for</span> <span class="keyword">package</span> ‘RCurl’</div></pre></td></tr></table></figure>
+
+<p>解决：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">sudo</span> apt-get install libcurl4-gnutls-dev</div></pre></td></tr></table></figure>
+
+<p>附: <a href="http://cos.name/cn/topic/108303" target="_blank" rel="external">http://cos.name/cn/topic/108303</a></p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/R/">R</a><a href="/tags/经验/">经验</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
     <h1 class="title"><a href="/2013/09/05/2013-09-05-sed命令/">sed命令</a></h1>
   
 
@@ -597,66 +658,6 @@
       
   <div class="tags">
 <a href="/tags/R/">R</a><a href="/tags/lapply/">lapply</a><a href="/tags/向量化运算/">向量化运算</a></div>
-
-      
-    </footer>
-    
-  </div>
-  
-</article>
-  
-    <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <header>
-    
-  
-    <h1 class="title"><a href="/2013/08/20/2013-08-20-function.apply/">R function apply</a></h1>
-  
-
-    <time datetime="2013-08-19T16:00:00.000Z">
-  <span class="day">20</span><span class="month">8月</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <h2 id="apply">apply</h2>
-<p>   apply(X, MARGIN, FUN, …)</p>
-<h3 id="参数说明">参数说明</h3>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">X:         array or matrix</div><div class="line">MARGIN:    <span class="number">1</span>表示按行计算，<span class="number">2</span>表示按列计算，c(<span class="number">1</span>, <span class="number">2</span>)表示对行和列同时作用，就会对每个元素都产生作用</div><div class="line">FUN:       作用函数</div><div class="line"><span class="keyword">...</span>:       作用函数的参数</div></pre></td></tr></table></figure>
-
-<h3 id="实例">实例</h3>
-<p>按行计算</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&gt; <span class="tag">a</span></div><div class="line"><span class="attr_selector">[,1]</span> <span class="attr_selector">[,2]</span> <span class="attr_selector">[,3]</span> <span class="attr_selector">[,4]</span></div><div class="line"><span class="attr_selector">[1,]</span> 1 3 2 1</div><div class="line"><span class="attr_selector">[2,]</span> 2 1 3 2</div><div class="line">&gt; <span class="function">apply</span>(<span class="tag">a</span>, 1, <span class="function">function</span>(x)<span class="function">sum</span>(x))     # 可以简化成：<span class="function">apply</span>(<span class="tag">a</span>, 1, sum)</div><div class="line"><span class="attr_selector">[1]</span> 7 8</div></pre></td></tr></table></figure>
-
-<p>按列计算</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&gt; <span class="function">apply</span>(<span class="tag">a</span>, 2, <span class="function">function</span>(x)<span class="function">sum</span>(x))</div><div class="line"><span class="attr_selector">[1]</span> 3 4 5 3</div></pre></td></tr></table></figure>
-
-<p>行列同时作用</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="function">apply</span>(<span class="tag">a</span>, <span class="function">c</span>(1,2), <span class="function">function</span>(x)<span class="function">sum</span>(x))</div><div class="line"><span class="attr_selector">[,1]</span> <span class="attr_selector">[,2]</span> <span class="attr_selector">[,3]</span> <span class="attr_selector">[,4]</span></div><div class="line"><span class="attr_selector">[1,]</span> 1 3 2 1</div><div class="line"><span class="attr_selector">[2,]</span> 2 1 3 2</div></pre></td></tr></table></figure>
-
-<p>扩展参数</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="function">apply</span>(<span class="tag">a</span>, 1, <span class="function">function</span>(x, t)x+t, 10)    # </div><div class="line"><span class="attr_selector">[,1]</span> <span class="attr_selector">[,2]</span></div><div class="line"><span class="attr_selector">[1,]</span> 11 12</div><div class="line"><span class="attr_selector">[2,]</span> 13 11</div><div class="line"><span class="attr_selector">[3,]</span> 12 13</div><div class="line"><span class="attr_selector">[4,]</span> 11 12</div></pre></td></tr></table></figure>
-
-
-    
-    
-    <footer class="meta">
-      
-      
-  <div class="tags">
-<a href="/tags/R/">R</a><a href="/tags/apply/">apply</a><a href="/tags/向量化运算/">向量化运算</a></div>
 
       
     </footer>
