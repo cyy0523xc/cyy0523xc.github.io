@@ -7,6 +7,13 @@
   <meta name="author" content="AlexCai">
 
   
+  <meta name="description" content="期待一元表达式
+异常信息：
+1bash: [: h: 期待一元表达式]
+
+对应语句：
+12345if [ &quot;h&quot; = $1 ]# 如果变量未定义的话，则报错，应改成：if [ &quot;h&quot; = &quot;$1&quot; ]">
+  
   
 
   <link rel="alternate" href="/atom.xml" title="数据明月" type="application/atom+xml">
@@ -63,7 +70,14 @@
   </header>
   <div class="entry-content">
     
-      
+      <h1 id="期待一元表达式">期待一元表达式</h1>
+<p>异常信息：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">bash</span>: <span class="string">[: h: 期待一元表达式]</span></div></pre></td></tr></table></figure>
+
+<p>对应语句：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> [ <span class="string">"h"</span> = <span class="variable">$1</span> ]</div><div class="line"></div><div class="line"><span class="comment"># 如果变量未定义的话，则报错，应改成：</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> [ <span class="string">"h"</span> = <span class="string">"<span class="variable">$1</span>"</span> ]</div></pre></td></tr></table></figure>
+
+
     
     
     <footer class="meta">
