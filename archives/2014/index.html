@@ -72,6 +72,60 @@
   <header>
     
   
+    <h1 class="title"><a href="/2014/09/24/vim插件/">vim插件</a></h1>
+  
+
+    <time datetime="2014-09-24T07:18:30.000Z">
+  <span class="day">24</span><span class="month">9月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="华丽的powerline">华丽的powerline</h2>
+<p>下载插件：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">cd</span> ~/.<span class="keyword">vim</span>/bundle/ </div><div class="line">git clone http<span class="variable">s:</span>//github.<span class="keyword">com</span>/Lokaltog/<span class="keyword">vim</span>-powerline</div></pre></td></tr></table></figure>
+
+<p>修改vim的配置文件：vim ~/.vimrc，加入下面几行：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="string">" powerline插件</span></div><div class="line"><span class="keyword">set</span> t_Co=<span class="number">256</span></div><div class="line"><span class="keyword">let</span> <span class="variable">g:Powerline_symbols</span> = <span class="string">'unicode'</span></div><div class="line"><span class="keyword">set</span> encoding=utf8</div></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<p><img src="/images/vim-powerline效果.jpg" alt="vim-powerline"></p>
+
+    
+    
+    <footer class="meta">
+      
+  <div class="cats">
+<a href="/categories/record/">record</a></div>
+
+      
+  <div class="tags">
+<a href="/tags/vim/">vim</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
     <h1 class="title"><a href="/2014/09/22/shell命令自动补全/">shell命令自动补全</a></h1>
   
 
@@ -540,52 +594,6 @@
       
   <div class="tags">
 <a href="/tags/hexo/">hexo</a></div>
-
-      
-    </footer>
-    
-  </div>
-  
-</article>
-  
-    <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <header>
-    
-  
-    <h1 class="title"><a href="/2014/08/15/vim命令汇总/">vim命令汇总</a></h1>
-  
-
-    <time datetime="2014-08-14T16:00:00.000Z">
-  <span class="day">15</span><span class="month">8月</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <h3 id="vim_命令汇总">vim 命令汇总</h3>
-<p><a href="http://www.cnblogs.com/softwaretesting/archive/2011/07/12/2104435.html" target="_blank" rel="external">http://www.cnblogs.com/softwaretesting/archive/2011/07/12/2104435.html</a></p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 单词操作</span></div><div class="line">yw    复制单词</div><div class="line">dw    删除单词</div><div class="line"></div><div class="line"><span class="variable">n=</span>=   n行缩进</div><div class="line"></div><div class="line">.     重复刚才的命令</div><div class="line">z+f % 折叠代码</div><div class="line"></div><div class="line">o     插入一个空行</div><div class="line">CTRL+v, I, <span class="comment">#, ESC    多行注释（#可以换成其他的，例如//）</span></div><div class="line">      删除多行注释的方法，同样 Ctrl+v 进入列选择模式，移到光标把注释符选中，按下d，注释就被删除了</div></pre></td></tr></table></figure>
-
-
-    
-    
-    <footer class="meta">
-      
-      
-  <div class="tags">
-<a href="/tags/linux/">linux</a><a href="/tags/vim/">vim</a></div>
 
       
     </footer>
