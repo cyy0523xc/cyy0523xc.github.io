@@ -1,0 +1,168 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Greasemonkey脚本开发 | 数据明月</title>
+  <meta name="author" content="AlexCai">
+
+  
+  <meta name="description" content="简介
+Greasemonkey，简称GM，中文俗称为“油猴子”，是Mozilla Firefox的一个附加组件。它让用户安装一些脚本使大部分HTML为主的网页于用户端直接改变得更方便易用。随着Greasemonkey脚本常驻于浏览器，每次随着目的网页打开而自动做修改，使得运行脚本的用户印象深刻地享受其固定便利性。Greasemonkey可替网页加入些新功能、修正网页错误、组合来自不同网页的数据、或者数繁不及备载的其他功能。写的好的Greasemonkey脚本甚至可让其输出与被修改的页面集成得天衣无缝，像是原本网页里的一部分。">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="数据明月" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <!-- <script src="http://libs.baidu.com/jquery/1.9.0/jquery.min.js"></script> -->
+
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script src="http://code.jquery.com/jquery-migrate-1.0.0.js"></script>
+
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="site-name">
+    数据明月 
+    <span>心有沉香，无惧浮世！</span>
+</div>
+
+<nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="http://github.com/cyy0523xc/">Github</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+  </ul>
+</nav>
+</header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">Greasemonkey脚本开发</h1>
+  
+
+    <time datetime="2014-09-26T13:48:00.000Z">
+  <span class="day">26</span><span class="month">9月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="简介">简介</h2>
+<p>Greasemonkey，简称GM，中文俗称为“油猴子”，是Mozilla Firefox的一个附加组件。它让用户安装一些脚本使大部分HTML为主的网页于用户端直接改变得更方便易用。随着Greasemonkey脚本常驻于浏览器，每次随着目的网页打开而自动做修改，使得运行脚本的用户印象深刻地享受其固定便利性。<br>Greasemonkey可替网页加入些新功能、修正网页错误、组合来自不同网页的数据、或者数繁不及备载的其他功能。写的好的Greasemonkey脚本甚至可让其输出与被修改的页面集成得天衣无缝，像是原本网页里的一部分。</p>
+<a id="more"></a>
+
+<h2 id="实例：过滤新浪微博上那些烦人的信息">实例：过滤新浪微博上那些烦人的信息</h2>
+<p>新浪微博上烦人的广告等信息非常多，甚为讨厌，作为练手，就拿他开刀了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
+
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/Greasemonkey/">Greasemonkey</a><a href="/tags/javascript/">javascript</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2014 AlexCai
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+    try {
+        $('.fancybox').fancybox();
+    } catch(e) {
+        console.log('after_footer:fancybox');
+    }
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+</body>
+</html>
