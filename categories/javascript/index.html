@@ -1,0 +1,200 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>javascript | 数据明月</title>
+  <meta name="author" content="AlexCai">
+
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="数据明月" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <!-- <script src="http://libs.baidu.com/jquery/1.9.0/jquery.min.js"></script> -->
+
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script src="http://code.jquery.com/jquery-migrate-1.0.0.js"></script>
+
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="site-name">
+    数据明月 
+    <span>心有沉香，无惧浮世！</span>
+</div>
+
+<nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="http://github.com/cyy0523xc/">Github</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+  </ul>
+</nav>
+</header>
+  <div id="content" class="inner">
+
+<header id="archive-header">
+  <h1 class="alignleft">Category: javascript</h1>
+  <div class="search alignright">
+    <form action="http://google.com/search" method="get" accept-charset="utf-8">
+      <input type="search" name="q" results="0" placeholder="Search">
+      <input type="hidden" name="q" value="site:cyy0523xc.github.io">
+    </form>
+  </div>
+</header>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2014/09/28/javascript的promise模式/">jquery的promise模式</a></h1>
+  
+
+    <time datetime="2014-09-28T12:01:25.000Z">
+  <span class="day">28</span><span class="month">9月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="Promise">Promise</h2>
+<p>典型的ajax调用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$.ajax({</div><div class="line">    url:     <span class="string">'/url'</span>,</div><div class="line">    success: successFunction,</div><div class="line">    error:   errorFunction</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>这个实现没有问题，但是耦合性比较高，不够优美，用promise实现如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$.ajax({url: <span class="string">'/url'</span>})</div><div class="line">.done(successFunction)</div><div class="line">.done(successFunction2)</div><div class="line">.fail(errorFunction);</div><div class="line"></div><div class="line"><span class="comment">// 更通用的方式</span></div><div class="line"></div><div class="line">$.when(ajax({url: <span class="string">'/url'</span>}))     <span class="comment">// $.when(promise)</span></div><div class="line">.done(successFunction)</div><div class="line">.fail(errorFunction);</div></pre></td></tr></table></figure>
+
+<p>好处如下：</p>
+<ul>
+<li>你可以多次调用done()和fail()函数，并使用不同的回调函数。或许你的一个回调函数用来停止动画，一个用来发起一个新的AJAX请求，一个用来将接受到的数据展示给用户。</li>
+<li>即使在AJAX调用完成之后，你依然可以调用done()和fail()函数，并且回调函数可以立即执行。不同的状态之间并不会发生变量混乱。当一个AJAX调用结束时，它保持了一个成功状态或者失败状态，这个状态不会发生改变。</li>
+</ul>
+<h2 id="Deferred">Deferred</h2>
+<p>那么Deferred和Promise之间有什么区别呢？正如你在前面看到的，一个promise就是一个由异步函数返回的对象。当你想要自己编写一个这样的函数时你需要使用一个deferred。</p>
+<p>一个promise对象有done和fail两个函数，Deferred有两个与之对应的函数：resolve和reject。使用Deferred对象可以构造异步模型。如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">wait</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">var</span> deferred = $.Deferred();</div><div class="line"></div><div class="line">    <span class="comment">// 异步任务（例如异步请求数据）</span></div><div class="line">    setTimeout(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        deferred.resolve();</div><div class="line">    }, <span class="number">2000</span>);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> deferred.promise();</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>see: <a href="http://www.html-js.com/article/Study-JavaScript-jQuery-Deferred-and-promise-every-day" target="_blank" rel="external">http://www.html-js.com/article/Study-JavaScript-jQuery-Deferred-and-promise-every-day</a> </p>
+
+    
+    
+    <footer class="meta">
+      
+  <div class="cats">
+<a href="/categories/javascript/">javascript</a></div>
+
+      
+  <div class="tags">
+<a href="/tags/javascript/">javascript</a><a href="/tags/jquery/">jquery</a><a href="/tags/promise/">promise</a><a href="/tags/异步编程/">异步编程</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+  
+
+  <nav id="pagenavi">
+  
+  
+  <div class="clearfix"></div>
+</nav>
+</div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2014 AlexCai
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+    try {
+        $('.fancybox').fancybox();
+    } catch(e) {
+        console.log('after_footer:fancybox');
+    }
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+</body>
+</html>

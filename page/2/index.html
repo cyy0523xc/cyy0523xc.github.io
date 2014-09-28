@@ -59,6 +59,52 @@
   <header>
     
   
+    <h1 class="title"><a href="/2014/09/12/vim/vim中替换-M符号/">vim中替换^M符号</a></h1>
+  
+
+    <time datetime="2014-09-12T09:14:32.000Z">
+  <span class="day">12</span><span class="month">9月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <p>在使用git pull时，发生文件冲突，合并冲突时，发现行尾显示了很多 <strong>^M</strong> 的符号。这是一个特殊符号，可以使用替换：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">:%s/^M$//g</div></pre></td></tr></table></figure>
+
+<p>注意：命令中的 <strong>^M</strong> 需要用“ <strong>CTRL-V CTRL-M</strong> ” 生成。</p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/vim/">vim</a><a href="/tags/linux/">linux</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
     <h1 class="title"><a href="/2014/09/11/hexo记录/">hexo记录</a></h1>
   
 
@@ -136,7 +182,7 @@
   <header>
     
   
-    <h1 class="title"><a href="/2014/08/15/vim命令汇总/">vim命令汇总</a></h1>
+    <h1 class="title"><a href="/2014/08/15/vim/vim命令汇总/">vim命令汇总</a></h1>
   
 
     <time datetime="2014-08-14T16:00:00.000Z">
@@ -229,7 +275,7 @@
   <header>
     
   
-    <h1 class="title"><a href="/2014/02/11/R对数组指定下标顺序输出/">R对数组指定下标顺序输出</a></h1>
+    <h1 class="title"><a href="/2014/02/11/R/R对数组指定下标顺序输出/">R对数组指定下标顺序输出</a></h1>
   
 
     <time datetime="2014-02-10T16:00:00.000Z">
@@ -325,7 +371,7 @@
   <header>
     
   
-    <h1 class="title"><a href="/2013/09/06/R语言的小技巧/">R语言的小技巧</a></h1>
+    <h1 class="title"><a href="/2013/09/06/R/R语言的小技巧/">R语言的小技巧</a></h1>
   
 
     <time datetime="2013-09-05T16:00:00.000Z">
@@ -386,7 +432,61 @@
   <header>
     
   
-    <h1 class="title"><a href="/2013/09/05/sed命令/">sed命令</a></h1>
+    <h1 class="title"><a href="/2013/09/05/R/R中vector和names函数/">R中vector和names函数</a></h1>
+  
+
+    <time datetime="2013-09-04T16:00:00.000Z">
+  <span class="day">5</span><span class="month">9月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="问题">问题</h2>
+<p>源数据保存在文件中，格式如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">28</span>&<span class="variable">at=</span><span class="number">7</span>&<span class="variable">cid=</span>mDamz1b7WRJZ</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">29</span>&<span class="variable">at=</span><span class="number">3</span>&<span class="variable">cid=</span>Q4ETETM9Hjx0</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">39</span>&<span class="variable">at=</span><span class="number">0</span>&<span class="variable">cid=</span>ytBSubxEaFN6</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">40</span>&<span class="variable">at=</span><span class="number">3</span>&<span class="variable">cid=</span>mDamz1b7WRJZ</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">42</span>&<span class="variable">at=</span><span class="number">6</span>&<span class="variable">cid=</span>ytBSubxEaFN6</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">42</span>&<span class="variable">at=</span><span class="number">3</span>&<span class="variable">cid=</span>mDamz1b7WRJZ</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">45</span>&<span class="variable">at=</span><span class="number">0</span>&<span class="variable">cid=</span><span class="number">66</span>OwWFuVBMSS</div></pre></td></tr></table></figure>
+
+<p>需要生成一个list，其下标是数据的字段名：drt，at，cid</p>
+<h2 id="解决">解决</h2>
+<p>开始写成这样，很别扭的代码：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">x &lt;- scan(filename, what=<span class="string">""</span>, sep=<span class="string">"&"</span>, nlines=<span class="number">1</span>)</div><div class="line">fields.name &lt;- sapply(x, FUN=<span class="keyword">function</span>(x){strsplit(x, split=<span class="string">"="</span>)[[<span class="number">1</span>]][<span class="number">1</span>]})</div><div class="line">names(fields.name) &lt;- <span class="literal">NULL</span></div><div class="line">names(fields.name) &lt;- fields.name</div><div class="line">fields.name &lt;- as.list(fields.name)</div></pre></td></tr></table></figure>
+
+<p>借鉴tapply的源码，改成这样：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">x &lt;- scan(filename, what=<span class="string">""</span>, sep=<span class="string">"&"</span>, nlines=<span class="number">1</span>)</div><div class="line">fields.name &lt;- sapply(x, FUN=<span class="keyword">function</span>(x){strsplit(x, split=<span class="string">"="</span>)[[<span class="number">1</span>]][<span class="number">1</span>]})</div><div class="line">tmp.fields.name &lt;- vector(<span class="string">"list"</span>, length(fields.name))    <span class="comment"># 生成一个空的list</span></div><div class="line">names(tmp.fields.name) &lt;- fields.name</div></pre></td></tr></table></figure>
+
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/R/">R</a><a href="/tags/vector/">vector</a><a href="/tags/names/">names</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2013/09/05/shell/sed命令/">sed命令</a></h1>
   
 
     <time datetime="2013-09-04T16:00:00.000Z">
@@ -457,60 +557,6 @@
   <header>
     
   
-    <h1 class="title"><a href="/2013/09/05/R中vector和names函数/">R中vector和names函数</a></h1>
-  
-
-    <time datetime="2013-09-04T16:00:00.000Z">
-  <span class="day">5</span><span class="month">9月</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <h2 id="问题">问题</h2>
-<p>源数据保存在文件中，格式如下：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">28</span>&<span class="variable">at=</span><span class="number">7</span>&<span class="variable">cid=</span>mDamz1b7WRJZ</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">29</span>&<span class="variable">at=</span><span class="number">3</span>&<span class="variable">cid=</span>Q4ETETM9Hjx0</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">39</span>&<span class="variable">at=</span><span class="number">0</span>&<span class="variable">cid=</span>ytBSubxEaFN6</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">40</span>&<span class="variable">at=</span><span class="number">3</span>&<span class="variable">cid=</span>mDamz1b7WRJZ</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">42</span>&<span class="variable">at=</span><span class="number">6</span>&<span class="variable">cid=</span>ytBSubxEaFN6</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">42</span>&<span class="variable">at=</span><span class="number">3</span>&<span class="variable">cid=</span>mDamz1b7WRJZ</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">45</span>&<span class="variable">at=</span><span class="number">0</span>&<span class="variable">cid=</span><span class="number">66</span>OwWFuVBMSS</div></pre></td></tr></table></figure>
-
-<p>需要生成一个list，其下标是数据的字段名：drt，at，cid</p>
-<h2 id="解决">解决</h2>
-<p>开始写成这样，很别扭的代码：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">x &lt;- scan(filename, what=<span class="string">""</span>, sep=<span class="string">"&"</span>, nlines=<span class="number">1</span>)</div><div class="line">fields.name &lt;- sapply(x, FUN=<span class="keyword">function</span>(x){strsplit(x, split=<span class="string">"="</span>)[[<span class="number">1</span>]][<span class="number">1</span>]})</div><div class="line">names(fields.name) &lt;- <span class="literal">NULL</span></div><div class="line">names(fields.name) &lt;- fields.name</div><div class="line">fields.name &lt;- as.list(fields.name)</div></pre></td></tr></table></figure>
-
-<p>借鉴tapply的源码，改成这样：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">x &lt;- scan(filename, what=<span class="string">""</span>, sep=<span class="string">"&"</span>, nlines=<span class="number">1</span>)</div><div class="line">fields.name &lt;- sapply(x, FUN=<span class="keyword">function</span>(x){strsplit(x, split=<span class="string">"="</span>)[[<span class="number">1</span>]][<span class="number">1</span>]})</div><div class="line">tmp.fields.name &lt;- vector(<span class="string">"list"</span>, length(fields.name))    <span class="comment"># 生成一个空的list</span></div><div class="line">names(tmp.fields.name) &lt;- fields.name</div></pre></td></tr></table></figure>
-
-
-    
-    
-    <footer class="meta">
-      
-      
-  <div class="tags">
-<a href="/tags/R/">R</a><a href="/tags/vector/">vector</a><a href="/tags/names/">names</a></div>
-
-      
-    </footer>
-    
-  </div>
-  
-</article>
-
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <header>
-    
-  
     <h1 class="title"><a href="/2013/09/02/BlueKai模式研究/">BlueKai模式研究</a></h1>
   
 
@@ -531,60 +577,6 @@
       
   <div class="tags">
 <a href="/tags/DMP/">DMP</a></div>
-
-      
-    </footer>
-    
-  </div>
-  
-</article>
-
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <header>
-    
-  
-    <h1 class="title"><a href="/2013/08/30/rsync命令/">rsync命令</a></h1>
-  
-
-    <time datetime="2013-08-29T16:00:00.000Z">
-  <span class="day">30</span><span class="month">8月</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <p>从远程服务器复制文件到本地服务器以前通常会使用scp命令，例如：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -<span class="constant">P</span> <span class="number">3000</span> user<span class="variable">@host</span><span class="symbol">:/data2/bak/</span><span class="number">20130801</span>/part-* <span class="regexp">/home/windows</span><span class="regexp">/data/</span><span class="number">20130825</span>/</div></pre></td></tr></table></figure>
-
-<p>不过用脚本跑的时候，发现得到的文件不齐全，有些文件不知道为什么没有下载到本地，所以寻找可以不覆盖更新的命令。本以为scp有这样的参数的，不过没发现。后来就使用rsync命令了，如：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rsync -aPuv <span class="string">'-e ssh -p 3000'</span> user<span class="variable">@host</span><span class="symbol">:/data2/bak/</span><span class="number">20130825</span>/part-* <span class="regexp">/home/windows</span><span class="regexp">/data/</span><span class="number">20130825</span>/</div></pre></td></tr></table></figure>
-
-<p>rsync的参数解释：</p>
-<ul>
-<li>P：显示进度条信息</li>
-<li>u：update，只返回不同的文件</li>
-</ul>
-<p>扩展：<a href="http://www.howtocn.org/rsync:use_rsync" target="_blank" rel="external">http://www.howtocn.org/rsync:use_rsync</a></p>
-
-    
-    
-    <footer class="meta">
-      
-      
-  <div class="tags">
-<a href="/tags/linux/">linux</a><a href="/tags/rsync/">rsync</a><a href="/tags/scp/">scp</a></div>
 
       
     </footer>
