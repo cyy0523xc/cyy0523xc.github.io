@@ -1,0 +1,209 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>shell-export及执行环境 | 数据明月</title>
+  <meta name="author" content="AlexCai">
+
+  
+  <meta name="description" content="export 功能说明：设置或显示环境变量。
+语　　法：export [-fnp] [变量名称]=[变量设置值]
+补充说明：
+
+在shell中定义的变量，通常只能在当前shell中有效，只有用export输出之后，才能在其fork的子shell中有效。
+子shell中的变量无法被父shell读取，即">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="数据明月" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <!-- <script src="http://libs.baidu.com/jquery/1.9.0/jquery.min.js"></script> -->
+
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script src="http://code.jquery.com/jquery-migrate-1.0.0.js"></script>
+
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="site-name">
+    数据明月 
+    <span>心有沉香，无惧浮世！</span>
+</div>
+
+<nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="http://github.com/cyy0523xc/">Github</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+  </ul>
+</nav>
+</header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">shell-export及执行环境</h1>
+  
+
+    <time datetime="2014-09-28T16:00:00.000Z">
+  <span class="day">29</span><span class="month">9月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="export_功能说明：设置或显示环境变量。">export 功能说明：设置或显示环境变量。</h2>
+<p>语　　法：export [-fnp] [变量名称]=[变量设置值]</p>
+<p>补充说明：</p>
+<ul>
+<li>在shell中定义的变量，通常只能在当前shell中有效，只有用export输出之后，才能在其fork的子shell中有效。</li>
+<li>子shell中的变量无法被父shell读取，即使export也不行。</li>
+</ul>
+<p>参　　数：</p>
+<ul>
+<li>-f 　代表[变量名称]中为函数名称。</li>
+<li>-n 　删除指定的变量。变量实际上并未删除，只是不会输出到后续指令的执行环境中。</li>
+<li>-p 　列出所有的shell赋予程序的环境变量。</li>
+</ul>
+<p>用法：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> var</div><div class="line"><span class="keyword">export</span> <span class="operator">-f</span> func</div><div class="line"></div><div class="line"><span class="keyword">export</span> -fp</div></pre></td></tr></table></figure>
+
+<h2 id="shell的命令类型">shell的命令类型</h2>
+<h3 id="1-_内置命令(Builtin)">1. 内置命令(Builtin)</h3>
+<p>shell 执行这些命令时不会派生新进程，而是由 shell 直接执行。比如 read, set, export 都是内置命令，这些命令需要用 help command 来查看其帮助信息。</p>
+<h3 id="2-_外部命令">2. 外部命令</h3>
+<p>外部命令就是普通的可执行二进制文件，shell 在执行它们时会 fork 出新进程(这是一个子 shell)，然后用 exec 系列函数来执行它们，这时候子 shell 的环境就被命令的环境所取代。</p>
+<h3 id="3-_shell_脚本">3. shell 脚本</h3>
+<p>在执行 shell 脚本时，shell 同样会先执行 fork 派生出子进程，然后使用 exec 来调用脚本解释程序(内核中会检查脚本中的第一行 #!/bin/xxx 来确定是调用哪一种)，然后将脚本装入，由它来解释执行。脚本解释器有很多，比如 bash, cshell, perl, python 等。如果被调出来的解释程序和当前 shell 是同一种 shell，那么它就是当前 shell 的子 shell，脚本中的命令都在子 shell 中执行，不会影响父 shell 的环境。</p>
+<h2 id="几种常见的形式">几种常见的形式</h2>
+<h3 id="(_)_和_{_}_中的指令组：">(  ) 和 {  } 中的指令组：</h3>
+<p>在 (  ) 和 {  } 中都可以内置一组指令。<br>(  ) 中的指令会在一个子 shell 中执行，命令执行结果不影响当前 shell。需要注意的是，$$ 代表当前 shell 进程的 PID，而不是子 shell 进程的 PID 。</p>
+<p>{  } 中的指令在当前 shell 中执行，指令执行结果会影响当前的环境。</p>
+<h3 id="后台执行和异步执行">后台执行和异步执行</h3>
+<p>在一个 shell 脚本中将一个命令通过 &amp; 放入后台执行，这个命令和当前 shell 的执行是并行的，当前 shell 会派生一个子 shell 执行这个后台命令，而自己则继续往下执行，两者并没有相互依赖及等待的关系，所以这是一种异步的执行方式。以下代码可以说明这一点：</p>
+<h3 id="命令替换">命令替换</h3>
+<p>`command` 会将 command 命令的输出结果代换到当前的命令行。command 在子 shell 中执行，它的结果不会影响到当前 shell 。比较下面代码：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">pwd</span></div><div class="line">dir=`<span class="built_in">cd</span> /tmp; <span class="built_in">pwd</span>`</div><div class="line"><span class="built_in">echo</span> <span class="variable">$dir</span></div><div class="line"><span class="built_in">pwd</span></div></pre></td></tr></table></figure>
+
+<h3 id="管道">管道</h3>
+<p>对于 bash 来说(dash，ash 等大部分 shell 也一样)， <strong>管道中的命令都是放在子shell里执行的</strong> 。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">a=<span class="string">"hello world"</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span> <span class="string">"<span class="variable">$a</span>"</span>| (<span class="built_in">read</span> var; <span class="built_in">echo</span> <span class="string">"In subshell:<span class="variable">$var</span>"</span>)</div><div class="line"></div><div class="line"><span class="comment"># 管道中的命令是放在子 shell 里执行的，所以 var 得到的值无法传递到当前 shell ，所以这里要输出为空。</span></div><div class="line"><span class="built_in">echo</span> <span class="variable">$var</span></div></pre></td></tr></table></figure>
+
+<h2 id="相关资料">相关资料</h2>
+<ul>
+<li><a href="http://www.groad.net/bbs/thread-3699-1-1.html" target="_blank" rel="external">http://www.groad.net/bbs/thread-3699-1-1.html</a></li>
+<li><a href="http://www.cnblogs.com/hopeworld/archive/2011/09/21/2184576.html" target="_blank" rel="external">http://www.cnblogs.com/hopeworld/archive/2011/09/21/2184576.html</a></li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+  <div class="cats">
+<a href="/categories/shell/">shell</a></div>
+
+      
+  <div class="tags">
+<a href="/tags/shell/">shell</a><a href="/tags/export/">export</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2014 AlexCai
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+    try {
+        $('.fancybox').fancybox();
+    } catch(e) {
+        console.log('after_footer:fancybox');
+    }
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+</body>
+</html>
