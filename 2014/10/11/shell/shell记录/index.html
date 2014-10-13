@@ -7,14 +7,16 @@
   <meta name="author" content="AlexCai">
 
   
-  <meta name="description" content="粘贴到行首
+  <meta name="description" content="多行复制
+12349,14 copy 45  # copy 9,14 move 45  # move9,14 m 45  # move
+
+粘贴到行首
 使用大写 P 
 在某个目录下查找包含某个字符串的文件
 1find . | xargs grep -ri &quot;some string&quot;
 
 xargs命令
-作用：将参数列表转换成小块分段传递给其他命令，以避免参数列表过长的问题。
-1234567rm `find /path -type f`# ">
+">
   
   
 
@@ -76,7 +78,10 @@ xargs命令
   </header>
   <div class="entry-content">
     
-      <h1 id="粘贴到行首">粘贴到行首</h1>
+      <h1 id="多行复制">多行复制</h1>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="number">9</span>,<span class="number">14</span> <span class="built_in">copy</span> <span class="number">45</span>  # <span class="built_in">copy</span> </div><div class="line"></div><div class="line"><span class="number">9</span>,<span class="number">14</span> <span class="keyword">move</span> <span class="number">45</span>  # <span class="keyword">move</span></div><div class="line"><span class="number">9</span>,<span class="number">14</span> <span class="keyword">m</span> <span class="number">45</span>  # <span class="keyword">move</span></div></pre></td></tr></table></figure>
+
+<h1 id="粘贴到行首">粘贴到行首</h1>
 <p>使用大写 <strong>P</strong> </p>
 <h1 id="在某个目录下查找包含某个字符串的文件">在某个目录下查找包含某个字符串的文件</h1>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">find</span> . | xargs <span class="keyword">grep</span> -<span class="keyword">ri</span> <span class="string">"some string"</span></div></pre></td></tr></table></figure>
