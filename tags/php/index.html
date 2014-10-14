@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>markdown | 数据明月</title>
+  <title>php | 数据明月</title>
   <meta name="author" content="AlexCai">
 
   
@@ -44,7 +44,7 @@
   <div id="content" class="inner">
 
 <header id="archive-header">
-  <h1 class="alignleft">Tag: markdown</h1>
+  <h1 class="alignleft">Tag: php</h1>
   <div class="search alignright">
     <form action="http://google.com/search" method="get" accept-charset="utf-8">
       <input type="search" name="q" results="0" placeholder="Search">
@@ -96,59 +96,6 @@
       
   <div class="tags">
 <a href="/tags/markdown/">markdown</a><a href="/tags/sql/">sql</a><a href="/tags/php/">php</a></div>
-
-      
-    </footer>
-    
-  </div>
-  
-</article>
-  
-    <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <header>
-    
-  
-    <h1 class="title"><a href="/2014/10/13/vim/markdown中快速进行表格对齐/">在markdown中快速进行表格对齐</a></h1>
-  
-
-    <time datetime="2014-10-12T16:00:00.000Z">
-  <span class="day">13</span><span class="month">10月</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <p>在markdown中的表格格式对齐是比价麻烦的，有了tabular这个vim插件之后，简单了许多，用法如下：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">:<span class="number">45</span>,<span class="number">67</span> <span class="keyword">Tab</span> /|</div></pre></td></tr></table></figure>
-
-<p>这样就可以将表格按竖线进行对齐了，比较简单。不过经常修改表格时，每次都要输入这样一个命令还是挺麻烦的，故实现成快捷键的形式，如下：</p>
-<figure class="highlight vimscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="string">" align</span></div><div class="line">" markdown table align by <span class="string">"|"</span></div><div class="line">nmap tab\|   :call CyyAlignBy(<span class="string">"\|"</span>)&lt;CR&gt;</div><div class="line">nmap tab,    :call CyyAlignBy(<span class="string">","</span>)&lt;CR&gt;</div><div class="line">nmap tab=    :call CyyAlignBy(<span class="string">"="</span>)&lt;CR&gt;</div><div class="line">nmap tab=&gt;   :call CyyAlignBy(<span class="string">"=&gt;"</span>)&lt;CR&gt;</div><div class="line"></div><div class="line"><span class="string">" 根据某字符串对齐</span></div><div class="line">func CyyAlignBy(string)</div><div class="line">    let __lineno    = line('.<span class="string">')</span></div><div class="line">    let __begin_ln  = __lineno</div><div class="line">    let __end_ln    = __lineno</div><div class="line"></div><div class="line">    " 向前搜索，直到空行</div><div class="line">    while <span class="string">""</span> != getline(__begin_ln)</div><div class="line">        let __begin_ln -= <span class="number">1</span></div><div class="line">        <span class="keyword">if</span> __begin_ln &lt; <span class="number">1</span></div><div class="line">            <span class="keyword">break</span></div><div class="line">        endif</div><div class="line">    endwhile</div><div class="line"></div><div class="line">    <span class="string">" 向后搜索，直到空行 </span></div><div class="line">    while "<span class="string">" != getline(__end_ln)</span></div><div class="line">        let __end_ln += 1</div><div class="line">    endwhile </div><div class="line">    </div><div class="line">    let __exec = printf('%d,%d Tab /%<span class="transposed_variable">s'</span>, __begin_ln, __end_ln, a:string)</div><div class="line">    echo __exec </div><div class="line">    exec __exec</div><div class="line"><span class="function"><span class="keyword">endfunction</span></span></div></pre></td></tr></table></figure>
-
-<p>说明：</p>
-<ul>
-<li>依赖代码区块前后的空行来确定开始和结束的行号。</li>
-<li>最新版见这里：<a href="https://github.com/cyy0523xc/code/blob/master/vim/cyy.vim" target="_blank" rel="external">https://github.com/cyy0523xc/code/blob/master/vim/cyy.vim</a> </li>
-</ul>
-
-    
-    
-    <footer class="meta">
-      
-      
-  <div class="tags">
-<a href="/tags/vim/">vim</a><a href="/tags/markdown/">markdown</a><a href="/tags/vimscript/">vimscript</a></div>
 
       
     </footer>

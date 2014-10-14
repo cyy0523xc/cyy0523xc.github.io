@@ -59,6 +59,62 @@
   <header>
     
   
+    <h1 class="title"><a href="/2014/09/18/vim/vim的模式/">vim的模式</a></h1>
+  
+
+    <time datetime="2014-09-18T07:36:31.000Z">
+  <span class="day">18</span><span class="month">9月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="通常模式(n)">通常模式(n)</h2>
+<p>在其它任何一个模式下,用ESC或者 ctrl+c 键可以退到通常模式</p>
+<h2 id="插入模式(i)">插入模式(i)</h2>
+<p>在这个模式下,vim像一个常见的编辑器.在通常模式下,用i或者a可以进行本模式,当然,还有一些其它命令也可以.</p>
+<h2 id="可视模式(v)">可视模式(v)</h2>
+<p>在这个模式下,可以使用hjkl进行选择.然后进行copy,paste或者其它操作. 在通常模式下,用 <strong>v or shift+v</strong> 命令进行可视模式.</p>
+<h2 id="列块操作模式(V)">列块操作模式(V)</h2>
+<p>这是块操作模式. 在通常模式下,用 <strong>ctrl+v</strong> 进入本模式.</p>
+<p>例如注释多行代码等（ <strong>I, #, ESC</strong> ）</p>
+<p>还有 <strong>行尾列块操作模式</strong> ：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gg, ctrl+v, <span class="constant">G</span>, <span class="variable">$,</span> <span class="constant">A</span></div></pre></td></tr></table></figure>
+
+<h2 id="修改模式(R)">修改模式(R)</h2>
+<p>这是改写的模式.很多软件法用insert键来完成这个切换.在vim中,从通常模式用R即可进入改写模式.</p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/vim/">vim</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
     <h1 class="title"><a href="/2014/09/18/php/在PHP中近似实现AOP思想/">在PHP中近似实现AOP思想</a></h1>
   
 
@@ -520,60 +576,6 @@
       
   <div class="tags">
 <a href="/tags/R/">R</a><a href="/tags/经验/">经验</a></div>
-
-      
-    </footer>
-    
-  </div>
-  
-</article>
-
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <header>
-    
-  
-    <h1 class="title"><a href="/2013/09/05/R/R中vector和names函数/">R中vector和names函数</a></h1>
-  
-
-    <time datetime="2013-09-04T16:00:00.000Z">
-  <span class="day">5</span><span class="month">9月</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <h2 id="问题">问题</h2>
-<p>源数据保存在文件中，格式如下：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">28</span>&<span class="variable">at=</span><span class="number">7</span>&<span class="variable">cid=</span>mDamz1b7WRJZ</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">29</span>&<span class="variable">at=</span><span class="number">3</span>&<span class="variable">cid=</span>Q4ETETM9Hjx0</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">39</span>&<span class="variable">at=</span><span class="number">0</span>&<span class="variable">cid=</span>ytBSubxEaFN6</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">40</span>&<span class="variable">at=</span><span class="number">3</span>&<span class="variable">cid=</span>mDamz1b7WRJZ</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">42</span>&<span class="variable">at=</span><span class="number">6</span>&<span class="variable">cid=</span>ytBSubxEaFN6</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">42</span>&<span class="variable">at=</span><span class="number">3</span>&<span class="variable">cid=</span>mDamz1b7WRJZ</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">45</span>&<span class="variable">at=</span><span class="number">0</span>&<span class="variable">cid=</span><span class="number">66</span>OwWFuVBMSS</div></pre></td></tr></table></figure>
-
-<p>需要生成一个list，其下标是数据的字段名：drt，at，cid</p>
-<h2 id="解决">解决</h2>
-<p>开始写成这样，很别扭的代码：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">x &lt;- scan(filename, what=<span class="string">""</span>, sep=<span class="string">"&"</span>, nlines=<span class="number">1</span>)</div><div class="line">fields.name &lt;- sapply(x, FUN=<span class="keyword">function</span>(x){strsplit(x, split=<span class="string">"="</span>)[[<span class="number">1</span>]][<span class="number">1</span>]})</div><div class="line">names(fields.name) &lt;- <span class="literal">NULL</span></div><div class="line">names(fields.name) &lt;- fields.name</div><div class="line">fields.name &lt;- as.list(fields.name)</div></pre></td></tr></table></figure>
-
-<p>借鉴tapply的源码，改成这样：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">x &lt;- scan(filename, what=<span class="string">""</span>, sep=<span class="string">"&"</span>, nlines=<span class="number">1</span>)</div><div class="line">fields.name &lt;- sapply(x, FUN=<span class="keyword">function</span>(x){strsplit(x, split=<span class="string">"="</span>)[[<span class="number">1</span>]][<span class="number">1</span>]})</div><div class="line">tmp.fields.name &lt;- vector(<span class="string">"list"</span>, length(fields.name))    <span class="comment"># 生成一个空的list</span></div><div class="line">names(tmp.fields.name) &lt;- fields.name</div></pre></td></tr></table></figure>
-
-
-    
-    
-    <footer class="meta">
-      
-      
-  <div class="tags">
-<a href="/tags/R/">R</a><a href="/tags/vector/">vector</a><a href="/tags/names/">names</a></div>
 
       
     </footer>
