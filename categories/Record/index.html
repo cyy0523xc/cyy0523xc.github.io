@@ -72,16 +72,23 @@
   <header>
     
   
-    <h1 class="title"><a href="/2014/09/11/hexo记录/">hexo记录</a></h1>
+    <h1 class="title"><a href="/2014/10/14/hexo记录/">hexo记录</a></h1>
   
 
-    <time datetime="2014-09-11T03:19:30.000Z">
-  <span class="day">11</span><span class="month">9月</span>
+    <time datetime="2014-10-13T16:00:00.000Z">
+  <span class="day">14</span><span class="month">10月</span>
 </time>
   </header>
   <div class="entry-content">
     
-      <h3 id="f-browser-msie没有定义">f.browser.msie没有定义</h3>
+      <h3 id="加上阅读更多的链接">加上阅读更多的链接</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor"># 针对phase主题</span></div><div class="line">vim <span class="keyword">layout</span>/_partial/article.ejs</div></pre></td></tr></table></figure>
+
+<p>找到对应的地方，加上相应的代码，如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="vbscript">&lt;% <span class="keyword">if</span> (item.excerpt && index){ %&gt;</span></div><div class="line">  <span class="vbscript">&lt;%- item.excerpt %&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"&lt;%- item.permalink %&gt;"</span> <span class="attribute">target</span>=<span class="value">"_blank"</span> <span class="attribute">class</span>=<span class="value">"post-read-more"</span>&gt;</span>READ MORE<span class="tag">&lt;/<span class="title">a</span>&gt;</span></div><div class="line"><span class="vbscript">&lt;% } <span class="keyword">else</span> { %&gt;</span></div><div class="line">  <span class="vbscript">&lt;%- item.content %&gt;</span></div><div class="line"><span class="vbscript">&lt;% } %&gt;</span></div></pre></td></tr></table></figure>
+
+<p>其中的超链接部分就是新增的。然后就是修改样式。。。</p>
+<h3 id="f-browser-msie没有定义">f.browser.msie没有定义</h3>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># @see: http://stackoverflow.com/questions/14344289/fancybox-doesnt-work-with-jquery-v1-9-0-f-browser-is-undefined-cannot-read/14344290</div><div class="line"></div><div class="line"># vim themes/phase/layout/_partial/head.ejs</div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://code.jquery.com/jquery-latest.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"></div><div class="line"># replace by:</div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://code.jquery.com/jquery-latest.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://code.jquery.com/jquery-migrate-1.0.0.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div></pre></td></tr></table></figure>
 
 <h3 id="文章摘要">文章摘要</h3>
