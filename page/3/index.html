@@ -59,44 +59,19 @@
   <header>
     
   
-    <h1 class="title"><a href="/2013/09/05/shell/sed命令/">sed命令</a></h1>
+    <h1 class="title"><a href="/2013/10/11/big-data-enterprice-finance/">国内外大数据创业企业的融资情况</a></h1>
   
 
-    <time datetime="2013-09-04T16:00:00.000Z">
-  <span class="day">5</span><span class="month">9月</span>
+    <time datetime="2013-10-10T16:00:00.000Z">
+  <span class="day">11</span><span class="month">10月</span>
 </time>
   </header>
   <div class="entry-content">
     
-      <h2 id="问题">问题</h2>
-<p>源数据：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">28</span>&<span class="variable">at=</span><span class="number">7</span>&<span class="variable">cid=</span>mDamz1b7WRJZ</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">29</span>&<span class="variable">at=</span><span class="number">3</span>&<span class="variable">cid=</span>Q4ETETM9Hjx0</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">39</span>&<span class="variable">at=</span><span class="number">0</span>&<span class="variable">cid=</span>ytBSubxEaFN6</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">40</span>&<span class="variable">at=</span><span class="number">3</span>&<span class="variable">cid=</span>mDamz1b7WRJZ</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">42</span>&<span class="variable">at=</span><span class="number">6</span>&<span class="variable">cid=</span>ytBSubxEaFN6</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">42</span>&<span class="variable">at=</span><span class="number">3</span>&<span class="variable">cid=</span>mDamz1b7WRJZ</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">45</span>&<span class="variable">at=</span><span class="number">0</span>&<span class="variable">cid=</span><span class="number">66</span>OwWFuVBMSS</div></pre></td></tr></table></figure>
-
-<p>希望把drt字段中的+号及后面的替换掉：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sed 's/<span class="command">\+</span><span class="special">[</span><span class="command">\d</span>:<span class="special">]</span>+<span class="special">&</span>/<span class="special">&</span>/g'</div></pre></td></tr></table></figure>
-
-<p>结果就是死活不工作。。。</p>
-<h2 id="解决">解决</h2>
-<p>原来&amp;在sed中也是元字符，之前从来没注意到这个，和普通正则还差异多多。最后就只是一个转义符的事情：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sed 's/<span class="command">\+</span>/<span class="command">\&</span>/g'</div></pre></td></tr></table></figure>
-
-<p>关于&amp;的说明：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">保存搜索字符用来替换其他字符，如s/love<span class="javadoc">/**&**/</span>，love这成**love**。</div></pre></td></tr></table></figure>
-
-<p>还有：</p>
-<ul>
-<li>sed的元字符里原来没有+号的。。。</li>
-<li>\d发现也是无效的</li>
-</ul>
-<p>最终就变成了：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sed 's/+<span class="special">[</span>0-9:<span class="special">]</span>*<span class="command">\&</span>/<span class="command">\&</span>/g'</div></pre></td></tr></table></figure>
-
-<h2 id="附录">附录</h2>
-<ul>
-<li>sed的元字符：<a href="http://tsnc.zhongaokao.com/tsnc_wgrj/doc/sed.htm#id2810450" target="_blank" rel="external">http://tsnc.zhongaokao.com/tsnc_wgrj/doc/sed.htm#id2810450</a></li>
-<li>sed manual：<a href="http://www.gnu.org/software/sed/manual/sed.html" target="_blank" rel="external">http://www.gnu.org/software/sed/manual/sed.html</a></li>
-<li>grep、sed、awk、perl等对正则表达式的支持的差别：<a href="http://blog.csdn.net/zouxue138/article/details/8620799" target="_blank" rel="external">http://blog.csdn.net/zouxue138/article/details/8620799</a></li>
-</ul>
+      <h3 id="大数据行业融资情况">大数据行业融资情况</h3>
+<p>业余时间整理的，见：<a href="https://docs.google.com/spreadsheet/ccc?key=0AtdtDh06pqwEdHpXUHZQVzZLb0k4U09mUjJqV1gyVWc&amp;usp=sharing" target="_blank" rel="external">https://docs.google.com/spreadsheet/ccc?key=0AtdtDh06pqwEdHpXUHZQVzZLb0k4U09mUjJqV1gyVWc&amp;usp=sharing</a></p>
+<p>另推荐视频：<a href="http://v.youku.com/v_show/id_XNTkyNDI1OTcy.html" target="_blank" rel="external">http://v.youku.com/v_show/id_XNTkyNDI1OTcy.html</a></p>
+<p>及网站：<a href="https://angel.co/big-data" target="_blank" rel="external">https://angel.co/big-data</a></p>
 
     
     
@@ -104,7 +79,69 @@
       
       
   <div class="tags">
-<a href="/tags/linux/">linux</a><a href="/tags/sed/">sed</a></div>
+<a href="/tags/大数据/">大数据</a><a href="/tags/创业/">创业</a><a href="/tags/融资/">融资</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2013/09/06/R/R语言的小技巧/">R语言的小技巧</a></h1>
+  
+
+    <time datetime="2013-09-05T16:00:00.000Z">
+  <span class="day">6</span><span class="month">9月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h3 id="ifelse和if_…_else_…不同">ifelse和if … else …不同</h3>
+<p>认为相同，主要是受到之前经验的影响，不过这里的ifelse是向量化的运算，返回值的长度会和test的长度一致。可以看ifelse的源码：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> (test, yes, no) </div><div class="line">{</div><div class="line">    <span class="keyword">if</span> (is.atomic(test)) </div><div class="line">        storage.mode(test) &lt;- <span class="string">"logical"</span></div><div class="line">    <span class="keyword">else</span> test &lt;- <span class="keyword">if</span> (isS4(test)) </div><div class="line">        as(test, <span class="string">"logical"</span>)</div><div class="line">    <span class="keyword">else</span> as.logical(test)</div><div class="line">    ans &lt;- test</div><div class="line">    ok &lt;- !(nas &lt;- is.na(test))</div><div class="line">    <span class="keyword">if</span> (any(test[ok])) </div><div class="line">        ans[test & ok] &lt;- rep(yes, length.out = length(ans))[test & </div><div class="line">            ok]</div><div class="line">    <span class="keyword">if</span> (any(!test[ok])) </div><div class="line">        ans[!test & ok] &lt;- rep(no, length.out = length(ans))[!test & </div><div class="line">            ok]</div><div class="line">    ans[nas] &lt;- <span class="literal">NA</span></div><div class="line">    ans</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; ifelse(c(<span class="literal">T</span>, <span class="literal">F</span>, <span class="literal">T</span>), c(<span class="number">1</span>,<span class="number">2</span>), c(<span class="number">5</span>,<span class="number">6</span>))  <span class="comment"># 长度不够，则会自动补充</span></div><div class="line">[<span class="number">1</span>] <span class="number">1</span> <span class="number">6</span> <span class="number">1</span></div></pre></td></tr></table></figure>
+
+<h3 id="install_RCurld的问题">install RCurld的问题</h3>
+<p>在ubuntu12.04上安装：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">install.packages(<span class="string">"RCurl"</span>)</div></pre></td></tr></table></figure>
+
+<p>提示：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">checking <span class="keyword">for</span> curl-config... no</div><div class="line">Cannot <span class="keyword">find</span> curl-config</div><div class="line">ERROR: configuration failed <span class="keyword">for</span> <span class="keyword">package</span> ‘RCurl’</div></pre></td></tr></table></figure>
+
+<p>解决：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">sudo</span> apt-get install libcurl4-gnutls-dev</div></pre></td></tr></table></figure>
+
+<p>附: <a href="http://cos.name/cn/topic/108303" target="_blank" rel="external">http://cos.name/cn/topic/108303</a></p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/R/">R</a><a href="/tags/经验/">经验</a></div>
 
       
     </footer>
@@ -186,18 +223,44 @@
   <header>
     
   
-    <h1 class="title"><a href="/2013/09/02/BlueKai模式研究/">BlueKai模式研究</a></h1>
+    <h1 class="title"><a href="/2013/09/05/shell/sed命令/">sed命令</a></h1>
   
 
-    <time datetime="2013-09-01T16:00:00.000Z">
-  <span class="day">2</span><span class="month">9月</span>
+    <time datetime="2013-09-04T16:00:00.000Z">
+  <span class="day">5</span><span class="month">9月</span>
 </time>
   </header>
   <div class="entry-content">
     
-      <h2 id="产品">产品</h2>
+      <h2 id="问题">问题</h2>
+<p>源数据：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">28</span>&<span class="variable">at=</span><span class="number">7</span>&<span class="variable">cid=</span>mDamz1b7WRJZ</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">29</span>&<span class="variable">at=</span><span class="number">3</span>&<span class="variable">cid=</span>Q4ETETM9Hjx0</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">39</span>&<span class="variable">at=</span><span class="number">0</span>&<span class="variable">cid=</span>ytBSubxEaFN6</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">40</span>&<span class="variable">at=</span><span class="number">3</span>&<span class="variable">cid=</span>mDamz1b7WRJZ</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">42</span>&<span class="variable">at=</span><span class="number">6</span>&<span class="variable">cid=</span>ytBSubxEaFN6</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">42</span>&<span class="variable">at=</span><span class="number">3</span>&<span class="variable">cid=</span>mDamz1b7WRJZ</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">45</span>&<span class="variable">at=</span><span class="number">0</span>&<span class="variable">cid=</span><span class="number">66</span>OwWFuVBMSS</div></pre></td></tr></table></figure>
+
+<p>希望把drt字段中的+号及后面的替换掉：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sed 's/<span class="command">\+</span><span class="special">[</span><span class="command">\d</span>:<span class="special">]</span>+<span class="special">&</span>/<span class="special">&</span>/g'</div></pre></td></tr></table></figure>
+
+<p>结果就是死活不工作。。。</p>
+<h2 id="解决">解决</h2>
+<p>原来&amp;在sed中也是元字符，之前从来没注意到这个，和普通正则还差异多多。最后就只是一个转义符的事情：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sed 's/<span class="command">\+</span>/<span class="command">\&</span>/g'</div></pre></td></tr></table></figure>
+
+<p>关于&amp;的说明：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">保存搜索字符用来替换其他字符，如s/love<span class="javadoc">/**&**/</span>，love这成**love**。</div></pre></td></tr></table></figure>
+
+<p>还有：</p>
+<ul>
+<li>sed的元字符里原来没有+号的。。。</li>
+<li>\d发现也是无效的</li>
+</ul>
+<p>最终就变成了：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sed 's/+<span class="special">[</span>0-9:<span class="special">]</span>*<span class="command">\&</span>/<span class="command">\&</span>/g'</div></pre></td></tr></table></figure>
+
 <h2 id="附录">附录</h2>
-<p><a href="http://www.bluekai.com/" target="_blank" rel="external">http://www.bluekai.com/</a><br><a href="http://www.iamniu.com/2013/03/30/about-bluekai/" target="_blank" rel="external">http://www.iamniu.com/2013/03/30/about-bluekai/</a></p>
+<ul>
+<li>sed的元字符：<a href="http://tsnc.zhongaokao.com/tsnc_wgrj/doc/sed.htm#id2810450" target="_blank" rel="external">http://tsnc.zhongaokao.com/tsnc_wgrj/doc/sed.htm#id2810450</a></li>
+<li>sed manual：<a href="http://www.gnu.org/software/sed/manual/sed.html" target="_blank" rel="external">http://www.gnu.org/software/sed/manual/sed.html</a></li>
+<li>grep、sed、awk、perl等对正则表达式的支持的差别：<a href="http://blog.csdn.net/zouxue138/article/details/8620799" target="_blank" rel="external">http://blog.csdn.net/zouxue138/article/details/8620799</a></li>
+</ul>
 
     
     
@@ -205,7 +268,7 @@
       
       
   <div class="tags">
-<a href="/tags/DMP/">DMP</a></div>
+<a href="/tags/linux/">linux</a><a href="/tags/sed/">sed</a></div>
 
       
     </footer>
@@ -232,18 +295,18 @@
   <header>
     
   
-    <h1 class="title"><a href="/2013/08/30/R/使用R来获取网易公开课的下载地址/">使用R来获取网易公开课的下载地址</a></h1>
+    <h1 class="title"><a href="/2013/09/02/BlueKai模式研究/">BlueKai模式研究</a></h1>
   
 
-    <time datetime="2013-08-29T16:00:00.000Z">
-  <span class="day">30</span><span class="month">8月</span>
+    <time datetime="2013-09-01T16:00:00.000Z">
+  <span class="day">2</span><span class="month">9月</span>
 </time>
   </header>
   <div class="entry-content">
     
-      <p>今天看到一个网易公开课的课程，想把它们下载下来，所以写了一个脚本去分析页面结构，把title和url解析出来。</p>
-<p>脚本见<a href="https://github.com/cyy0523xc/R/blob/master/lib/cai_get_download_url.r" target="_blank" rel="external">https://github.com/cyy0523xc/R/blob/master/lib/cai_get_download_url.r</a></p>
-<p>其他页面的数据应该也是一样的。</p>
+      <h2 id="产品">产品</h2>
+<h2 id="附录">附录</h2>
+<p><a href="http://www.bluekai.com/" target="_blank" rel="external">http://www.bluekai.com/</a><br><a href="http://www.iamniu.com/2013/03/30/about-bluekai/" target="_blank" rel="external">http://www.iamniu.com/2013/03/30/about-bluekai/</a></p>
 
     
     
@@ -251,7 +314,7 @@
       
       
   <div class="tags">
-<a href="/tags/R/">R</a></div>
+<a href="/tags/DMP/">DMP</a></div>
 
       
     </footer>
@@ -307,6 +370,52 @@
       
   <div class="tags">
 <a href="/tags/linux/">linux</a><a href="/tags/rsync/">rsync</a><a href="/tags/scp/">scp</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2013/08/30/R/使用R来获取网易公开课的下载地址/">使用R来获取网易公开课的下载地址</a></h1>
+  
+
+    <time datetime="2013-08-29T16:00:00.000Z">
+  <span class="day">30</span><span class="month">8月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <p>今天看到一个网易公开课的课程，想把它们下载下来，所以写了一个脚本去分析页面结构，把title和url解析出来。</p>
+<p>脚本见<a href="https://github.com/cyy0523xc/R/blob/master/lib/cai_get_download_url.r" target="_blank" rel="external">https://github.com/cyy0523xc/R/blob/master/lib/cai_get_download_url.r</a></p>
+<p>其他页面的数据应该也是一样的。</p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/R/">R</a></div>
 
       
     </footer>
@@ -524,133 +633,6 @@
       
   <div class="tags">
 <a href="/tags/移动互联网/">移动互联网</a><a href="/tags/广告/">广告</a><a href="/tags/数据挖掘/">数据挖掘</a></div>
-
-      
-    </footer>
-    
-  </div>
-  
-</article>
-
-
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <header>
-    
-  
-    <h1 class="title"><a href="/2013/08/20/R/function.tapply/">R function tapply</a></h1>
-  
-
-    <time datetime="2013-08-19T16:00:00.000Z">
-  <span class="day">20</span><span class="month">8月</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <h2 id="tapply">tapply</h2>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tapply(X, INDEX, FUN = <span class="literal">NULL</span>, <span class="keyword">...</span>, simplify = <span class="literal">TRUE</span>)</div></pre></td></tr></table></figure>
-
-<p>把变量X（通常为向量）通过函数FUN作用在INDEX这个因子变量上，返回值可以根据simplify参数设置。simplify = T（默认）返回array，simplify = F则返回list。</p>
-<h3 id="实例">实例</h3>
-<p>计算各个省份的人均收入</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&gt; ins &lt;- <span class="keyword">list</span>(year=c(<span class="number">2011</span>, <span class="number">2012</span>, <span class="number">2012</span>, <span class="number">2013</span>, <span class="number">2013</span>), province=c(<span class="string">"GZ"</span>, <span class="string">"GZ"</span>, <span class="string">"BG"</span>, <span class="string">"BG"</span>, <span class="string">"GZ"</span>), income=c(<span class="number">10</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">12</span>, <span class="number">15</span>))  <span class="comment"># 定义数据</span></div><div class="line">&gt; ins</div><div class="line"><span class="variable">$year</span></div><div class="line">[<span class="number">1</span>] <span class="number">2011</span> <span class="number">2012</span> <span class="number">2012</span> <span class="number">2013</span> <span class="number">2013</span></div><div class="line"></div><div class="line"><span class="variable">$province</span></div><div class="line">[<span class="number">1</span>] <span class="string">"GZ"</span> <span class="string">"GZ"</span> <span class="string">"BG"</span> <span class="string">"BG"</span> <span class="string">"GZ"</span></div><div class="line"></div><div class="line"><span class="variable">$income</span></div><div class="line">[<span class="number">1</span>] <span class="number">10</span> <span class="number">12</span> <span class="number">13</span> <span class="number">12</span> <span class="number">15</span></div><div class="line"></div><div class="line">&gt; tapply(ins<span class="variable">$income</span>, ins<span class="variable">$province</span>, mean)</div><div class="line">      BG       GZ </div><div class="line"><span class="number">12.50000</span> <span class="number">12.33333</span></div></pre></td></tr></table></figure>
-
-<p>计算各个省份在各个年份的平均收入</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="function">tapply</span>(<span class="tag">ins</span><span class="variable">$income</span>, <span class="function">list</span>(<span class="tag">ins</span><span class="variable">$province</span>, <span class="tag">ins</span><span class="variable">$year</span>), mean)</div><div class="line">   2011 2012 2013</div><div class="line">BG   NA   13   12</div><div class="line">GZ   10   12   15</div></pre></td></tr></table></figure>
-
-<h3 id="源码">源码</h3>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> (X, INDEX, FUN = <span class="literal">NULL</span>, <span class="keyword">...</span>, simplify = <span class="literal">TRUE</span>) </div><div class="line">{</div><div class="line">    FUN &lt;- <span class="keyword">if</span> (!is.null(FUN)) </div><div class="line">        match.fun(FUN)</div><div class="line">    <span class="keyword">if</span> (!is.list(INDEX))           <span class="comment"># 如果分组因子不是list，则自动转为list</span></div><div class="line">        INDEX &lt;- list(INDEX)</div><div class="line">    nI &lt;- length(INDEX)</div><div class="line">    <span class="keyword">if</span> (!nI) </div><div class="line">        <span class="keyword">stop</span>(<span class="string">"'INDEX' is of length zero"</span>)</div><div class="line">    namelist &lt;- vector(<span class="string">"list"</span>, nI)</div><div class="line">    names(namelist) &lt;- names(INDEX)</div><div class="line">    extent &lt;- integer(nI) </div><div class="line">    nx &lt;- length(X)</div><div class="line">    one &lt;- <span class="number">1L</span></div><div class="line">    group &lt;- rep.int(one, nx)     <span class="comment"># 构造一个重复向量</span></div><div class="line">    ngroup &lt;- one</div><div class="line">    <span class="keyword">for</span> (i <span class="keyword">in</span> seq_along(INDEX)) {   <span class="comment"># 对分组因子列表的下标进行循环处理</span></div><div class="line">        index &lt;- as.factor(INDEX[[i]])</div><div class="line">        <span class="keyword">if</span> (length(index) != nx) </div><div class="line">            <span class="keyword">stop</span>(<span class="string">"arguments must have same length"</span>)</div><div class="line">        namelist[[i]] &lt;- levels(index)</div><div class="line">        extent[i] &lt;- nlevels(index)</div><div class="line">        </div><div class="line">        <span class="comment"># 注意这里计算分组的算法：计算组合后的分组情况</span></div><div class="line">        group &lt;- group + ngroup * (as.integer(index) - one)</div><div class="line">        ngroup &lt;- ngroup * nlevels(index)</div><div class="line">    }</div><div class="line">    <span class="keyword">if</span> (is.null(FUN)) </div><div class="line">        <span class="keyword">return</span>(group)</div><div class="line">        </div><div class="line">    <span class="comment"># 分组数据，完成映射（FUN）</span></div><div class="line">    ans &lt;- lapply(X = split(X, group), FUN = FUN, <span class="keyword">...</span>)   <span class="comment"># split按照分组因子切割变量X</span></div><div class="line">    index &lt;- as.integer(names(ans))</div><div class="line">    <span class="keyword">if</span> (simplify && all(unlist(lapply(ans, length)) == <span class="number">1L</span>)) {</div><div class="line">        ansmat &lt;- array(dim = extent, dimnames = namelist)</div><div class="line">        ans &lt;- unlist(ans, recursive = <span class="literal">FALSE</span>)</div><div class="line">    }</div><div class="line">    <span class="keyword">else</span> {</div><div class="line">        ansmat &lt;- array(vector(<span class="string">"list"</span>, prod(extent)), dim = extent, </div><div class="line">            dimnames = namelist)</div><div class="line">    }</div><div class="line">    <span class="keyword">if</span> (length(index)) {</div><div class="line">        names(ans) &lt;- <span class="literal">NULL</span></div><div class="line">        ansmat[index] &lt;- ans</div><div class="line">    }</div><div class="line">    ansmat</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>这个源码有可以优化的地方，例如循环体里面的：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">namelist[[i]] &lt;- levels(index)</div><div class="line">extent[i] &lt;- nlevels(index)</div><div class="line">ngroup &lt;- ngroup * nlevels(index)</div></pre></td></tr></table></figure>
-
-<p>实际上nlevels(index)只是对levels(index)取length，所以这三行代码实质上调用了levels函数三次（在一次循环体里面），调用nlevels和length两次。可以修改成这样：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">namelist[[i]] &lt;- levels(index)</div><div class="line">extent[i] &lt;- length(namelist[[i]])</div><div class="line">ngroup &lt;- ngroup * extent[i]</div></pre></td></tr></table></figure>
-
-<blockquote>
-<p>有时间的话，可以考虑把tapply改成C语言实现</p>
-</blockquote>
-
-    
-    
-    <footer class="meta">
-      
-      
-  <div class="tags">
-<a href="/tags/R/">R</a><a href="/tags/tapply/">tapply</a><a href="/tags/向量化运算/">向量化运算</a></div>
-
-      
-    </footer>
-    
-  </div>
-  
-</article>
-
-
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <header>
-    
-  
-    <h1 class="title"><a href="/2013/08/20/R/function.apply/">R function apply</a></h1>
-  
-
-    <time datetime="2013-08-19T16:00:00.000Z">
-  <span class="day">20</span><span class="month">8月</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <h2 id="apply">apply</h2>
-<p>   apply(X, MARGIN, FUN, …)</p>
-<h3 id="参数说明">参数说明</h3>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">X:         array or matrix</div><div class="line">MARGIN:    <span class="number">1</span>表示按行计算，<span class="number">2</span>表示按列计算，c(<span class="number">1</span>, <span class="number">2</span>)表示对行和列同时作用，就会对每个元素都产生作用</div><div class="line">FUN:       作用函数</div><div class="line"><span class="keyword">...</span>:       作用函数的参数</div></pre></td></tr></table></figure>
-
-<h3 id="实例">实例</h3>
-<p>按行计算</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&gt; <span class="tag">a</span></div><div class="line"><span class="attr_selector">[,1]</span> <span class="attr_selector">[,2]</span> <span class="attr_selector">[,3]</span> <span class="attr_selector">[,4]</span></div><div class="line"><span class="attr_selector">[1,]</span> 1 3 2 1</div><div class="line"><span class="attr_selector">[2,]</span> 2 1 3 2</div><div class="line">&gt; <span class="function">apply</span>(<span class="tag">a</span>, 1, <span class="function">function</span>(x)<span class="function">sum</span>(x))     # 可以简化成：<span class="function">apply</span>(<span class="tag">a</span>, 1, sum)</div><div class="line"><span class="attr_selector">[1]</span> 7 8</div></pre></td></tr></table></figure>
-
-<p>按列计算</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&gt; <span class="function">apply</span>(<span class="tag">a</span>, 2, <span class="function">function</span>(x)<span class="function">sum</span>(x))</div><div class="line"><span class="attr_selector">[1]</span> 3 4 5 3</div></pre></td></tr></table></figure>
-
-<p>行列同时作用</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="function">apply</span>(<span class="tag">a</span>, <span class="function">c</span>(1,2), <span class="function">function</span>(x)<span class="function">sum</span>(x))</div><div class="line"><span class="attr_selector">[,1]</span> <span class="attr_selector">[,2]</span> <span class="attr_selector">[,3]</span> <span class="attr_selector">[,4]</span></div><div class="line"><span class="attr_selector">[1,]</span> 1 3 2 1</div><div class="line"><span class="attr_selector">[2,]</span> 2 1 3 2</div></pre></td></tr></table></figure>
-
-<p>扩展参数</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="function">apply</span>(<span class="tag">a</span>, 1, <span class="function">function</span>(x, t)x+t, 10)    # </div><div class="line"><span class="attr_selector">[,1]</span> <span class="attr_selector">[,2]</span></div><div class="line"><span class="attr_selector">[1,]</span> 11 12</div><div class="line"><span class="attr_selector">[2,]</span> 13 11</div><div class="line"><span class="attr_selector">[3,]</span> 12 13</div><div class="line"><span class="attr_selector">[4,]</span> 11 12</div></pre></td></tr></table></figure>
-
-
-    
-    
-    <footer class="meta">
-      
-      
-  <div class="tags">
-<a href="/tags/R/">R</a><a href="/tags/apply/">apply</a><a href="/tags/向量化运算/">向量化运算</a></div>
 
       
     </footer>

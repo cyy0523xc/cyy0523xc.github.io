@@ -1,0 +1,249 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>书籍：vim实用技巧 | 数据明月</title>
+  <meta name="author" content="AlexCai">
+
+  
+  <meta name="description" content="以思维的速度来编辑文本！
+《vim实用技巧》看了几天，今天终于看完了第一部分 模式 ，感觉收益良多，很多以前困惑的或者不懂的，有种豁然开朗的感觉。">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="数据明月" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <!-- <script src="http://libs.baidu.com/jquery/1.9.0/jquery.min.js"></script> -->
+
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script src="http://code.jquery.com/jquery-migrate-1.0.0.js"></script>
+
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="site-name">
+    数据明月 
+    <span>心有沉香，无惧浮世！</span>
+</div>
+
+<nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="http://github.com/cyy0523xc/">Github</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+  </ul>
+</nav>
+</header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">书籍：vim实用技巧</h1>
+  
+
+    <time datetime="2014-10-25T16:00:00.000Z">
+  <span class="day">26</span><span class="month">10月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <pre><code>以思维的速度来编辑文本！
+</code></pre><p>《vim实用技巧》看了几天，今天终于看完了第一部分 <strong>模式</strong> ，感觉收益良多，很多以前困惑的或者不懂的，有种豁然开朗的感觉。</p>
+<a id="more"></a>
+
+<h2 id="第一章：VIM解决问题的方式">第一章：VIM解决问题的方式</h2>
+<pre><code>凡是可以简化重复性操作的方式，都会成倍地节省我们的时间。
+</code></pre><ol>
+<li>.命令： 重复上次的修改</li>
+<li><p>不要自我重复</p>
+<p> 减少不必要的移动。</p>
+</li>
+</ol>
+<p>进入编辑模式的几个命令：i, I, a, A, c, cw（删除光标开始到单词结束）, s（替换）, caw（删除光标所在的单词）</p>
+<ol>
+<li><p>以退为进 </p>
+<p> 使修改可重复<br> 使移动可重复</p>
+</li>
+</ol>
+<p>例如把一个等号，前后加上空格：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">f=</span><span class="variable">s =</span> &lt;Esc&gt;          <span class="comment"># f{char}命令：行内查找字符</span></div><div class="line">;.                   <span class="comment"># ;命令：重复上一次查找(正向)。对应的命令是,（逆向）</span></div></pre></td></tr></table></figure>
+
+<ol>
+<li>执行=》重复=》回退</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>重复</th>
+<th>回退</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{edit}</td>
+<td>.</td>
+<td>u</td>
+</tr>
+<tr>
+<td>f{char}/t{char}</td>
+<td>;</td>
+<td>,</td>
+</tr>
+<tr>
+<td>F{char}/T{char}</td>
+<td>;</td>
+<td>,</td>
+</tr>
+<tr>
+<td>/pattern<cr></cr></td>
+<td>n</td>
+<td>N</td>
+</tr>
+<tr>
+<td>?pattern<cr></cr></td>
+<td>n</td>
+<td>N</td>
+</tr>
+<tr>
+<td>:s/target/replacement</td>
+<td>&amp;</td>
+<td>u</td>
+</tr>
+<tr>
+<td>qx{changes}q</td>
+<td>@x</td>
+<td>u</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>查找并手动替换</li>
+</ol>
+<ul>
+<li>单键命令* (查找单词)</li>
+<li>使修改可重复 </li>
+</ul>
+<ol>
+<li><p>结识.范式</p>
+<p> 一键移动，一键执行</p>
+</li>
+</ol>
+<h2 id="普通模式">普通模式</h2>
+<ol>
+<li>停顿时请离开画笔 </li>
+<li>构造可撤销块 </li>
+</ol>
+<p>u：撤销最新修改</p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/vim/">vim</a><a href="/tags/读书笔记/">读书笔记</a><a href="/tags/vim实用技巧/">vim实用技巧</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+</div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2014 AlexCai
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+    try {
+        $('.fancybox').fancybox();
+    } catch(e) {
+        console.log('after_footer:fancybox');
+    }
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+</body>
+</html>
