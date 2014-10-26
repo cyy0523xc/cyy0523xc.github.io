@@ -76,24 +76,24 @@
 
 <h2 id="第一章：VIM解决问题的方式">第一章：VIM解决问题的方式</h2>
 <pre><code>凡是可以简化重复性操作的方式，都会成倍地节省我们的时间。
-</code></pre><ol>
+</code></pre><ul>
 <li>.命令： 重复上次的修改</li>
 <li><p>不要自我重复</p>
 <p> 减少不必要的移动。</p>
 </li>
-</ol>
+</ul>
 <p>进入编辑模式的几个命令：i, I, a, A, c, cw（删除光标开始到单词结束）, s（替换）, caw（删除光标所在的单词）</p>
-<ol>
+<ul>
 <li><p>以退为进 </p>
 <p> 使修改可重复<br> 使移动可重复</p>
 </li>
-</ol>
+</ul>
 <p>例如把一个等号，前后加上空格：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">f=</span><span class="variable">s =</span> &lt;Esc&gt;          <span class="comment"># f{char}命令：行内查找字符</span></div><div class="line">;.                   <span class="comment"># ;命令：重复上一次查找(正向)。对应的命令是,（逆向）</span></div></pre></td></tr></table></figure>
 
-<ol>
+<ul>
 <li>执行=》重复=》回退</li>
-</ol>
+</ul>
 <table>
 <thead>
 <tr>
@@ -140,24 +140,18 @@
 </tr>
 </tbody>
 </table>
-<ol>
-<li>查找并手动替换</li>
-</ol>
 <ul>
-<li>单键命令* (查找单词)</li>
-<li>使修改可重复 </li>
+<li>查找并手动替换</li>
 </ul>
 <ol>
+<li>单键命令* (查找单词)</li>
+<li>使修改可重复 </li>
+</ol>
+<ul>
 <li><p>结识.范式</p>
 <p> 一键移动，一键执行</p>
 </li>
-</ol>
-<h2 id="普通模式">普通模式</h2>
-<ol>
-<li>停顿时请离开画笔 </li>
-<li>构造可撤销块 </li>
-</ol>
-<p>u：撤销最新修改</p>
+</ul>
 
     
     
