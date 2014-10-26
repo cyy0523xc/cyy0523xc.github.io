@@ -98,67 +98,8 @@
 <li>在行尾添加文本</li>
 </ul>
 <p><code>&lt;C-v&gt;jj$A;</code>：可视模式下，a与i无法进入插入模式</p>
-<h2 id="命令行模式">命令行模式</h2>
-<ul>
-<li>命令行模式</li>
-</ul>
-<p>帮助：<code>h ex-cmd-index</code></p>
-<p>delete, yank（复制），put（粘贴到寄存器），copy（简写co，或者t），move（简写m），join（连接），mormal（执行普通模式命令），substitute（替换，简写s），global（匹配并执行指定命令）</p>
-<p>特殊键：<code>&lt;C-w&gt;, &lt;C-u&gt;, &lt;C-v&gt;, &lt;C-k&gt;, &lt;C-r&gt;</code></p>
-<ul>
-<li>在一行或者连续多行上执行命令</li>
-</ul>
-<ol>
-<li><code>:{start},{end}</code></li>
-<li>高亮选择之后，按:号会出现 <code>&#39;&lt;,&#39;&gt;</code> （高亮选区的首行和尾行）</li>
-<li>用模式指定范围：<code>:/&lt;html&gt;/,/&lt;\/html&gt;/</code></li>
-<li>用偏移对地址进行修正：<code>:/&lt;html&gt;/+1,/&lt;\/html&gt;/-1</code></li>
-<li><code>.</code> 当前行，<code>%</code> 所有行</li>
-</ol>
-<ul>
-<li>复制，移动</li>
-</ul>
-<p><code>@:</code> 重复执行 </p>
-<ul>
-<li>在指定范围内执行普通模式的命令</li>
-</ul>
-<ol>
-<li><code>jVG:&#39;&lt;,&#39;&gt;normal .</code></li>
-<li><code>:%normal A;</code></li>
-<li><code>:%normal i//</code></li>
-</ol>
-<ul>
-<li>重复 </li>
-</ul>
-<p><code>@:, @@</code></p>
-<ul>
-<li>补全命令</li>
-</ul>
-<p><code>&lt;C-d&gt;</code> 显示补全列表，按Tab键或者 <code>&lt;S-Tab&gt;</code> 选择 </p>
-<ul>
-<li>把当前单词插入到命令行中</li>
-</ul>
-<p>例如重命名变量：<code>*cw{new_name}&lt;Esc&gt;:%s//&lt;C-r&gt;&lt;C-w&gt;/g</code></p>
-<p>注：<code>&lt;C-r&gt;&lt;C-w&gt;</code> ： 插入光标处的单词 </p>
-<ul>
-<li>回溯命令历史 </li>
-</ul>
-<ol>
-<li><code>&lt;Up&gt; or &lt;Down&gt;, &lt;C-p&gt; or &lt;C-n&gt;</code>：移动</li>
-<li><code>q/</code> 打开查找命令行的历史窗口</li>
-<li><code>q:</code> 打开Ex命令的历史窗口</li>
-<li>在历史命令窗口通过k，j上下移动</li>
-</ol>
-<ul>
-<li>运行shell命令 <code>!{cmd}</code></li>
-</ul>
-<ol>
-<li>在命令行中，%表示当前文件名</li>
-<li><code>:shell or &lt;C-z&gt;</code> 切换至控制台，<code>exit or fg</code>退出返回vim</li>
-<li>csv文件中按第二列重排文件。<code>:2,$ !sort -t &#39;,&#39; -k2</code> （ <code>ggj!G</code> 等效 <code>:.,$!</code>）</li>
-<li><code>:read !{cmd}</code>：执行命令，并把结果插入光标下方</li>
-</ol>
 
+      <a href="http://cyy0523xc.github.io/2014/10/27/vim/book-vim实用技巧-模式2/" target="_blank" class="post-read-more">READ MORE</a>
     
     
     <footer class="meta">

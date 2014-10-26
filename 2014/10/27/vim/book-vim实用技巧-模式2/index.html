@@ -18,7 +18,25 @@
 
 v, V, &amp;lt;C-v&amp;gt;, gv（重选上次的高亮选区），o（激活高亮选区的活动端）
 
-重复执行面向行的可">
+重复执行面向行的可视命令 .
+尽量使用操作符命令，而不是可视命令
+
+可视模式下，. 号命令可能会有异常表现。如 vitU 与 gUit （后者是普通模式的命令）
+
+操作表格数据
+
+
+列：&amp;lt;C-v&amp;gt;3jr|
+行：yypVr-
+
+
+修改列文本
+
+&amp;lt;C-v&amp;gt;jjeC{new text}&amp;lt;Esc&amp;gt;
+
+在行尾添加文本
+
+&amp;lt;C-v&amp;gt;jj$A;：可视模式下，a与i无法进入插入模式">
   
   
 
@@ -110,6 +128,8 @@ v, V, &amp;lt;C-v&amp;gt;, gv（重选上次的高亮选区），o（激活高�
 <li>在行尾添加文本</li>
 </ul>
 <p><code>&lt;C-v&gt;jj$A;</code>：可视模式下，a与i无法进入插入模式</p>
+<a id="more"></a>
+
 <h2 id="命令行模式">命令行模式</h2>
 <ul>
 <li>命令行模式</li>
