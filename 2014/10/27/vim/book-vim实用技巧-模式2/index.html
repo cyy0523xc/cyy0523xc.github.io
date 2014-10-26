@@ -3,9 +3,22 @@
 <head>
   <meta charset="utf-8">
   
-  <title>vim实用技巧 | 数据明月</title>
+  <title>vim实用技巧-模式2 | 数据明月</title>
   <meta name="author" content="AlexCai">
 
+  
+  <meta name="description" content="第三章：可视模式
+
+深入理解可视模式
+
+:h Select-mode ：选择模式（特殊的可视模式）
+&amp;lt;C-g&amp;gt; 在可视模式和选择模式之间切换（提示栏不同）
+
+选择高亮选区
+
+v, V, &amp;lt;C-v&amp;gt;, gv（重选上次的高亮选区），o（激活高亮选区的活动端）
+
+重复执行面向行的可">
   
   
 
@@ -41,21 +54,7 @@
   </ul>
 </nav>
 </header>
-  <div id="content" class="inner">
-
-<header id="archive-header">
-  <h1 class="alignleft">Tag: vim实用技巧</h1>
-  <div class="search alignright">
-    <form action="http://google.com/search" method="get" accept-charset="utf-8">
-      <input type="search" name="q" results="0" placeholder="Search">
-      <input type="hidden" name="q" value="site:cyy0523xc.github.io">
-    </form>
-  </div>
-</header>
-
-
-  
-    <article class="post">
+  <div id="content" class="inner"><article class="post">
   
     <div class="gallery">
   <div class="photoset">
@@ -72,7 +71,7 @@
   <header>
     
   
-    <h1 class="title"><a href="/2014/10/27/vim/book-vim实用技巧-模式2/">vim实用技巧-模式2</a></h1>
+    <h1 class="title">vim实用技巧-模式2</h1>
   
 
     <time datetime="2014-10-26T16:00:00.000Z">
@@ -186,132 +185,6 @@
   </div>
   
 </article>
-
-  
-    <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <header>
-    
-  
-    <h1 class="title"><a href="/2014/10/26/vim/book-vim实用技巧-模式/">书籍：vim实用技巧-模式</a></h1>
-  
-
-    <time datetime="2014-10-25T16:00:00.000Z">
-  <span class="day">26</span><span class="month">10月</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <h2 id="第二章：普通模式">第二章：普通模式</h2>
-<ul>
-<li>停顿时请离开画笔 </li>
-<li>构造可撤销块</li>
-</ul>
-<p>u命令：撤销最新修改</p>
-<p>一次修改：</p>
-<ol>
-<li>普通模式，可视模式和命令行模式中所触发的修改命令</li>
-<li>插入模式： <code>i{some text}&lt;Esc&gt;</code></li>
-</ol>
-<p>段落完时，可用：<code>&lt;Esc&gt;o</code></p>
-<ul>
-<li>构造可重复修改块</li>
-</ul>
-<p>例如在单词结尾处怎么删除单词：dbx，bdx，daw（最好）</p>
-<ul>
-<li>用次数做简单的运算</li>
-</ul>
-<p><code>&lt;C-a&gt;</code> 和 <code>&lt;C-x&gt;</code> ：加与减</p>
-<ul>
-<li>能够重复就别用次数</li>
-</ul>
-<p>连续删除两个单词：d2w, 2dw, dw.（可重复，避免算错数）</p>
-<ul>
-<li>操作 = 操作符 + 动作命令</li>
-</ul>
-<p>操作符：c（修改），d，y，g~（反转大小写），gU，gu（小写），&gt;（增加缩进），&lt;（减少缩进），=（自动缩进）</p>
-
-      <a href="http://cyy0523xc.github.io/2014/10/26/vim/book-vim实用技巧-模式/" target="_blank" class="post-read-more">READ MORE</a>
-    
-    
-    <footer class="meta">
-      
-      
-  <div class="tags">
-<a href="/tags/vim/">vim</a><a href="/tags/读书笔记/">读书笔记</a><a href="/tags/vim实用技巧/">vim实用技巧</a></div>
-
-      
-    </footer>
-    
-  </div>
-  
-</article>
-
-  
-    <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <header>
-    
-  
-    <h1 class="title"><a href="/2014/10/26/vim/book-vim实用技巧/">书籍：vim实用技巧</a></h1>
-  
-
-    <time datetime="2014-10-25T16:00:00.000Z">
-  <span class="day">26</span><span class="month">10月</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <pre><code>以思维的速度来编辑文本！
-</code></pre><p>《vim实用技巧》看了几天，今天终于看完了第一部分 <strong>模式</strong> ，感觉收益良多，很多以前困惑的或者不懂的，有种豁然开朗的感觉。</p>
-
-      <a href="http://cyy0523xc.github.io/2014/10/26/vim/book-vim实用技巧/" target="_blank" class="post-read-more">READ MORE</a>
-    
-    
-    <footer class="meta">
-      
-      
-  <div class="tags">
-<a href="/tags/vim/">vim</a><a href="/tags/读书笔记/">读书笔记</a><a href="/tags/vim实用技巧/">vim实用技巧</a></div>
-
-      
-    </footer>
-    
-  </div>
-  
-</article>
-
-  
-
-  <nav id="pagenavi">
-  
-  
-  <div class="clearfix"></div>
-</nav>
 </div>
   <footer id="footer" class="inner"><div class="social alignright">
   

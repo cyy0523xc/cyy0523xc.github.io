@@ -59,6 +59,139 @@
   <header>
     
   
+    <h1 class="title"><a href="/2014/10/27/vim/book-vim实用技巧-模式2/">vim实用技巧-模式2</a></h1>
+  
+
+    <time datetime="2014-10-26T16:00:00.000Z">
+  <span class="day">27</span><span class="month">10月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="第三章：可视模式">第三章：可视模式</h2>
+<ul>
+<li>深入理解可视模式</li>
+</ul>
+<p><code>:h Select-mode</code> ：选择模式（特殊的可视模式）</p>
+<p><code>&lt;C-g&gt;</code> 在可视模式和选择模式之间切换（提示栏不同）</p>
+<ul>
+<li>选择高亮选区</li>
+</ul>
+<p><code>v, V, &lt;C-v&gt;, gv（重选上次的高亮选区），o（激活高亮选区的活动端）</code></p>
+<ul>
+<li>重复执行面向行的可视命令 <code>.</code></li>
+<li>尽量使用操作符命令，而不是可视命令</li>
+</ul>
+<p>可视模式下，<code>.</code> 号命令可能会有异常表现。如 <code>vitU</code> 与 <code>gUit</code> （后者是普通模式的命令）</p>
+<ul>
+<li>操作表格数据</li>
+</ul>
+<ol>
+<li>列：<code>&lt;C-v&gt;3jr|</code></li>
+<li>行：<code>yypVr-</code></li>
+</ol>
+<ul>
+<li>修改列文本</li>
+</ul>
+<p><code>&lt;C-v&gt;jjeC{new text}&lt;Esc&gt;</code></p>
+<ul>
+<li>在行尾添加文本</li>
+</ul>
+<p><code>&lt;C-v&gt;jj$A;</code>：可视模式下，a与i无法进入插入模式</p>
+<h2 id="命令行模式">命令行模式</h2>
+<ul>
+<li>命令行模式</li>
+</ul>
+<p>帮助：<code>h ex-cmd-index</code></p>
+<p>delete, yank（复制），put（粘贴到寄存器），copy（简写co，或者t），move（简写m），join（连接），mormal（执行普通模式命令），substitute（替换，简写s），global（匹配并执行指定命令）</p>
+<p>特殊键：<code>&lt;C-w&gt;, &lt;C-u&gt;, &lt;C-v&gt;, &lt;C-k&gt;, &lt;C-r&gt;</code></p>
+<ul>
+<li>在一行或者连续多行上执行命令</li>
+</ul>
+<ol>
+<li><code>:{start},{end}</code></li>
+<li>高亮选择之后，按:号会出现 <code>&#39;&lt;,&#39;&gt;</code> （高亮选区的首行和尾行）</li>
+<li>用模式指定范围：<code>:/&lt;html&gt;/,/&lt;\/html&gt;/</code></li>
+<li>用偏移对地址进行修正：<code>:/&lt;html&gt;/+1,/&lt;\/html&gt;/-1</code></li>
+<li><code>.</code> 当前行，<code>%</code> 所有行</li>
+</ol>
+<ul>
+<li>复制，移动</li>
+</ul>
+<p><code>@:</code> 重复执行 </p>
+<ul>
+<li>在指定范围内执行普通模式的命令</li>
+</ul>
+<ol>
+<li><code>jVG:&#39;&lt;,&#39;&gt;normal .</code></li>
+<li><code>:%normal A;</code></li>
+<li><code>:%normal i//</code></li>
+</ol>
+<ul>
+<li>重复 </li>
+</ul>
+<p><code>@:, @@</code></p>
+<ul>
+<li>补全命令</li>
+</ul>
+<p><code>&lt;C-d&gt;</code> 显示补全列表，按Tab键或者 <code>&lt;S-Tab&gt;</code> 选择 </p>
+<ul>
+<li>把当前单词插入到命令行中</li>
+</ul>
+<p>例如重命名变量：<code>*cw{new_name}&lt;Esc&gt;:%s//&lt;C-r&gt;&lt;C-w&gt;/g</code></p>
+<p>注：<code>&lt;C-r&gt;&lt;C-w&gt;</code> ： 插入光标处的单词 </p>
+<ul>
+<li>回溯命令历史 </li>
+</ul>
+<ol>
+<li><code>&lt;Up&gt; or &lt;Down&gt;, &lt;C-p&gt; or &lt;C-n&gt;</code>：移动</li>
+<li><code>q/</code> 打开查找命令行的历史窗口</li>
+<li><code>q:</code> 打开Ex命令的历史窗口</li>
+<li>在历史命令窗口通过k，j上下移动</li>
+</ol>
+<ul>
+<li>运行shell命令 <code>!{cmd}</code></li>
+</ul>
+<ol>
+<li>在命令行中，%表示当前文件名</li>
+<li><code>:shell or &lt;C-z&gt;</code> 切换至控制台，<code>exit or fg</code>退出返回vim</li>
+<li>csv文件中按第二列重排文件。<code>:2,$ !sort -t &#39;,&#39; -k2</code> （ <code>ggj!G</code> 等效 <code>:.,$!</code>）</li>
+<li><code>:read !{cmd}</code>：执行命令，并把结果插入光标下方</li>
+</ol>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/vim/">vim</a><a href="/tags/读书笔记/">读书笔记</a><a href="/tags/vim实用技巧/">vim实用技巧</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
     <h1 class="title"><a href="/2014/10/26/vim/book-vim实用技巧-模式/">书籍：vim实用技巧-模式</a></h1>
   
 
@@ -616,52 +749,6 @@
       
   <div class="tags">
 <a href="/tags/javascript/">javascript</a><a href="/tags/jquery/">jquery</a><a href="/tags/promise/">promise</a><a href="/tags/异步编程/">异步编程</a></div>
-
-      
-    </footer>
-    
-  </div>
-  
-</article>
-
-
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <header>
-    
-  
-    <h1 class="title"><a href="/2014/09/26/javascript/Greasemonkey脚本开发/">Greasemonkey脚本开发</a></h1>
-  
-
-    <time datetime="2014-09-26T13:48:00.000Z">
-  <span class="day">26</span><span class="month">9月</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <h2 id="简介">简介</h2>
-<p>Greasemonkey，简称GM，中文俗称为“油猴子”，是Mozilla Firefox的一个附加组件。它让用户安装一些脚本使大部分HTML为主的网页于用户端直接改变得更方便易用。随着Greasemonkey脚本常驻于浏览器，每次随着目的网页打开而自动做修改，使得运行脚本的用户印象深刻地享受其固定便利性。<br>Greasemonkey可替网页加入些新功能、修正网页错误、组合来自不同网页的数据、或者数繁不及备载的其他功能。写的好的Greasemonkey脚本甚至可让其输出与被修改的页面集成得天衣无缝，像是原本网页里的一部分。</p>
-
-      <a href="http://cyy0523xc.github.io/2014/09/26/javascript/Greasemonkey脚本开发/" target="_blank" class="post-read-more">READ MORE</a>
-    
-    
-    <footer class="meta">
-      
-      
-  <div class="tags">
-<a href="/tags/Greasemonkey/">Greasemonkey</a><a href="/tags/javascript/">javascript</a></div>
 
       
     </footer>
