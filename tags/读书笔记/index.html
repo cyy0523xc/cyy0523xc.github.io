@@ -72,7 +72,7 @@
   <header>
     
   
-    <h1 class="title"><a href="/2014/10/26/vim/book-vim实用技巧-模式/">vim实用技巧-模式</a></h1>
+    <h1 class="title"><a href="/2014/10/26/vim/book-vim实用技巧-模式/">书籍：vim实用技巧-模式</a></h1>
   
 
     <time datetime="2014-10-25T16:00:00.000Z">
@@ -90,9 +90,9 @@
 <p>一次修改：</p>
 <ol>
 <li>普通模式，可视模式和命令行模式中所触发的修改命令</li>
-<li>插入模式：i{some text}<esc></esc></li>
+<li>插入模式：i{some text}<esc\></esc\></li>
 </ol>
-<p>段落完时，可用：<esc>o</esc></p>
+<p>段落完时，可用：<esc\>o</esc\></p>
 <ul>
 <li>构造可重复修改块</li>
 </ul>
@@ -100,7 +100,7 @@
 <ul>
 <li>用次数做简单的运算</li>
 </ul>
-<p><c-a>和<c-x>：加与减</c-x></c-a></p>
+<p><c-a\>和<c-x\>：加与减</c-x\></c-a\></p>
 <ul>
 <li>能够重复就别用次数</li>
 </ul>
@@ -108,9 +108,51 @@
 <ul>
 <li>操作 = 操作符 + 动作命令</li>
 </ul>
-<p>操作符：c（修改），d，y，g~（反转大小写），gU，gu（小写），&gt;（增加缩进），&lt;（减少缩进），=（自动缩进）</p>
+<p>操作符：c（修改），d，y，g~（反转大小写），gU，gu（小写），>（增加缩进），&lt;（减少缩进），=（自动缩进）</p>
+<p>&lt;!—more—></p>
+<h2 id="第三章：插入模式">第三章：插入模式</h2>
+<ul>
+<li>在插入模式中可即时更正错误</li>
+</ul>
+<p>避免模式切换（如果单词输入错了，则用退格键删除整个单词，再重新输入）</p>
+<ol>
+<li><c-h\>：删除前一个字符（退格键）</c-h\></li>
+<li><c-w\>：删除前一个单词</c-w\></li>
+<li><c-u\>：删除至行首</c-u\></li>
+</ol>
+<p>这三个命令在shell上也可用。</p>
+<ul>
+<li>返回普通模式</li>
+</ul>
+<ol>
+<li><esc\></esc\></li>
+<li><c-o\>：插入-普通模式。<c-o\>zz重绘屏幕</c-o\></c-o\></li>
+</ol>
+<ul>
+<li>不离开插入模式，粘贴寄存器中的文本</li>
+</ul>
+<p><c-r\>0：寄存器0-9。<c-r\>{register}</c-r\></c-r\></p>
+<ul>
+<li>随时随地做运算</li>
+</ul>
+<p><c-r\>={表达式}：=号是表达式寄存器</c-r\></p>
+<ul>
+<li>使用字符编码插入非常字符</li>
+</ul>
+<ol>
+<li><c-v\>{code}：</c-v\></li>
+<li>ga：查看编码</li>
+</ol>
+<ul>
+<li>二合字符 </li>
+</ul>
+<p><c-k\>{char1}{char2}</c-k\></p>
+<ul>
+<li>替换模式 </li>
+</ul>
+<p>R, r, gr（替换完返回普通模式），gR</p>
+<p>待续。。。</p>
 
-      <a href="http://cyy0523xc.github.io/2014/10/26/vim/book-vim实用技巧-模式/" target="_blank" class="post-read-more">READ MORE</a>
     
     
     <footer class="meta">
