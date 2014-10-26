@@ -16,7 +16,7 @@ u命令：撤销最新修改
 一次修改：
 
 普通模式，可视模式和命令行模式中所触发的修改命令
-插入模式：i{some text}&amp;lt;Esc&amp;gt;
+插入模式： i{some text}&amp;lt;Esc&amp;gt;
 
 段落完时，可用：&amp;lt;Esc&amp;gt;o
 
@@ -26,7 +26,7 @@ u命令：撤销最新修改
 
 用次数做简单的运算
 
-和：加与减
+&amp;lt;C-a&amp;gt; 和 &amp;lt;C-x&amp;gt; ：加与减
 
 能够重复就别用次数
 
@@ -105,7 +105,7 @@ u命令：撤销最新修改
 <p>一次修改：</p>
 <ol>
 <li>普通模式，可视模式和命令行模式中所触发的修改命令</li>
-<li>插入模式：i{some text}<code>&lt;Esc&gt;</code></li>
+<li>插入模式： <code>i{some text}&lt;Esc&gt;</code></li>
 </ol>
 <p>段落完时，可用：<code>&lt;Esc&gt;o</code></p>
 <ul>
@@ -115,7 +115,7 @@ u命令：撤销最新修改
 <ul>
 <li>用次数做简单的运算</li>
 </ul>
-<p><c-a>和<c-x>：加与减</c-x></c-a></p>
+<p><code>&lt;C-a&gt;</code> 和 <code>&lt;C-x&gt;</code> ：加与减</p>
 <ul>
 <li>能够重复就别用次数</li>
 </ul>
@@ -132,37 +132,35 @@ u命令：撤销最新修改
 </ul>
 <p>避免模式切换（如果单词输入错了，则用退格键删除整个单词，再重新输入）</p>
 <ol>
-<li><c-h>：删除前一个字符（退格键）</c-h></li>
-<li><c-w>：删除前一个单词</c-w></li>
-<li><c-u>：删除至行首</c-u></li>
+<li><code>&lt;C-u&gt;</code> ：删除至行首</li>
 </ol>
 <p>这三个命令在shell上也可用。</p>
 <ul>
 <li>返回普通模式</li>
 </ul>
 <ol>
-<li><esc></esc></li>
-<li><c-o>：插入-普通模式。<c-o>zz重绘屏幕</c-o></c-o></li>
+<li><code>&lt;Esc&gt;</code> </li>
+<li><code>&lt;C-o&gt;</code> ：插入-普通模式。 <code>&lt;C-o&gt;zz</code> 重绘屏幕</li>
 </ol>
 <ul>
 <li>不离开插入模式，粘贴寄存器中的文本</li>
 </ul>
-<p><c-r>0：寄存器0-9。<c-r>{register}</c-r></c-r></p>
+<p><code>&lt;C-r&gt;0</code> ：寄存器0-9。 <code>&lt;C-r&gt;{register}</code></p>
 <ul>
 <li>随时随地做运算</li>
 </ul>
-<p><c-r>={表达式}：=号是表达式寄存器</c-r></p>
+<p><code>&lt;C-r&gt;={表达式}</code> ：=号是表达式寄存器</p>
 <ul>
 <li>使用字符编码插入非常字符</li>
 </ul>
 <ol>
-<li><c-v>{code}：</c-v></li>
+<li><code>&lt;C-v&gt;{code}</code> ：</li>
 <li>ga：查看编码</li>
 </ol>
 <ul>
 <li>二合字符 </li>
 </ul>
-<p><c-k>{char1}{char2}</c-k></p>
+<p><code>&lt;C-k&gt;{char1}{char2}</code></p>
 <ul>
 <li>替换模式 </li>
 </ul>
