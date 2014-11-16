@@ -1,0 +1,211 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>vim实用技巧之快速移动与跳转 | 数据明月</title>
+  <meta name="author" content="AlexCai">
+
+  
+  <meta name="description" content="动作命令是vim操作中最重要的一些命令。不仅可以实现快速移动，还能与操作符进行配合使用。">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="数据明月" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <!-- <script src="http://libs.baidu.com/jquery/1.9.0/jquery.min.js"></script> -->
+
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script src="http://code.jquery.com/jquery-migrate-1.0.0.js"></script>
+
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="site-name">
+    数据明月 
+    <span>心有沉香，无惧浮世！</span>
+</div>
+
+<nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="http://github.com/cyy0523xc/">Github</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+  </ul>
+</nav>
+</header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">vim实用技巧之快速移动与跳转</h1>
+  
+
+    <time datetime="2014-11-15T16:00:00.000Z">
+  <span class="day">16</span><span class="month">11月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <p>动作命令是vim操作中最重要的一些命令。不仅可以实现快速移动，还能与操作符进行配合使用。</p>
+<a id="more"></a>
+
+<ul>
+<li>让手指保持在本位行上</li>
+</ul>
+<p>移动命令：<code>h, l, j, k</code> （h和l用来解决 <strong>差一错误</strong> ，不应该出现连续按多次h键的情况）</p>
+<ul>
+<li>屏幕行与实际行</li>
+</ul>
+<p>屏幕行命令：<code>gj, gk, g0, g$</code></p>
+<ul>
+<li>基于单词的移动 </li>
+</ul>
+<p>向后或者向前一个单词：<code>w, b</code>（光标落在首字母上）；<code>e, ge</code>（光标落在尾字母上）</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">单词：（<span class="symbol">:h</span> word）数字，字母，下划线，或者其他非空白字符组成，以空白字符分割</div><div class="line">字串：（<span class="symbol">:h</span> <span class="constant">WORD</span>）以非空白字符组成，以空白字符分割 </div><div class="line"></div><div class="line">简单理解：单词比字串短</div></pre></td></tr></table></figure>
+
+<p>字串命令：<code>W, B, E, gE</code></p>
+<ul>
+<li>对字符进行查找</li>
+</ul>
+<p><code>f{char} t{char} ; ,</code>：如<code>f,dt.</code>：删除逗号及逗号与句号之间的内容。</p>
+<p>注意字符出现的频率</p>
+<ul>
+<li>通过查找进行移动 </li>
+</ul>
+<p>对比命令：<code>v/ge&lt;CR&gt;hd</code>与<code>d/ge&lt;CR&gt;</code> （第二个命令符合 <code>d{motion}</code> 的模式，更好）</p>
+<ul>
+<li>用精确的文本对象选择选区 </li>
+</ul>
+<ol>
+<li>文本对象有两个字符组成，第一个字符是i（inside）或者a（around），第二个字符可以是 <code>), }, ], &gt;, &#39;, &quot;, `, t， w, W, s, p</code> （t是指标签，对html文档特别有效；s是指句子；p是指段落）</li>
+<li>常见操作：<code>d{motion}, c{motion}, y{motion}</code></li>
+</ol>
+<ul>
+<li>删除周边，修改内部</li>
+</ul>
+<p>注意<code>caw</code>与<code>ciw</code>的区别。</p>
+<ul>
+<li>位置标志</li>
+</ul>
+<p>自动位置标志：</p>
+<ol>
+<li><strong>`(</strong> 上次跳转的位置；</li>
+<li><strong>`.</strong> 上次修改的置；</li>
+<li><strong>`^</strong> 上次插入的位置</li>
+<li><strong>`[</strong> 上次修改或者复制的开始位置</li>
+<li><strong>`]</strong> 上次修改或者复制的结束位置</li>
+<li><strong>`&lt;</strong> 上次高亮选区的开始位置</li>
+<li><strong>`&gt;</strong> 上次高亮选区的结束位置</li>
+</ol>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/vim/">vim</a><a href="/tags/vim实用技巧/">vim实用技巧</a><a href="/tags/读书笔记/">读书笔记</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+</div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2014 AlexCai
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+    try {
+        $('.fancybox').fancybox();
+    } catch(e) {
+        console.log('after_footer:fancybox');
+    }
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+</body>
+</html>
