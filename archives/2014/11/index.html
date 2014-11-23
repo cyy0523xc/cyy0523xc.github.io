@@ -72,6 +72,61 @@
   <header>
     
   
+    <h1 class="title"><a href="/2014/11/23/接口扩展性的一点小技巧/">提升接口可扩展性的一点小技巧</a></h1>
+  
+
+    <time datetime="2014-11-22T16:00:00.000Z">
+  <span class="day">23</span><span class="month">11月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h3 id="现实情况">现实情况</h3>
+<p>接口涉及到三个方面：</p>
+<ul>
+<li>服务器端，简称s；</li>
+<li>自己封装的浏览器，简称b；</li>
+<li>前端js，简称j。</li>
+</ul>
+<p>b启动之后，会定时轮询s，获取相应的信息，并把其中的一部分反馈给j。开始时对s的返回值设计如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">{</div><div class="line">    status: <span class="number">0</span>,                         <span class="comment">// 标识成功还是失败（0表示成功，非0表示失败）</span></div><div class="line">    data: {                            <span class="comment">// 打印数据</span></div><div class="line">        photo:    <span class="number">123</span>,                 <span class="comment">// 【整型】照片ID</span></div><div class="line">        preview:  <span class="string">'http://...'</span>,        <span class="comment">// 【字符串】预览图地址：给前端预览使用</span></div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>其中，preview字段是缩略图的地址，b在接收到之后，需要传递给前端的js去展示。理想情况下，这可以运行得很好，但是b端一旦固定下来，是很难改的，如果我们需要传更多的数据给j端怎么办？</p>
+
+      <a href="http://cyy0523xc.github.io/2014/11/23/接口扩展性的一点小技巧/" target="_blank" class="post-read-more">READ MORE</a>
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/接口开发/">接口开发</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
     <h1 class="title"><a href="/2014/11/16/vim/book-vim实用技巧-快速移动/">vim实用技巧之快速移动与跳转</a></h1>
   
 
