@@ -72,23 +72,66 @@
   <header>
     
   
-    <h1 class="title"><a href="/2014/11/28/vim/book-vim实用技巧-寄存器/">vim实用技巧之寄存器</a></h1>
+    <h1 class="title"><a href="/2015/04/28/php/laravel项目中的数据表设计规范/">laravel项目中的数据表设计规范及使用方式</a></h1>
   
 
-    <time datetime="2014-11-27T16:00:00.000Z">
-  <span class="day">28</span><span class="month">11月</span>
+    <time datetime="2015-04-27T16:00:00.000Z">
+  <span class="day">28</span><span class="month">4月</span>
 </time>
   </header>
   <div class="entry-content">
     
-      
+      <h3 id="字段设计规范">字段设计规范</h3>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 主键</span></div><div class="line"><span class="variable">$table</span><span class="variable">-&gt;increments</span>(<span class="string">'id'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 加入 created_at 和 updated_at 字段</span></div><div class="line"><span class="variable">$table</span><span class="variable">-&gt;timestamps</span>();</div><div class="line"></div><div class="line"><span class="comment">// 加入 deleted_at 字段于软删除使用</span></div><div class="line"><span class="variable">$table</span><span class="variable">-&gt;softDeletes</span>();</div><div class="line"></div><div class="line"><span class="comment">// 加入整数 taggable_id 与字串 taggable_type</span></div><div class="line"><span class="variable">$table</span><span class="variable">-&gt;morphs</span>(<span class="string">'taggable'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 加入 remember_token 使用 VARCHAR(100) NULL</span></div><div class="line"><span class="variable">$table</span><span class="variable">-&gt;rememberToken</span>();</div></pre></td></tr></table></figure>
+
+<h3 id="软删除">软删除</h3>
+<p>通过软删除方式删除了一个模型后，模型中的数据并不是真的从数据库被移除。而是会设定 deleted_at时间戳。要让模型使用软删除功能，只要在模型类里加入 SoftDeletingTrait 即可：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Database</span>\<span class="title">Eloquent</span>\<span class="title">SoftDeletes</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">extends</span> <span class="title">Model</span> </span>{</div><div class="line">    </div><div class="line">    <span class="keyword">use</span> <span class="title">SoftDeletes</span>;</div><div class="line"></div><div class="line">    <span class="keyword">protected</span> <span class="variable">$dates</span> = [<span class="string">'deleted_at'</span>];</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>现在当您使用模型调用 delete 方法时， deleted_at字段会被更新成现在的时间戳。在查询使用软删除功能的模型时，被「删除」的模型数据不会出现在查询结果里。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 强制查询软删除数据(使用 withTrashed 方法)</span></div><div class="line"><span class="variable">$users</span> = User::withTrashed()<span class="variable">-&gt;where</span>(<span class="string">'account_id'</span>, <span class="number">1</span>)<span class="variable">-&gt;get</span>();</div><div class="line"></div><div class="line"><span class="comment">// 只想查询被软删除的模型数据，可以使用 onlyTrashed 方法</span></div><div class="line"><span class="variable">$users</span> = User::onlyTrashed()<span class="variable">-&gt;where</span>(<span class="string">'account_id'</span>, <span class="number">1</span>)<span class="variable">-&gt;get</span>();</div></pre></td></tr></table></figure>
+
+<h3 id="时间戳">时间戳</h3>
+<p>默认 Eloquent 会自动维护数据库表的 created_at 和 updated_at 字段。只要把这两个「时间戳」字段加到数据库表， Eloquent 就会处理剩下的工作。</p>
+<h3 id="范围查询">范围查询</h3>
+<h4 id="定义范围查询">定义范围查询</h4>
+<p>范围查询可以让您轻松的重复利用模型的查询逻辑。要设定范围查询，只要定义有 scope 前缀的模型方法：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">extends</span> <span class="title">Model</span> </span>{</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">scopePopular</span><span class="params">(<span class="variable">$query</span>)</span></span></div><div class="line">    {</div><div class="line">        <span class="keyword">return</span> <span class="variable">$query</span><span class="variable">-&gt;where</span>(<span class="string">'votes'</span>, <span class="string">'&gt;'</span>, <span class="number">100</span>);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">scopeWomen</span><span class="params">(<span class="variable">$query</span>)</span></span></div><div class="line">    {</div><div class="line">        <span class="keyword">return</span> <span class="variable">$query</span><span class="variable">-&gt;whereGender</span>(<span class="string">'W'</span>);</div><div class="line">    }</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h4 id="使用范围查询">使用范围查询</h4>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$users</span> = User::popular()<span class="variable">-&gt;women</span>()<span class="variable">-&gt;orderBy</span>(<span class="string">'created_at'</span>)<span class="variable">-&gt;get</span>();</div></pre></td></tr></table></figure>
+
+<h4 id="动态范围查询">动态范围查询</h4>
+<p>有时您可能想要定义可接受参数的范围查询方法。只要把参数加到方法里：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">extends</span> <span class="title">Model</span> </span>{</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">scopeOfType</span><span class="params">(<span class="variable">$query</span>, <span class="variable">$type</span>)</span></span></div><div class="line">    {</div><div class="line">        <span class="keyword">return</span> <span class="variable">$query</span><span class="variable">-&gt;whereType</span>(<span class="variable">$type</span>);</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>使用：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$users</span> = User::ofType(<span class="string">'member'</span>)<span class="variable">-&gt;get</span>();</div></pre></td></tr></table></figure>
+
+<h3 id="使用枢纽表">使用枢纽表</h3>
+<p>如您所知，要操作多对多关联需要一个中间的数据库表。 Eloquent 提供了一些有用的方法可以和这张表互动。例如，假设 User 对象关联到很多 Role 对象。取出这些关联对象时，我们可以在关联模型上取得 pivot 数据库表的数据：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$user</span> = User::find(<span class="number">1</span>);</div><div class="line"></div><div class="line"><span class="keyword">foreach</span> (<span class="variable">$user</span><span class="variable">-&gt;roles</span> <span class="keyword">as</span> <span class="variable">$role</span>)</div><div class="line">{</div><div class="line">    <span class="keyword">echo</span> <span class="variable">$role</span><span class="variable">-&gt;pivot</span><span class="variable">-&gt;created_at</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>注意我们取出的每个 Role 模型对象会自动给一个 pivot 属性。这属性包含了枢纽表的模型数据，可以像一般的 Eloquent 模型一样使用。</p>
+<p>默认 pivot 对象只会有关联键的属性。如果您想让 pivot 可以包含其他枢纽表的字段，可以在定义关联方法时指定那些字段：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">return</span> <span class="variable">$this</span><span class="variable">-&gt;belongsToMany</span>(<span class="string">'App\Role'</span>)<span class="variable">-&gt;withPivot</span>(<span class="string">'foo'</span>, <span class="string">'bar'</span>);</div></pre></td></tr></table></figure>
+
+<p>其他操作：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 删除枢纽表的关联数据</span></div><div class="line">User::find(<span class="number">1</span>)<span class="variable">-&gt;roles</span>()<span class="variable">-&gt;detach</span>();</div><div class="line"></div><div class="line"><span class="comment">// 更新枢纽表的数据</span></div><div class="line">User::find(<span class="number">1</span>)<span class="variable">-&gt;roles</span>()<span class="variable">-&gt;updateExistingPivot</span>(<span class="variable">$roleId</span>, <span class="variable">$attributes</span>);</div></pre></td></tr></table></figure>
+
+<h3 id="集合">集合</h3>
+<p>所有 Eloquent 查询返回的数据，如果结果多于一条，不管是经由 get 方法或是 relationship，都会转换成集合对象返回。这个对象实现了 IteratorAggregate PHP 接口，所以可以像数组一般进行遍历。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 确认集合中里是否包含特定键值</span></div><div class="line"><span class="variable">$roles</span> = User::find(<span class="number">1</span>)<span class="variable">-&gt;roles</span>;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (<span class="variable">$roles</span><span class="variable">-&gt;contains</span>(<span class="number">2</span>))</div><div class="line">{</div><div class="line">    <span class="comment">//</span></div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">// 集合遍历</span></div><div class="line"><span class="variable">$roles</span> = <span class="variable">$user</span><span class="variable">-&gt;roles</span><span class="variable">-&gt;each</span>(<span class="function"><span class="keyword">function</span><span class="params">(<span class="variable">$role</span>)</span></span></div><div class="line">{</div><div class="line">    <span class="comment">//</span></div><div class="line">});</div><div class="line"></div><div class="line"><span class="comment">// 集合过滤</span></div><div class="line"><span class="variable">$users</span> = <span class="variable">$users</span><span class="variable">-&gt;filter</span>(<span class="function"><span class="keyword">function</span><span class="params">(<span class="variable">$user</span>)</span></span></div><div class="line">{</div><div class="line">    <span class="keyword">return</span> <span class="variable">$user</span><span class="variable">-&gt;isAdmin</span>();</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>待续。。。</p>
+
     
     
     <footer class="meta">
       
       
   <div class="tags">
-<a href="/tags/vim/">vim</a><a href="/tags/读书笔记/">读书笔记</a><a href="/tags/vim实用技巧/">vim实用技巧</a></div>
+<a href="/tags/laravel/">laravel</a><a href="/tags/php/">php</a><a href="/tags/数据库/">数据库</a></div>
 
       
     </footer>
