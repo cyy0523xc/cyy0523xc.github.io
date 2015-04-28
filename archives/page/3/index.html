@@ -72,6 +72,63 @@
   <header>
     
   
+    <h1 class="title"><a href="/2014/09/18/vim/vim的模式/">vim的模式</a></h1>
+  
+
+    <time datetime="2014-09-18T07:36:31.000Z">
+  <span class="day">18</span><span class="month">9月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="通常模式(n)">通常模式(n)</h2>
+<p>在其它任何一个模式下,用ESC或者 ctrl+c 键可以退到通常模式</p>
+<h2 id="插入模式(i)">插入模式(i)</h2>
+<p>在这个模式下,vim像一个常见的编辑器.在通常模式下,用i或者a可以进行本模式,当然,还有一些其它命令也可以.</p>
+<h2 id="可视模式(v)">可视模式(v)</h2>
+<p>在这个模式下,可以使用hjkl进行选择.然后进行copy,paste或者其它操作. 在通常模式下,用 <strong>v or shift+v</strong> 命令进行可视模式.</p>
+<h2 id="列块操作模式(V)">列块操作模式(V)</h2>
+<p>这是块操作模式. 在通常模式下,用 <strong>ctrl+v</strong> 进入本模式.</p>
+<p>例如注释多行代码等（ <strong>I, #, ESC</strong> ）</p>
+<p>还有 <strong>行尾列块操作模式</strong> ：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gg, ctrl+v, <span class="constant">G</span>, <span class="variable">$,</span> <span class="constant">A</span></div></pre></td></tr></table></figure>
+
+<h2 id="修改模式(R)">修改模式(R)</h2>
+<p>这是改写的模式.很多软件法用insert键来完成这个切换.在vim中,从通常模式用R即可进入改写模式.</p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/vim/">vim</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
     <h1 class="title"><a href="/2014/09/18/php/在PHP中近似实现AOP思想/">在PHP中近似实现AOP思想</a></h1>
   
 
@@ -519,78 +576,6 @@
       
   <div class="tags">
 <a href="/tags/R/">R</a><a href="/tags/vector/">vector</a><a href="/tags/names/">names</a></div>
-
-      
-    </footer>
-    
-  </div>
-  
-</article>
-
-  
-    <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <header>
-    
-  
-    <h1 class="title"><a href="/2013/09/05/shell/sed命令/">sed命令</a></h1>
-  
-
-    <time datetime="2013-09-04T16:00:00.000Z">
-  <span class="day">5</span><span class="month">9月</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <h2 id="问题">问题</h2>
-<p>源数据：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">28</span>&<span class="variable">at=</span><span class="number">7</span>&<span class="variable">cid=</span>mDamz1b7WRJZ</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">29</span>&<span class="variable">at=</span><span class="number">3</span>&<span class="variable">cid=</span>Q4ETETM9Hjx0</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">39</span>&<span class="variable">at=</span><span class="number">0</span>&<span class="variable">cid=</span>ytBSubxEaFN6</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">40</span>&<span class="variable">at=</span><span class="number">3</span>&<span class="variable">cid=</span>mDamz1b7WRJZ</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">42</span>&<span class="variable">at=</span><span class="number">6</span>&<span class="variable">cid=</span>ytBSubxEaFN6</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">42</span>&<span class="variable">at=</span><span class="number">3</span>&<span class="variable">cid=</span>mDamz1b7WRJZ</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">45</span>&<span class="variable">at=</span><span class="number">0</span>&<span class="variable">cid=</span><span class="number">66</span>OwWFuVBMSS</div></pre></td></tr></table></figure>
-
-<p>希望把drt字段中的+号及后面的替换掉：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sed 's/<span class="command">\+</span><span class="special">[</span><span class="command">\d</span>:<span class="special">]</span>+<span class="special">&</span>/<span class="special">&</span>/g'</div></pre></td></tr></table></figure>
-
-<p>结果就是死活不工作。。。</p>
-<h2 id="解决">解决</h2>
-<p>原来&amp;在sed中也是元字符，之前从来没注意到这个，和普通正则还差异多多。最后就只是一个转义符的事情：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sed 's/<span class="command">\+</span>/<span class="command">\&</span>/g'</div></pre></td></tr></table></figure>
-
-<p>关于&amp;的说明：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">保存搜索字符用来替换其他字符，如s/love<span class="javadoc">/**&**/</span>，love这成**love**。</div></pre></td></tr></table></figure>
-
-<p>还有：</p>
-<ul>
-<li>sed的元字符里原来没有+号的。。。</li>
-<li>\d发现也是无效的</li>
-</ul>
-<p>最终就变成了：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sed 's/+<span class="special">[</span>0-9:<span class="special">]</span>*<span class="command">\&</span>/<span class="command">\&</span>/g'</div></pre></td></tr></table></figure>
-
-<h2 id="附录">附录</h2>
-<ul>
-<li>sed的元字符：<a href="http://tsnc.zhongaokao.com/tsnc_wgrj/doc/sed.htm#id2810450" target="_blank" rel="external">http://tsnc.zhongaokao.com/tsnc_wgrj/doc/sed.htm#id2810450</a></li>
-<li>sed manual：<a href="http://www.gnu.org/software/sed/manual/sed.html" target="_blank" rel="external">http://www.gnu.org/software/sed/manual/sed.html</a></li>
-<li>grep、sed、awk、perl等对正则表达式的支持的差别：<a href="http://blog.csdn.net/zouxue138/article/details/8620799" target="_blank" rel="external">http://blog.csdn.net/zouxue138/article/details/8620799</a></li>
-</ul>
-
-    
-    
-    <footer class="meta">
-      
-      
-  <div class="tags">
-<a href="/tags/linux/">linux</a><a href="/tags/sed/">sed</a></div>
 
       
     </footer>
