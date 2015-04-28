@@ -59,6 +59,60 @@
   <header>
     
   
+    <h1 class="title"><a href="/2014/10/13/vim/markdown中快速进行表格对齐/">在markdown中快速进行表格对齐</a></h1>
+  
+
+    <time datetime="2014-10-12T16:00:00.000Z">
+  <span class="day">13</span><span class="month">10月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <p>在markdown中的表格格式对齐是比价麻烦的，有了tabular这个vim插件之后，简单了许多，用法如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">:<span class="number">45</span>,<span class="number">67</span> <span class="keyword">Tab</span> /|</div></pre></td></tr></table></figure>
+
+<p>这样就可以将表格按竖线进行对齐了，比较简单。不过经常修改表格时，每次都要输入这样一个命令还是挺麻烦的，故实现成快捷键的形式，如下：</p>
+<figure class="highlight vimscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="string">" align</span></div><div class="line">" markdown table align by <span class="string">"|"</span></div><div class="line">nmap tab\|   :call CyyAlignBy(<span class="string">"\|"</span>)&lt;CR&gt;</div><div class="line">nmap tab,    :call CyyAlignBy(<span class="string">","</span>)&lt;CR&gt;</div><div class="line">nmap tab=    :call CyyAlignBy(<span class="string">"="</span>)&lt;CR&gt;</div><div class="line">nmap tab=&gt;   :call CyyAlignBy(<span class="string">"=&gt;"</span>)&lt;CR&gt;</div><div class="line"></div><div class="line"><span class="string">" 根据某字符串对齐</span></div><div class="line">func CyyAlignBy(string)</div><div class="line">    let __lineno    = line('.<span class="string">')</span></div><div class="line">    let __begin_ln  = __lineno</div><div class="line">    let __end_ln    = __lineno</div><div class="line"></div><div class="line">    " 向前搜索，直到空行</div><div class="line">    while <span class="string">""</span> != getline(__begin_ln)</div><div class="line">        let __begin_ln -= <span class="number">1</span></div><div class="line">        <span class="keyword">if</span> __begin_ln &lt; <span class="number">1</span></div><div class="line">            <span class="keyword">break</span></div><div class="line">        endif</div><div class="line">    endwhile</div><div class="line"></div><div class="line">    <span class="string">" 向后搜索，直到空行 </span></div><div class="line">    while "<span class="string">" != getline(__end_ln)</span></div><div class="line">        let __end_ln += 1</div><div class="line">    endwhile </div><div class="line">    </div><div class="line">    let __exec = printf('%d,%d Tab /%<span class="transposed_variable">s'</span>, __begin_ln, __end_ln, a:string)</div><div class="line">    echo __exec </div><div class="line">    exec __exec</div><div class="line"><span class="function"><span class="keyword">endfunction</span></span></div></pre></td></tr></table></figure>
+
+<p>说明：</p>
+<ul>
+<li>依赖代码区块前后的空行来确定开始和结束的行号。</li>
+<li>最新版见这里：<a href="https://github.com/cyy0523xc/code/blob/master/vim/cyy.vim" target="_blank" rel="external">https://github.com/cyy0523xc/code/blob/master/vim/cyy.vim</a> </li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/vim/">vim</a><a href="/tags/markdown/">markdown</a><a href="/tags/vimscript/">vimscript</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
     <h1 class="title"><a href="/2014/10/11/shell/shell记录/">shell记录</a></h1>
   
 
@@ -580,62 +634,6 @@
 </article>
 
 
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <header>
-    
-  
-    <h1 class="title"><a href="/2014/09/18/php/在PHP中近似实现AOP思想/">在PHP中近似实现AOP思想</a></h1>
-  
-
-    <time datetime="2014-09-18T03:15:43.000Z">
-  <span class="day">18</span><span class="month">9月</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <h2 id="简介">简介</h2>
-<p><strong>AOP</strong> 为Aspect Oriented Programming的缩写，意为： <strong>面向切面编程</strong> ，通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术。利用AOP可以对业务逻辑的各个部分进行隔离，从而使得业务逻辑各部分之间的耦合度降低，提高程序的可重用性，同时提高了开发的效率。</p>
-<p><strong>主要的功能</strong> 是：日志记录，性能统计，安全控制，事务处理，异常处理等等。</p>
-<p><strong> 主要的意图</strong> 是：将日志记录，性能统计，安全控制，事务处理，异常处理等代码从业务逻辑代码中划分出来，通过对这些行为的分离，我们希望可以将它们独立到非指导业务逻辑的方法中，进而改变这些行为的时候不影响业务逻辑的代码。</p>
-<h2 id="PHP实现">PHP实现</h2>
-<p>PHP的原生内核并没有相关的实现，不过借助魔术函数可以近似实现。</p>
-<p>下面的代码主要实现了对实现了对业务类的包装：</p>
-<ul>
-<li>定义了两个层次的前置和后置函数：可以全局的（类层面的所有action），也可以局部的（对某个action的）</li>
-<li>允许继承</li>
-</ul>
-<p>代码如下：</p>
-
-      <a href="http://cyy0523xc.github.io/2014/09/18/php/在PHP中近似实现AOP思想/" target="_blank" class="post-read-more">READ MORE</a>
-    
-    
-    <footer class="meta">
-      
-      
-  <div class="tags">
-<a href="/tags/PHP/">PHP</a><a href="/tags/AOP/">AOP</a></div>
-
-      
-    </footer>
-    
-  </div>
-  
-</article>
-
-
 
 <nav id="pagenavi">
   
@@ -655,7 +653,7 @@
 </div>
 <p>
   
-  &copy; 2014 AlexCai
+  &copy; 2015 AlexCai
   
 </p>
 <div class="clearfix"></div></footer>
