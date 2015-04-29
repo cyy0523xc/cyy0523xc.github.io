@@ -59,6 +59,51 @@
   <header>
     
   
+    <h1 class="title"><a href="/2014/09/19/vim/vim脚本vimscript/">vim脚本vimscript</a></h1>
+  
+
+    <time datetime="2014-09-19T11:55:44.000Z">
+  <span class="day">19</span><span class="month">9月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <p>Vim的脚本语言被称为Vimscript，是典型的动态式命令语言，提供一些常用的语言特征：变量、表达式、控制结构、内置函数、用户自定义函数、一级字符串、列表、字典、终端、文件IO、正则表达式模式匹配、异常和集成调试器等。<br>在学习Vimscript时，你可以学习Vim自带的Vimscript文档，打开Vim自带的Vimscript很简单，只需在Vim内部执行：help vim-script-intro（Normal模式下）</p>
+
+      <a href="http://cyy0523xc.github.io/2014/09/19/vim/vim脚本vimscript/" target="_blank" class="post-read-more">READ MORE</a>
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/vim/">vim</a><a href="/tags/vimscript/">vimscript</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
     <h1 class="title"><a href="/2014/09/18/vim/vim的模式/">vim的模式</a></h1>
   
 
@@ -508,61 +553,6 @@
       
   <div class="tags">
 <a href="/tags/R/">R</a><a href="/tags/经验/">经验</a></div>
-
-      
-    </footer>
-    
-  </div>
-  
-</article>
-
-
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <header>
-    
-  
-    <h1 class="title"><a href="/2013/09/05/R/R中vector和names函数/">R中vector和names函数</a></h1>
-  
-
-    <time datetime="2013-09-04T16:00:00.000Z">
-  <span class="day">5</span><span class="month">9月</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <h2 id="问题">问题</h2>
-<p>源数据保存在文件中，格式如下：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">28</span>&<span class="variable">at=</span><span class="number">7</span>&<span class="variable">cid=</span>mDamz1b7WRJZ</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">29</span>&<span class="variable">at=</span><span class="number">3</span>&<span class="variable">cid=</span>Q4ETETM9Hjx0</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">39</span>&<span class="variable">at=</span><span class="number">0</span>&<span class="variable">cid=</span>ytBSubxEaFN6</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">40</span>&<span class="variable">at=</span><span class="number">3</span>&<span class="variable">cid=</span>mDamz1b7WRJZ</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">42</span>&<span class="variable">at=</span><span class="number">6</span>&<span class="variable">cid=</span>ytBSubxEaFN6</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">42</span>&<span class="variable">at=</span><span class="number">3</span>&<span class="variable">cid=</span>mDamz1b7WRJZ</div><div class="line"><span class="variable">drt=</span><span class="number">2013</span>-<span class="number">09</span>-<span class="number">02</span>+<span class="number">22</span>:<span class="number">14</span>:<span class="number">45</span>&<span class="variable">at=</span><span class="number">0</span>&<span class="variable">cid=</span><span class="number">66</span>OwWFuVBMSS</div></pre></td></tr></table></figure>
-
-<p>需要生成一个list，其下标是数据的字段名：drt，at，cid</p>
-<h2 id="解决">解决</h2>
-<p>开始写成这样，很别扭的代码：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">x &lt;- scan(filename, what=<span class="string">""</span>, sep=<span class="string">"&"</span>, nlines=<span class="number">1</span>)</div><div class="line">fields.name &lt;- sapply(x, FUN=<span class="keyword">function</span>(x){strsplit(x, split=<span class="string">"="</span>)[[<span class="number">1</span>]][<span class="number">1</span>]})</div><div class="line">names(fields.name) &lt;- <span class="literal">NULL</span></div><div class="line">names(fields.name) &lt;- fields.name</div><div class="line">fields.name &lt;- as.list(fields.name)</div></pre></td></tr></table></figure>
-
-<p>借鉴tapply的源码，改成这样：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">x &lt;- scan(filename, what=<span class="string">""</span>, sep=<span class="string">"&"</span>, nlines=<span class="number">1</span>)</div><div class="line">fields.name &lt;- sapply(x, FUN=<span class="keyword">function</span>(x){strsplit(x, split=<span class="string">"="</span>)[[<span class="number">1</span>]][<span class="number">1</span>]})</div><div class="line">tmp.fields.name &lt;- vector(<span class="string">"list"</span>, length(fields.name))    <span class="comment"># 生成一个空的list</span></div><div class="line">names(tmp.fields.name) &lt;- fields.name</div></pre></td></tr></table></figure>
-
-
-    
-    
-    <footer class="meta">
-      
-      
-  <div class="tags">
-<a href="/tags/R/">R</a><a href="/tags/vector/">vector</a><a href="/tags/names/">names</a></div>
 
       
     </footer>
