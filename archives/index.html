@@ -72,20 +72,21 @@
   <header>
     
   
-    <h1 class="title"><a href="/2015/04/29/mysql-procedure-select-into-and-set/">mysql存储过程中的select into与set语句的问题</a></h1>
+    <h1 class="title"><a href="/2015/04/30/mysql-procedure-select-into-and-set/">mysql存储过程中的select into与局部变量的问题</a></h1>
   
 
-    <time datetime="2015-04-29T04:44:53.000Z">
-  <span class="day">29</span><span class="month">4月</span>
+    <time datetime="2015-04-30T02:19:29.000Z">
+  <span class="day">30</span><span class="month">4月</span>
 </time>
   </header>
   <div class="entry-content">
     
-      <p>今天解决了存储过程中的select into与set语句的问题，原来存储过程大概这样：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># 在存储过程内部，省略</div><div class="line"><span class="operator"><span class="keyword">SET</span> user_uid = <span class="number">0</span>;</span></div><div class="line"></div><div class="line"><span class="operator"><span class="keyword">SELECT</span> <span class="string">`user_uid`</span> <span class="keyword">INTO</span> user_uid</span></div><div class="line"><span class="keyword">FROM</span> <span class="keyword">table</span></div><div class="line"><span class="keyword">WHERE</span> ...;</div></pre></td></tr></table></figure>
+      <p>今天解决了存储过程中的select into与局部变量的问题，原来存储过程大概这样：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># 在存储过程内部，省略</div><div class="line"><span class="operator"><span class="keyword">DECLARE</span> user_uid <span class="built_in">INT</span>;</span></div><div class="line"></div><div class="line"><span class="operator"><span class="keyword">SET</span> user_uid = <span class="number">0</span>;</span></div><div class="line"></div><div class="line"><span class="operator"><span class="keyword">SELECT</span> <span class="string">`user_uid`</span> <span class="keyword">INTO</span> user_uid</span></div><div class="line"><span class="keyword">FROM</span> <span class="keyword">table</span></div><div class="line"><span class="keyword">WHERE</span> ...;</div></pre></td></tr></table></figure>
 
-<p>结果user_uid的值一直为0，确认数据表满足条件是有一条数据的。实在没办法了，就把set语句注释，结果居然OK了。</p>
-<p>原因待查。。。</p>
+<p>结果user_uid的值一直为0，确认数据表满足条件是有一条数据的。试了很多种方法才发现是into赋值的变量不能和select的字段名相同，甚至不能用declare来定义，所以最终解决是这样：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># 注意不能定义user_uid这个局部变量</div><div class="line"><span class="operator"><span class="keyword">DECLARE</span> lc_user_uid <span class="built_in">INT</span>;</span></div><div class="line"></div><div class="line"><span class="operator"><span class="keyword">SET</span> lc_user_uid = <span class="number">0</span>;</span></div><div class="line"></div><div class="line"><span class="operator"><span class="keyword">SELECT</span> <span class="string">`user_uid`</span> <span class="keyword">INTO</span> lc_user_uid</span></div><div class="line"><span class="keyword">FROM</span> <span class="keyword">table</span></div><div class="line"><span class="keyword">WHERE</span> ...;</div></pre></td></tr></table></figure>
+
 
     
     
