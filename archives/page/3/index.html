@@ -72,6 +72,58 @@
   <header>
     
   
+    <h1 class="title"><a href="/2014/09/22/vim/vimscript问题汇总/">vimscript问题汇总</a></h1>
+  
+
+    <time datetime="2014-09-22T02:54:36.000Z">
+  <span class="day">22</span><span class="month">9月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="source时提示“E484:_无法打开文件”">source时提示“E484: 无法打开文件”</h2>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">source</span> <span class="string">'/home/code/github/code/vim/cyy.vim'</span></div></pre></td></tr></table></figure>
+
+<p>应该去掉路径中的单引号，如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">source</span> <span class="regexp">/home/</span>code<span class="regexp">/github/</span>code<span class="regexp">/vim/</span>cyy.vim</div></pre></td></tr></table></figure>
+
+
+    
+    
+    <footer class="meta">
+      
+  <div class="cats">
+<a href="/categories/record/">record</a></div>
+
+      
+  <div class="tags">
+<a href="/tags/vim/">vim</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
     <h1 class="title"><a href="/2014/09/19/vim/vim脚本vimscript/">vim脚本vimscript</a></h1>
   
 
@@ -504,68 +556,6 @@
       
   <div class="tags">
 <a href="/tags/大数据/">大数据</a><a href="/tags/创业/">创业</a><a href="/tags/融资/">融资</a></div>
-
-      
-    </footer>
-    
-  </div>
-  
-</article>
-
-  
-    <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <header>
-    
-  
-    <h1 class="title"><a href="/2013/09/06/R/R语言的小技巧/">R语言的小技巧</a></h1>
-  
-
-    <time datetime="2013-09-05T16:00:00.000Z">
-  <span class="day">6</span><span class="month">9月</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <h3 id="ifelse和if_…_else_…不同">ifelse和if … else …不同</h3>
-<p>认为相同，主要是受到之前经验的影响，不过这里的ifelse是向量化的运算，返回值的长度会和test的长度一致。可以看ifelse的源码：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> (test, yes, no) </div><div class="line">{</div><div class="line">    <span class="keyword">if</span> (is.atomic(test)) </div><div class="line">        storage.mode(test) &lt;- <span class="string">"logical"</span></div><div class="line">    <span class="keyword">else</span> test &lt;- <span class="keyword">if</span> (isS4(test)) </div><div class="line">        as(test, <span class="string">"logical"</span>)</div><div class="line">    <span class="keyword">else</span> as.logical(test)</div><div class="line">    ans &lt;- test</div><div class="line">    ok &lt;- !(nas &lt;- is.na(test))</div><div class="line">    <span class="keyword">if</span> (any(test[ok])) </div><div class="line">        ans[test & ok] &lt;- rep(yes, length.out = length(ans))[test & </div><div class="line">            ok]</div><div class="line">    <span class="keyword">if</span> (any(!test[ok])) </div><div class="line">        ans[!test & ok] &lt;- rep(no, length.out = length(ans))[!test & </div><div class="line">            ok]</div><div class="line">    ans[nas] &lt;- <span class="literal">NA</span></div><div class="line">    ans</div><div class="line">}</div></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; ifelse(c(<span class="literal">T</span>, <span class="literal">F</span>, <span class="literal">T</span>), c(<span class="number">1</span>,<span class="number">2</span>), c(<span class="number">5</span>,<span class="number">6</span>))  <span class="comment"># 长度不够，则会自动补充</span></div><div class="line">[<span class="number">1</span>] <span class="number">1</span> <span class="number">6</span> <span class="number">1</span></div></pre></td></tr></table></figure>
-
-<h3 id="install_RCurld的问题">install RCurld的问题</h3>
-<p>在ubuntu12.04上安装：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">install.packages(<span class="string">"RCurl"</span>)</div></pre></td></tr></table></figure>
-
-<p>提示：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">checking <span class="keyword">for</span> curl-config... no</div><div class="line">Cannot <span class="keyword">find</span> curl-config</div><div class="line">ERROR: configuration failed <span class="keyword">for</span> <span class="keyword">package</span> ‘RCurl’</div></pre></td></tr></table></figure>
-
-<p>解决：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">sudo</span> apt-get install libcurl4-gnutls-dev</div></pre></td></tr></table></figure>
-
-<p>附: <a href="http://cos.name/cn/topic/108303" target="_blank" rel="external">http://cos.name/cn/topic/108303</a></p>
-
-    
-    
-    <footer class="meta">
-      
-      
-  <div class="tags">
-<a href="/tags/R/">R</a><a href="/tags/经验/">经验</a></div>
 
       
     </footer>

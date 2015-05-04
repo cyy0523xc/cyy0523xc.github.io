@@ -72,6 +72,59 @@
   <header>
     
   
+    <h1 class="title"><a href="/2015/05/04/mysql中的TIME_FORMAT与DATE_FORMAT/">mysql中的TIME\_FORMAT与DATE\_FORMAT函数</a></h1>
+  
+
+    <time datetime="2015-05-03T16:00:00.000Z">
+  <span class="day">4</span><span class="month">5月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <p>之前一直使用TIME_FORMAT来格式化日期，如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">TIME_FORMAT</span>(<span class="keyword">CURRENT_TIMESTAMP</span>, <span class="string">'%y%m%d'</span>);</span></div></pre></td></tr></table></figure>
+
+<p>但是今天发现在有些版本的mysql上会返回0，不是想要的结果。查了一下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">TIME_FORMAT(<span class="built_in">time</span>,<span class="built_in">format</span>)  </div><div class="line">这象上面的DATE_FORMAT()函数一样使用，但是<span class="built_in">format</span>字符串只能包含处理小时、分钟和秒的那些格式修饰符。</div><div class="line">其他修饰符产生一个<span class="constant">NULL</span>值或<span class="number">0</span>。</div></pre></td></tr></table></figure>
+
+<h3 id="DATE_FORMAT">DATE_FORMAT</h3>
+<p>改成使用DATE_FORMAT即可：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">DATE_FORMAT</span>(<span class="keyword">CURRENT_TIMESTAMP</span>, <span class="string">'%y%m%d'</span>);</span></div></pre></td></tr></table></figure>
+
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/mysql/">mysql</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
     <h1 class="title"><a href="/2015/04/30/mysql-procedure-select-into-and-set/">mysql存储过程中的select into与局部变量的问题</a></h1>
   
 
