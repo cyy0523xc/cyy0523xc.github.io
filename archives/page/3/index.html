@@ -72,6 +72,59 @@
   <header>
     
   
+    <h1 class="title"><a href="/2014/09/22/shell/shell命令自动补全/">shell命令自动补全</a></h1>
+  
+
+    <time datetime="2014-09-22T07:02:13.000Z">
+  <span class="day">22</span><span class="month">9月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <p>代码如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># github相关操作 </span></div><div class="line"><span class="function"><span class="title">github</span></span>() {</div><div class="line">    <span class="built_in">cd</span>_github_code</div><div class="line">    my_github=git@github.com/cyy053xc/</div><div class="line"></div><div class="line">    <span class="keyword">case</span> <span class="variable">$1</span> <span class="keyword">in</span> </div><div class="line">        <span class="string">"c"</span>|<span class="string">"clone"</span>)</div><div class="line">            git clone <span class="variable">$my_github</span><span class="variable">$2</span><span class="string">".git"</span></div><div class="line">            ;;</div><div class="line">        <span class="string">"l"</span>|<span class="string">"pull"</span>)</div><div class="line">            <span class="built_in">pushd</span> <span class="variable">$my_github</span><span class="variable">$2</span></div><div class="line">            git pull</div><div class="line">            <span class="built_in">popd</span></div><div class="line">            ;;</div><div class="line">        <span class="string">"s"</span>|<span class="string">"push"</span>)</div><div class="line">            <span class="built_in">pushd</span> <span class="variable">$my_github</span><span class="variable">$2</span></div><div class="line">            git pull </div><div class="line">            git commit -am <span class="string">'script commit'</span></div><div class="line">            git push </div><div class="line">            <span class="built_in">popd</span></div><div class="line">            ;;</div><div class="line">        <span class="string">"h"</span>|<span class="string">"help"</span>|*)</div><div class="line">            cat &lt;&lt;EOF</div><div class="line">github [hcls] [path] </div><div class="line"></div><div class="line">usage:</div><div class="line">h|<span class="built_in">help</span>               : <span class="built_in">help</span></div><div class="line">c|clone  project     : git clone {<span class="variable">$my_github</span>}project.git</div><div class="line">l|pull   project     : git pull </div><div class="line">s|push   project     : git push </div><div class="line">EOF</div><div class="line">            ;;</div><div class="line">    <span class="keyword">esac</span></div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment"># 补全函数</span></div><div class="line">function <span class="function"><span class="title">_github</span></span>() {</div><div class="line">    COMPREPLY=()</div><div class="line">    local cur=<span class="variable">${COMP_WORDS[COMP_CWORD]}</span>;</div><div class="line">    local com=<span class="variable">${COMP_WORDS[COMP_CWORD-1]}</span>;</div><div class="line">    <span class="keyword">case</span> <span class="variable">$com</span> <span class="keyword">in</span></div><div class="line">        <span class="string">'github'</span>)</div><div class="line">            COMPREPLY=($(compgen -W <span class="string">'c clone l pull s push h help'</span> -- <span class="variable">$cur</span>))</div><div class="line">            ;;</div><div class="line">        <span class="string">'compile'</span>)</div><div class="line">            local pro=($(awk <span class="string">'{print $1}'</span> project.list))</div><div class="line">            COMPREPLY=($(compgen -W <span class="string">'${pro[@]}'</span> -- <span class="variable">$cur</span>))</div><div class="line">            ;;</div><div class="line">        *)</div><div class="line">            ;;</div><div class="line">    <span class="keyword">esac</span></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span></div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment"># 绑定自动补全函数</span></div><div class="line">complete -F _github github</div></pre></td></tr></table></figure>
+
+<p>从效果上，可以说已经实现了tab键自动补全，不过不是很完美：</p>
+<ul>
+<li>每个函数需要搭配一个额外的补全函数</li>
+<li>补全函数的实现有大量的重复代码</li>
+<li>另外还需要一个额外的命令进行绑定</li>
+</ul>
+<p>理想的应该是：在函数的内部加上一条命令或者一个配置来解决。</p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/shell/">shell</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
     <h1 class="title"><a href="/2014/09/22/vim/vimscript问题汇总/">vimscript问题汇总</a></h1>
   
 
@@ -509,53 +562,6 @@
       
   <div class="tags">
 <a href="/tags/R/">R</a><a href="/tags/经验/">经验</a></div>
-
-      
-    </footer>
-    
-  </div>
-  
-</article>
-
-  
-    <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <header>
-    
-  
-    <h1 class="title"><a href="/2013/10/11/big-data-enterprice-finance/">国内外大数据创业企业的融资情况</a></h1>
-  
-
-    <time datetime="2013-10-10T16:00:00.000Z">
-  <span class="day">11</span><span class="month">10月</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <h3 id="大数据行业融资情况">大数据行业融资情况</h3>
-<p>业余时间整理的，见：<a href="https://docs.google.com/spreadsheet/ccc?key=0AtdtDh06pqwEdHpXUHZQVzZLb0k4U09mUjJqV1gyVWc&amp;usp=sharing" target="_blank" rel="external">https://docs.google.com/spreadsheet/ccc?key=0AtdtDh06pqwEdHpXUHZQVzZLb0k4U09mUjJqV1gyVWc&amp;usp=sharing</a></p>
-<p>另推荐视频：<a href="http://v.youku.com/v_show/id_XNTkyNDI1OTcy.html" target="_blank" rel="external">http://v.youku.com/v_show/id_XNTkyNDI1OTcy.html</a></p>
-<p>及网站：<a href="https://angel.co/big-data" target="_blank" rel="external">https://angel.co/big-data</a></p>
-
-    
-    
-    <footer class="meta">
-      
-      
-  <div class="tags">
-<a href="/tags/大数据/">大数据</a><a href="/tags/创业/">创业</a><a href="/tags/融资/">融资</a></div>
 
       
     </footer>
