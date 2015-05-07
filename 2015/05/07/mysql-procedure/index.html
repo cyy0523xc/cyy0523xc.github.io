@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>mysql存储过程 | 数据明月</title>
+  <meta name="author" content="AlexCai">
+
+  
+  <meta name="description" content="sql存储过程的实现跟一般的语言相比，有点特殊，有很多值得注意的地方，下面以一个支付的存储过程为例：">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="数据明月" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <!-- <script src="http://libs.baidu.com/jquery/1.9.0/jquery.min.js"></script> -->
+
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script src="http://code.jquery.com/jquery-migrate-1.0.0.js"></script>
+
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="site-name">
+    数据明月 
+    <span>心有沉香，无惧浮世！</span>
+</div>
+
+<nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="http://github.com/cyy0523xc/">Github</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+  </ul>
+</nav>
+</header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">mysql存储过程</h1>
+  
+
+    <time datetime="2015-05-06T16:00:00.000Z">
+  <span class="day">7</span><span class="month">5月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <p>sql存储过程的实现跟一般的语言相比，有点特殊，有很多值得注意的地方，下面以一个支付的存储过程为例：</p>
+<a id="more"></a>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div></pre></td><td class="code"><pre><div class="line"># 赏金的缴纳</div><div class="line"># 从用户账户扣钱，加到平台的赏金账户</div><div class="line"># 返回订单ID</div><div class="line"># 相关的数据表：user_info, order_info, order_flow</div><div class="line"># @author alex</div><div class="line"># @date 2015-5-4</div><div class="line"></div><div class="line">DELIMITER //</div><div class="line">DROP PROCEDURE IF EXISTS  proc_money_reward_income //</div><div class="line">CREATE PROCEDURE proc_money_reward_income(</div><div class="line">    in_user_uid    INT,             # 用户ID</div><div class="line">    in_reward      DECIMAL(10,2),   # 赏金金额</div><div class="line">    in_service_fee DECIMAL(10,2),   # 平台服务费</div><div class="line">    in_task_id     INT,             # 任务ID</div><div class="line">    OUT out_error  INT              # 返回状态，0为正常</div><div class="line">)</div><div class="line">label_proc:BEGIN</div><div class="line"></div><div class="line">    DECLARE ym                MEDIUMINT;        # 年份月份</div><div class="line">    DECLARE order_type        TINYINT;          # 订单类型</div><div class="line">    DECLARE order_id          INT;              # 新生成的订单ID</div><div class="line">    DECLARE pf_reward_uid     INT;              # 平台的赏金账户</div><div class="line">    DECLARE pf_fee_uid        INT;              # 平台的服务费账户</div><div class="line">    DECLARE pf_reward_balance DECIMAL(12,2);    # 平台的赏金账户余额</div><div class="line">    DECLARE pf_fee_balance    DECIMAL(12,2);    # 平台服务费账户余额</div><div class="line">    DECLARE user_balance      DECIMAL(12,2);    # 用户账户余额</div><div class="line">    DECLARE total_money       DECIMAL(10,2);    # 用户需要支付的总额</div><div class="line"></div><div class="line">    DECLARE EXIT HANDLER FOR SQLEXCEPTION, NOT FOUND</div><div class="line">    BEGIN</div><div class="line">        # 异常回滚</div><div class="line">        ROLLBACK;</div><div class="line">        SELECT order_id;</div><div class="line">    END;</div><div class="line"></div><div class="line">    # 初始化</div><div class="line">    SET pf_reward_uid = 10;</div><div class="line">    SET pf_fee_uid    = 11;</div><div class="line">    SET order_type    = 1;</div><div class="line">    SET order_id      = 0;</div><div class="line">    SET user_balance  = 0;</div><div class="line">    SET total_money   = in_reward + in_service_fee;</div><div class="line">    SET ym            = DATE_FORMAT(CURRENT_TIMESTAMP, '%Y%m');</div><div class="line"></div><div class="line">    ###########################################</div><div class="line"></div><div class="line">    # 判断用户余额是否足够</div><div class="line">    SELECT `stat_balance` INTO user_balance</div><div class="line">    FROM `yjq_user_info`</div><div class="line">    WHERE `id` = in_user_uid ;</div><div class="line"></div><div class="line">    IF (total_money &gt; user_balance) THEN</div><div class="line">        SET out_error = 10;</div><div class="line">        SELECT order_id;</div><div class="line">        LEAVE label_proc;</div><div class="line">    END IF;</div><div class="line"></div><div class="line">    # 开始事务</div><div class="line">    SET out_error = 1;</div><div class="line">    START TRANSACTION;</div><div class="line"></div><div class="line">    # user_info表: 用户的余额减少</div><div class="line">    UPDATE `yjq_user_info` </div><div class="line">    SET `stat_balance` = `stat_balance` - total_money,</div><div class="line">        `stat_reward` = `stat_reward` + in_reward,</div><div class="line">        `stat_payout` = `stat_payout` + total_money</div><div class="line">    WHERE `id` = in_user_uid;</div><div class="line"></div><div class="line">    # 异常监控点</div><div class="line">    IF (ROW_COUNT() = 0) THEN </div><div class="line">        # 如果影响的结果数为0，则标识状态并回滚</div><div class="line">        SET out_error = 110;</div><div class="line">        SELECT order_id;</div><div class="line">        ROLLBACK;</div><div class="line">        LEAVE label_proc;</div><div class="line">    END IF;</div><div class="line">    SET out_error = 100;   # 如果上一个update语句出错，则执行不到这里</div><div class="line"></div><div class="line">    # 平台的赏金账户的余额增多</div><div class="line">    SELECT `stat_balance` INTO pf_reward_balance </div><div class="line">    FROM `yjq_user_info`</div><div class="line">    WHERE `id` = pf_reward_uid;</div><div class="line"></div><div class="line">    UPDATE `yjq_user_info` </div><div class="line">    SET `stat_balance` = `stat_balance` + in_reward</div><div class="line">    WHERE `id` = pf_reward_uid;</div><div class="line"></div><div class="line">    # 异常监控点</div><div class="line">    IF (ROW_COUNT() = 0) THEN </div><div class="line">        SET out_error = 111;</div><div class="line">        SELECT order_id;</div><div class="line">        ROLLBACK;</div><div class="line">        LEAVE label_proc;</div><div class="line">    END IF;</div><div class="line">    SET out_error = 101;</div><div class="line"></div><div class="line">    # 创建订单(需要预置订单编号)</div><div class="line">    SELECT FLOOR(RAND() * 1000000000) INTO order_id;</div><div class="line"></div><div class="line">    INSERT INTO `yjq_order_info`(`order_num`, `order_type`, `task_id`, `user_uid`, `created_date`, `created_ym`, `pay_time`, `platform_deposit`, `platform_money`, `remark`)</div><div class="line">    VALUES(order_id, order_type, in_task_id, in_user_uid, CURRENT_DATE, ym, CURRENT_TIMESTAMP, in_reward, in_service_fee, 'auto');</div><div class="line"></div><div class="line">    # 异常监控点</div><div class="line">    IF (ROW_COUNT() = 0) THEN </div><div class="line">        SET out_error = 112;</div><div class="line">        SELECT order_id;</div><div class="line">        ROLLBACK;</div><div class="line">        LEAVE label_proc;</div><div class="line">    END IF;</div><div class="line">    SET out_error = 102;</div><div class="line"></div><div class="line">    COMMIT;</div><div class="line"></div><div class="line">    ######################################</div><div class="line"></div><div class="line">    # 返回状态</div><div class="line">    SET out_error = 0;</div><div class="line">    SELECT order_id;</div><div class="line">END //</div><div class="line">DELIMITER ;</div></pre></td></tr></table></figure>
+
+<p>存储过程的测试是相对比较麻烦的，所以这里设置了几个异常监控点，根据调用时返回的状态可以比较明确地知道是那个位置发生的异常。</p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/mysql/">mysql</a><a href="/tags/存储过程/">存储过程</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+</div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2015 AlexCai
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+    try {
+        $('.fancybox').fancybox();
+    } catch(e) {
+        console.log('after_footer:fancybox');
+    }
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+</body>
+</html>
