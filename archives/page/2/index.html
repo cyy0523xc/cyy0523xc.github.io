@@ -72,6 +72,54 @@
   <header>
     
   
+    <h1 class="title"><a href="/2014/11/04/php/封装redis基础类库/">封装redis基础类库</a></h1>
+  
+
+    <time datetime="2014-11-03T16:00:00.000Z">
+  <span class="day">4</span><span class="month">11月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <p>开发的时候，需要用到缓存，经常需要封装各种缓存类，有时为了所谓的缓存通用了，我们对redis做了统一性的封装，结果只能用到redis最基本的kv结构，大大浪费了。</p>
+<p>所以封装redis的时候，应该恰到好处就好了，phpredis本身的api就已经挺好的了。</p>
+<p>下面是一个封装：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">&lt;?php</span></div><div class="line"><span class="comment">/** </span></div><div class="line"> * redis初始化类库</div><div class="line"> *<span class="phpdoc"> @author</span> Alex &lt;cyy0523xc@gmail.com&gt;</div><div class="line"> *<span class="phpdoc"> @copyright</span> IBBD.net</div><div class="line"> *<span class="phpdoc"> @see</span> </div><div class="line"> *<span class="phpdoc"> @todo</span> </div><div class="line"> *<span class="phpdoc"> @version</span> 20141104</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">Common</span>\<span class="title">Model</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">RedisModel</span> </span></div><div class="line">{</div><div class="line">    <span class="comment">// redis对象</span></div><div class="line">    <span class="keyword">private</span> <span class="variable">$handler</span> = <span class="keyword">null</span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 获取Redis缓存对象</div><div class="line">     *<span class="phpdoc"> @param</span> array $options redis连接所需要的参数</div><div class="line">     *<span class="phpdoc"> @return</span> Redis </div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">getInstance</span><span class="params">(array <span class="variable">$options</span> = null)</span></span></div><div class="line">    {</div><div class="line">        <span class="keyword">static</span> <span class="variable">$instance</span> = <span class="keyword">array</span>();</div><div class="line">        <span class="keyword">if</span>(<span class="keyword">empty</span>(<span class="variable">$options</span>)) {</div><div class="line">            <span class="comment">// 加载配置文件</span></div><div class="line">            <span class="variable">$options</span> = C(<span class="string">'CACHE.REDIS_CONFIG'</span>);</div><div class="line">        }</div><div class="line"></div><div class="line">        <span class="variable">$guid</span> = to_guid_string(<span class="variable">$options</span>);</div><div class="line">        <span class="keyword">if</span> (!<span class="keyword">isset</span>(<span class="variable">$instance</span>[<span class="variable">$guid</span>])) {</div><div class="line">            <span class="variable">$obj</span> = <span class="keyword">new</span> <span class="keyword">self</span>(<span class="variable">$options</span>);</div><div class="line">            <span class="variable">$instance</span>[<span class="variable">$guid</span>] = <span class="variable">$obj</span><span class="variable">-&gt;getRedis</span>();</div><div class="line">        }</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> <span class="variable">$instance</span>[<span class="variable">$guid</span>];</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 构造函数</div><div class="line">     *<span class="phpdoc"> @param</span> array $options redis需要的参数 </div><div class="line">     */</div><div class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">(array <span class="variable">$options</span>)</span> </span></div><div class="line">    {</div><div class="line">        <span class="keyword">if</span> ( !extension_loaded(<span class="string">'redis'</span>) ) {</div><div class="line">            error_log(<span class="string">'NOT_SUPPORT:redis'</span>);</div><div class="line">        }</div><div class="line"></div><div class="line">        <span class="variable">$func</span> = <span class="variable">$options</span>[<span class="string">'persistent'</span>] ? <span class="string">'pconnect'</span> : <span class="string">'connect'</span>;</div><div class="line">        <span class="variable">$this</span><span class="variable">-&gt;handler</span>  = <span class="keyword">new</span> \Redis;</div><div class="line">        <span class="variable">$options</span>[<span class="string">'timeout'</span>] === <span class="keyword">false</span> ?</div><div class="line">            <span class="variable">$this</span><span class="variable">-&gt;handler</span><span class="variable">-&gt;$func</span>(<span class="variable">$options</span>[<span class="string">'host'</span>], <span class="variable">$options</span>[<span class="string">'port'</span>]) :</div><div class="line">            <span class="variable">$this</span><span class="variable">-&gt;handler</span><span class="variable">-&gt;$func</span>(<span class="variable">$options</span>[<span class="string">'host'</span>], <span class="variable">$options</span>[<span class="string">'port'</span>], <span class="variable">$options</span>[<span class="string">'timeout'</span>]);</div><div class="line"></div><div class="line">        <span class="comment">// select db </span></div><div class="line">        <span class="keyword">isset</span>(<span class="variable">$options</span>[<span class="string">'db'</span>]) && <span class="variable">$this</span><span class="variable">-&gt;select</span>(<span class="variable">$options</span>[<span class="string">'db'</span>]);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 获取redis处理对象</div><div class="line">     *<span class="phpdoc"> @return</span> Redis </div><div class="line">     */</div><div class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">getRedis</span><span class="params">()</span></span></div><div class="line">    {</div><div class="line">        <span class="keyword">return</span> <span class="variable">$this</span><span class="variable">-&gt;handler</span>;</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/php/">php</a><a href="/tags/redis/">redis</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
     <h1 class="title"><a href="/2014/10/27/vim/book-vim实用技巧-模式2/">vim实用技巧-模式2</a></h1>
   
 
@@ -639,70 +687,6 @@
       
   <div class="tags">
 <a href="/tags/shell/">shell</a><a href="/tags/export/">export</a></div>
-
-      
-    </footer>
-    
-  </div>
-  
-</article>
-
-  
-    <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <header>
-    
-  
-    <h1 class="title"><a href="/2014/09/28/javascript/javascript的promise模式/">jquery的promise模式</a></h1>
-  
-
-    <time datetime="2014-09-28T12:01:25.000Z">
-  <span class="day">28</span><span class="month">9月</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <h2 id="Promise">Promise</h2>
-<p>典型的ajax调用：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$.ajax({</div><div class="line">    url:     <span class="string">'/url'</span>,</div><div class="line">    success: successFunction,</div><div class="line">    error:   errorFunction</div><div class="line">});</div></pre></td></tr></table></figure>
-
-<p>这个实现没有问题，但是耦合性比较高，不够优美，用promise实现如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$.ajax({url: <span class="string">'/url'</span>})</div><div class="line">.done(successFunction)</div><div class="line">.done(successFunction2)</div><div class="line">.fail(errorFunction);</div><div class="line"></div><div class="line"><span class="comment">// 更通用的方式</span></div><div class="line"></div><div class="line">$.when(ajax({url: <span class="string">'/url'</span>}))     <span class="comment">// $.when(promise)</span></div><div class="line">.done(successFunction)</div><div class="line">.fail(errorFunction);</div></pre></td></tr></table></figure>
-
-<p>好处如下：</p>
-<ul>
-<li>你可以多次调用done()和fail()函数，并使用不同的回调函数。或许你的一个回调函数用来停止动画，一个用来发起一个新的AJAX请求，一个用来将接受到的数据展示给用户。</li>
-<li>即使在AJAX调用完成之后，你依然可以调用done()和fail()函数，并且回调函数可以立即执行。不同的状态之间并不会发生变量混乱。当一个AJAX调用结束时，它保持了一个成功状态或者失败状态，这个状态不会发生改变。</li>
-</ul>
-<h2 id="Deferred">Deferred</h2>
-<p>那么Deferred和Promise之间有什么区别呢？正如你在前面看到的，一个promise就是一个由异步函数返回的对象。当你想要自己编写一个这样的函数时你需要使用一个deferred。</p>
-<p>一个promise对象有done和fail两个函数，Deferred有两个与之对应的函数：resolve和reject。使用Deferred对象可以构造异步模型。如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">wait</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">var</span> deferred = $.Deferred();</div><div class="line"></div><div class="line">    <span class="comment">// 异步任务（例如异步请求数据）</span></div><div class="line">    setTimeout(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        deferred.resolve();</div><div class="line">    }, <span class="number">2000</span>);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> deferred.promise();</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>see: <a href="http://www.html-js.com/article/Study-JavaScript-jQuery-Deferred-and-promise-every-day" target="_blank" rel="external">http://www.html-js.com/article/Study-JavaScript-jQuery-Deferred-and-promise-every-day</a> </p>
-
-    
-    
-    <footer class="meta">
-      
-  <div class="cats">
-<a href="/categories/javascript/">javascript</a></div>
-
-      
-  <div class="tags">
-<a href="/tags/javascript/">javascript</a><a href="/tags/jquery/">jquery</a><a href="/tags/promise/">promise</a><a href="/tags/异步编程/">异步编程</a></div>
 
       
     </footer>
