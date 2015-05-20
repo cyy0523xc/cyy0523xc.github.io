@@ -72,6 +72,61 @@
   <header>
     
   
+    <h1 class="title"><a href="/2014/11/23/接口扩展性的一点小技巧/">提升接口可扩展性的一点小技巧</a></h1>
+  
+
+    <time datetime="2014-11-22T16:00:00.000Z">
+  <span class="day">23</span><span class="month">11月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h3 id="现实情况">现实情况</h3>
+<p>接口涉及到三个方面：</p>
+<ul>
+<li>服务器端，简称s；</li>
+<li>自己封装的浏览器，简称b；</li>
+<li>前端js，简称j。</li>
+</ul>
+<p>b启动之后，会定时轮询s，获取相应的信息，并把其中的一部分反馈给j。开始时对s的返回值设计如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">{</div><div class="line">    status: <span class="number">0</span>,                         <span class="comment">// 标识成功还是失败（0表示成功，非0表示失败）</span></div><div class="line">    data: {                            <span class="comment">// 打印数据</span></div><div class="line">        photo:    <span class="number">123</span>,                 <span class="comment">// 【整型】照片ID</span></div><div class="line">        preview:  <span class="string">'http://...'</span>,        <span class="comment">// 【字符串】预览图地址：给前端预览使用</span></div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>其中，preview字段是缩略图的地址，b在接收到之后，需要传递给前端的js去展示。理想情况下，这可以运行得很好，但是b端一旦固定下来，是很难改的，如果我们需要传更多的数据给j端怎么办？</p>
+
+      <a href="http://cyy0523xc.github.io/2014/11/23/接口扩展性的一点小技巧/" target="_blank" class="post-read-more">READ MORE</a>
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/接口开发/">接口开发</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
     <h1 class="title"><a href="/2014/11/16/vim/book-vim实用技巧-快速移动/">vim实用技巧之快速移动与跳转</a></h1>
   
 
@@ -566,84 +621,6 @@
       
   <div class="tags">
 <a href="/tags/vim/">vim</a><a href="/tags/markdown/">markdown</a><a href="/tags/vimscript/">vimscript</a></div>
-
-      
-    </footer>
-    
-  </div>
-  
-</article>
-
-  
-    <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <header>
-    
-  
-    <h1 class="title"><a href="/2014/10/11/shell/shell记录/">shell记录</a></h1>
-  
-
-    <time datetime="2014-10-10T16:00:00.000Z">
-  <span class="day">11</span><span class="month">10月</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <h1 id="多行复制">多行复制</h1>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="number">9</span>,<span class="number">14</span> <span class="built_in">copy</span> <span class="number">45</span>  # <span class="built_in">copy</span> </div><div class="line"></div><div class="line"><span class="number">9</span>,<span class="number">14</span> <span class="keyword">move</span> <span class="number">45</span>  # <span class="keyword">move</span></div><div class="line"><span class="number">9</span>,<span class="number">14</span> <span class="keyword">m</span> <span class="number">45</span>  # <span class="keyword">move</span></div></pre></td></tr></table></figure>
-
-<h1 id="粘贴到行首">粘贴到行首</h1>
-<p>使用大写 <strong>P</strong> </p>
-<h1 id="在某个目录下查找包含某个字符串的文件">在某个目录下查找包含某个字符串的文件</h1>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">find</span> . | xargs <span class="keyword">grep</span> -<span class="keyword">ri</span> <span class="string">"some string"</span></div></pre></td></tr></table></figure>
-
-<h3 id="xargs命令">xargs命令</h3>
-<p>作用：将参数列表转换成小块分段传递给其他命令，以避免参数列表过长的问题。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="title">rm</span> `find /path -<span class="typedef"><span class="keyword">type</span> f`</span></div><div class="line"></div><div class="line"><span class="preprocessor"># 如果path目录下文件过多就会因为“参数列表过长”而报错无法执行。但改用xargs以后，问题即获解决。</span></div><div class="line"></div><div class="line"><span class="title">find</span> /path -<span class="typedef"><span class="keyword">type</span> f -print0 | xargs -0 rm </span></div><div class="line"></div><div class="line"><span class="preprocessor"># xargs将find产生的长串文件列表拆散成多个子串，然后对每个子串调用rm。</span></div></pre></td></tr></table></figure>
-
-<h1 id="查找指定时间范围的文件">查找指定时间范围的文件</h1>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">find</span> ./<span class="regexp">*.jpg</span> -newermt <span class="string">"2013-10-28"</span> ! -newermt <span class="string">"2013-10-29"</span></div></pre></td></tr></table></figure>
-
-<h1 id="字符串参与条件判断或者计算时，必须加上双引号">字符串参与条件判断或者计算时，必须加上双引号</h1>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> [ -n <span class="string">"<span class="variable">$string</span>"</span> ]; </div><div class="line"></div><div class="line">string=<span class="string">"test  test2"</span></div><div class="line">your_func <span class="variable">$string</span>      <span class="comment"># 错误：函数会接收到两个参数</span></div><div class="line">your_func <span class="string">"<span class="variable">$string</span>"</span>    <span class="comment"># 正常：函数正常接收到一个参数</span></div></pre></td></tr></table></figure>
-
-<p>注意： <strong>shell会把字符串按照IFS进行分割处理</strong></p>
-<h1 id="多行字符串：IFS换行符">多行字符串：IFS换行符</h1>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">ifs=<span class="variable">$IFS</span> </div><div class="line">IFS=$`\n`              <span class="comment"># 注意这里，不能使用: IFS="\n" or IFS='\n'</span></div><div class="line">config=`cat &lt;&lt;EOF</div><div class="line">output: .user.js</div><div class="line"></div><div class="line">dese:</div><div class="line"><span class="comment">// ==UserScript==</span></div><div class="line"><span class="comment">// @name         Userscript</span></div><div class="line"><span class="comment">// @namespace    http://cyy0523xc.github.io/</span></div><div class="line"><span class="comment">// @version      0.1</span></div><div class="line"><span class="comment">// @description  something </span></div><div class="line"><span class="comment">// @match        http://*/*</span></div><div class="line"><span class="comment">// @copyright    2014, Alex(cyy0523xc@gmail.com)</span></div><div class="line"><span class="comment">// ==/UserScript==</span></div><div class="line">    </div><div class="line">input: </div><div class="line">- </div><div class="line">   </div><div class="line">EOF`</div><div class="line"></div><div class="line"><span class="keyword">echo</span> <span class="variable">$config</span></div><div class="line">IFS=<span class="variable">$ifs</span></div></pre></td></tr></table></figure>
-
-<h1 id="批量重命名文件">批量重命名文件</h1>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rename <span class="string">'s/201[34]\-[01][0-9]\-[012][0-9]\-//'</span> *.md</div></pre></td></tr></table></figure>
-
-<h1 id="期待一元表达式">期待一元表达式</h1>
-<p>异常信息：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">bash</span>: <span class="string">[: h: 期待一元表达式]</span></div></pre></td></tr></table></figure>
-
-<p>对应语句：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> [ <span class="string">"h"</span> = <span class="variable">$1</span> ]</div><div class="line"></div><div class="line"><span class="comment"># 如果变量未定义的话，则报错，应改成：</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> [ <span class="string">"h"</span> = <span class="string">"<span class="variable">$1</span>"</span> ]</div></pre></td></tr></table></figure>
-
-
-    
-    
-    <footer class="meta">
-      
-  <div class="cats">
-<a href="/categories/record/">record</a></div>
-
-      
-  <div class="tags">
-<a href="/tags/shell/">shell</a></div>
 
       
     </footer>

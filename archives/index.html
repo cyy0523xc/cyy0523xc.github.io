@@ -72,6 +72,80 @@
   <header>
     
   
+    <h1 class="title"><a href="/2015/05/13/vim/vim-plugin-admin-ma6174/">ma6174/vim所包含的插件</a></h1>
+  
+
+    <time datetime="2015-05-12T16:00:00.000Z">
+  <span class="day">13</span><span class="month">5月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <p>在用了几天的spf13-vim这个配置之后，觉得很不顺手，重新换回了这个配置文件 <a href="https://github.com/ma6174/vim" target="_blank" rel="external">https://github.com/ma6174/vim</a> 。它所包含的插件如下：</p>
+<h3 id="gmarik/vundle">gmarik/vundle</h3>
+<p>这个不用说。。。</p>
+<h3 id="tpope/vim-fugitive">tpope/vim-fugitive</h3>
+<p>a Git wrapper so awesome, it should be illegal</p>
+<p><a href="https://github.com/tpope/vim-fugitive" target="_blank" rel="external">https://github.com/tpope/vim-fugitive</a> </p>
+<h3 id="rstacruz/sparkup">rstacruz/sparkup</h3>
+<p>Sparkup lets you write HTML code faster. </p>
+<p><a href="https://github.com/rstacruz/sparkup/" target="_blank" rel="external">https://github.com/rstacruz/sparkup/</a> </p>
+<h3 id="Yggdroot/indentLine">Yggdroot/indentLine</h3>
+<h3 id="L9">L9</h3>
+<h3 id="FuzzyFinder">FuzzyFinder</h3>
+<h3 id="command-t">command-t</h3>
+<p>git://github.com/wincent/command-t.git </p>
+<h3 id="Auto-Pairs">Auto-Pairs</h3>
+<h3 id="python-imports-vim">python-imports.vim</h3>
+<h3 id="CaptureClipboard">CaptureClipboard</h3>
+<h3 id="ctrlp-modified-vim">ctrlp-modified.vim</h3>
+<h3 id="last_edit_marker-vim">last_edit_marker.vim</h3>
+<h3 id="synmark-vim">synmark.vim</h3>
+<h3 id="SQLComplete-vim">SQLComplete.vim</h3>
+<h3 id="Javascript-OmniCompletion-with-YUI-and-j">Javascript-OmniCompletion-with-YUI-and-j</h3>
+<h3 id="jslint-vim">jslint.vim</h3>
+<h3 id="pangloss/vim-javascript">pangloss/vim-javascript</h3>
+<h3 id="Vim-Script-Updater">Vim-Script-Updater</h3>
+<h3 id="ctrlp-vim">ctrlp.vim</h3>
+<h3 id="tacahiroy/ctrlp-funky">tacahiroy/ctrlp-funky</h3>
+<h3 id="jsbeautify">jsbeautify</h3>
+<h3 id="The-NERD-Commenter">The-NERD-Commenter</h3>
+<h3 id="django_templates-vim">django_templates.vim</h3>
+<h3 id="Django-Projects">Django-Projects</h3>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/vim/">vim</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
     <h1 class="title"><a href="/2015/05/12/git-manage-nginx-conf/">使用git来管理nginx的站点配置文件</a></h1>
   
 
@@ -531,61 +605,6 @@
       
   <div class="tags">
 <a href="/tags/laravel/">laravel</a><a href="/tags/php/">php</a><a href="/tags/数据库/">数据库</a></div>
-
-      
-    </footer>
-    
-  </div>
-  
-</article>
-
-  
-    <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <header>
-    
-  
-    <h1 class="title"><a href="/2014/11/23/接口扩展性的一点小技巧/">提升接口可扩展性的一点小技巧</a></h1>
-  
-
-    <time datetime="2014-11-22T16:00:00.000Z">
-  <span class="day">23</span><span class="month">11月</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <h3 id="现实情况">现实情况</h3>
-<p>接口涉及到三个方面：</p>
-<ul>
-<li>服务器端，简称s；</li>
-<li>自己封装的浏览器，简称b；</li>
-<li>前端js，简称j。</li>
-</ul>
-<p>b启动之后，会定时轮询s，获取相应的信息，并把其中的一部分反馈给j。开始时对s的返回值设计如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">{</div><div class="line">    status: <span class="number">0</span>,                         <span class="comment">// 标识成功还是失败（0表示成功，非0表示失败）</span></div><div class="line">    data: {                            <span class="comment">// 打印数据</span></div><div class="line">        photo:    <span class="number">123</span>,                 <span class="comment">// 【整型】照片ID</span></div><div class="line">        preview:  <span class="string">'http://...'</span>,        <span class="comment">// 【字符串】预览图地址：给前端预览使用</span></div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>其中，preview字段是缩略图的地址，b在接收到之后，需要传递给前端的js去展示。理想情况下，这可以运行得很好，但是b端一旦固定下来，是很难改的，如果我们需要传更多的数据给j端怎么办？</p>
-
-      <a href="http://cyy0523xc.github.io/2014/11/23/接口扩展性的一点小技巧/" target="_blank" class="post-read-more">READ MORE</a>
-    
-    
-    <footer class="meta">
-      
-      
-  <div class="tags">
-<a href="/tags/接口开发/">接口开发</a></div>
 
       
     </footer>
