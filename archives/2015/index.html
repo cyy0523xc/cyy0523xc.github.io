@@ -72,6 +72,87 @@
   <header>
     
   
+    <h1 class="title"><a href="/2015/06/07/gitlab-best-practice/">Gitlab未必最佳实践</a></h1>
+  
+
+    <time datetime="2015-06-06T16:00:00.000Z">
+  <span class="day">7</span><span class="month">6月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h3 id="背景及目标">背景及目标</h3>
+<p>公司使用git和gitlab有相当一段时间了，一直只是用来做代码管理，gitlab的很多功能都没有用上。经过一段时间的试用，从上周开始，在一个项目中开始推行gitlab的其他功能，重点是代码评论，里程碑和Issue，主要想达到的目标是：</p>
+<ul>
+<li>项目节奏能有一个更好的把控。</li>
+<li>更加有效的进行bug管理。</li>
+<li>使得code review可以进行下去。</li>
+</ul>
+<p>先说说这一周多团队试用的结果：</p>
+<ul>
+<li>bug管理方面的确有了很大的提升。</li>
+<li>节奏好了点，但是里程碑规划还不够科学，主要项目处在测试阶段，大家对自己的开发时间还没有比较好的把握。</li>
+<li>单纯试用gitlab的代码评论功能来做code review略显单薄，没有比较好标识是否审核过的状态。</li>
+</ul>
+<h3 id="里程碑">里程碑</h3>
+<p>里程碑功能主要用来把控项目的进度及节奏，对于我们来说，我们是以周为单位进行跟进。只有项目的master用户有权限设置和编辑里程碑。</p>
+<ul>
+<li>所有项目以周为单位建立里程碑</li>
+<li>原则上本周的里程碑不接受新的Issue，除非是严重的bug，需要马上修复</li>
+<li>除了本周正在进行的里程碑之外，还应该往后规划一个或者多个里程碑</li>
+<li>里程碑的名字以周五的日期为标识，例如“v2015.06.05”   （方便可以根据里程碑的名字对个人的工作进行汇总查看）</li>
+</ul>
+<h3 id="Issue">Issue</h3>
+<ul>
+<li>Issue是谁提出的，谁就要负责跟进Issue的解决情况。</li>
+<li>每个Issue从属一个里程碑</li>
+<li>提Issue的时候需要指定给一个人（谁来完成这个Issue），如果有些Issue不知道应该指派给谁，就直接指派给项目负责人</li>
+<li>一个Issue可以是一个bug，一个建议，一个特性，总之是一项可以指派给一个具体的人的任务。</li>
+<li>可以自己提Issue指派给自己，例如发现某块代码需要优化或者重构等等。</li>
+<li>如果是代码相关的Issue，最后在git commit时最好能够关联对应的Issue</li>
+<li>指派错误时可以重新指派：例如A被指派给一个Issue，但是A觉得这个应该由B来完成，这时A可以把这个Issue重新指派给B</li>
+<li>当Issue被关闭时，其发起人应该定时（例如每天的某个时间）检查那些关闭列表（或者可以直接查看邮件列表），并检查，如果确实已经完成，可以打上一个已完成的标签，否则可以评论后重新打开该Issue。</li>
+<li>Issue的标题应该基本说明了问题，里面的描述应该更多的是辅助性描述</li>
+</ul>
+<h3 id="Code_Review">Code Review</h3>
+<ul>
+<li>大家提交的每次commit都会有记录，可以直接进行diff操作，并且可以评论。</li>
+<li>除了指定需要相互review的同事，你对谁的代码有兴趣，都可以直接查看或者评论。</li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/git/">git</a><a href="/tags/gitlab/">gitlab</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
     <h1 class="title"><a href="/2015/05/13/vim/vim-plugin-admin-ma6174/">ma6174/vim所包含的插件</a></h1>
   
 
@@ -479,72 +560,6 @@
   <header>
     
   
-    <h1 class="title"><a href="/2015/04/28/mysql存储过程管理/">mysql存储过程管理（laravel下）</a></h1>
-  
-
-    <time datetime="2015-04-27T16:00:00.000Z">
-  <span class="day">28</span><span class="month">4月</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <p>直接在mysql这个层面（例如命令行或者phpmyadmin等）管理存储过程是一个非常麻烦的事情：</p>
-<ul>
-<li>变更很难管理</li>
-<li>无法进行版本控制</li>
-</ul>
-<h3 id="第一步：把存储过程文件都放到git下管理">第一步：把存储过程文件都放到git下管理</h3>
-<p>例如放在项目的sql目录下：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ ls sql/</div><div class="line">proc_money_appeal_payout.sql             proc_money_apply_cash_payout.sql</div><div class="line">proc_money_apply_cash_income_close.sql   proc_money_reward_income.sql</div><div class="line">proc_money_apply_cash_income_fail.sql    proc_money_reward_payout.sql</div><div class="line">proc_money_apply_cash_income_finish.sql  proc_money_security_deposit_income.sql</div><div class="line">proc_money_apply_cash_income.sql         proc_money_security_deposit_payout.sql</div></pre></td></tr></table></figure>
-
-<h3 id="第二步：生成导入数据库的sql文件">第二步：生成导入数据库的sql文件</h3>
-<p>如果项目的存储过程比较多，每次更新时都可能会变得很麻烦，所以需要统一的导入入口，例如sql目录下生成source.sql文件，内容如下：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">// vim sql/source.sql</div><div class="line">source /home/code/ibbd/yanjiuquan-php/sql/proc_money_appeal_payout.sql;</div><div class="line">source /home/code/ibbd/yanjiuquan-php/sql/proc_money_apply_cash_income.sql;</div><div class="line">source /home/code/ibbd/yanjiuquan-php/sql/proc_money_apply_cash_income_close.sql;</div><div class="line">source /home/code/ibbd/yanjiuquan-php/sql/proc_money_apply_cash_income_fail.sql;</div><div class="line">source /home/code/ibbd/yanjiuquan-php/sql/proc_money_apply_cash_income_finish.sql;</div><div class="line">source /home/code/ibbd/yanjiuquan-php/sql/proc_money_apply_cash_payout.sql;</div><div class="line">source /home/code/ibbd/yanjiuquan-php/sql/proc_money_apply_cash_payout_close.sql;</div><div class="line">source /home/code/ibbd/yanjiuquan-php/sql/proc_money_apply_cash_payout_finish.sql;</div><div class="line">source /home/code/ibbd/yanjiuquan-php/sql/proc_money_reward_income.sql;</div></pre></td></tr></table></figure>
-
-<p>说明：这个source文件不应该加入git版本控制中。</p>
-<p>这样只需要在命令行中，source这个文件即可：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">source /path/to/source.sql</div></pre></td></tr></table></figure>
-
-<h3 id="第三步：自动生成source-sql">第三步：自动生成source.sql</h3>
-<p>如果手动管理这个文件，也是挺麻烦的，可以结合laravel自动生成：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Database</span>\<span class="title">Seeder</span>;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ProcdureInitTableSeeder</span> <span class="keyword">extends</span> <span class="title">Seeder</span> </span>{</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">run</span><span class="params">()</span></span></div><div class="line">    {</div><div class="line">        <span class="variable">$path</span>  = <span class="string">'sql/proc_*.sql'</span>;</div><div class="line">        <span class="variable">$root</span>  = getcwd();</div><div class="line">        <span class="variable">$files</span> = glob(<span class="variable">$path</span>);</div><div class="line"></div><div class="line">        <span class="variable">$source_file</span> = <span class="variable">$root</span> . <span class="string">'/sql/source.sql'</span>;</div><div class="line">        file_put_contents(<span class="variable">$source_file</span>, <span class="string">"# @desc   导入及更新存储过程结构, 生成命令：php artisan db:seed\n"</span>);</div><div class="line">        file_put_contents(<span class="variable">$source_file</span>, <span class="string">"# @author Alex\n"</span>, FILE_APPEND);</div><div class="line">        file_put_contents(<span class="variable">$source_file</span>, <span class="string">"# @date   "</span> . date(<span class="string">'Y-m-d'</span>) . <span class="string">"\n\n"</span>, FILE_APPEND);</div><div class="line">        <span class="keyword">foreach</span> (<span class="variable">$files</span> <span class="keyword">as</span> <span class="variable">$file</span>) {</div><div class="line">            <span class="variable">$sql</span> = <span class="string">"source {$root}/{$file};\n"</span>;</div><div class="line">            file_put_contents(<span class="variable">$source_file</span>, <span class="variable">$sql</span>, FILE_APPEND);</div><div class="line">        }</div><div class="line">    }</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
-
-<h3 id="The_last">The last</h3>
-<p>每次变化的时候，还是需要手动source一下，略麻烦。。。暂时没有更好的方式。。。</p>
-
-    
-    
-    <footer class="meta">
-      
-      
-  <div class="tags">
-<a href="/tags/mysql/">mysql</a><a href="/tags/php/">php</a><a href="/tags/laravel/">laravel</a></div>
-
-      
-    </footer>
-    
-  </div>
-  
-</article>
-
-  
-    <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <header>
-    
-  
     <h1 class="title"><a href="/2015/04/28/php/laravel项目中的数据表设计规范/">laravel项目中的数据表设计规范及使用方式</a></h1>
   
 
@@ -617,6 +632,8 @@
 
   <nav id="pagenavi">
   
+  
+    <a href="/archives/2015/page/2/" class="alignright next">Next</a>
   
   <div class="clearfix"></div>
 </nav>
