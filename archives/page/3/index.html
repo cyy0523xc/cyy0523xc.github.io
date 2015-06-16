@@ -72,6 +72,91 @@
   <header>
     
   
+    <h1 class="title"><a href="/2014/10/14/hexo记录/">hexo记录</a></h1>
+  
+
+    <time datetime="2014-10-13T16:00:00.000Z">
+  <span class="day">14</span><span class="month">10月</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h3 id="加上阅读更多的链接">加上阅读更多的链接</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor"># 针对phase主题</span></div><div class="line">vim <span class="keyword">layout</span>/_partial/article.ejs</div></pre></td></tr></table></figure>
+
+<p>找到对应的地方，加上相应的代码，如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="vbscript">&lt;% <span class="keyword">if</span> (item.excerpt && index){ %&gt;</span></div><div class="line">  <span class="vbscript">&lt;%- item.excerpt %&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"&lt;%- item.permalink %&gt;"</span> <span class="attribute">target</span>=<span class="value">"_blank"</span> <span class="attribute">class</span>=<span class="value">"post-read-more"</span>&gt;</span>READ MORE<span class="tag">&lt;/<span class="title">a</span>&gt;</span></div><div class="line"><span class="vbscript">&lt;% } <span class="keyword">else</span> { %&gt;</span></div><div class="line">  <span class="vbscript">&lt;%- item.content %&gt;</span></div><div class="line"><span class="vbscript">&lt;% } %&gt;</span></div></pre></td></tr></table></figure>
+
+<p>其中的超链接部分就是新增的。然后就是修改样式。。。</p>
+<h3 id="f-browser-msie没有定义">f.browser.msie没有定义</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># @see: http://stackoverflow.com/questions/14344289/fancybox-doesnt-work-with-jquery-v1-9-0-f-browser-is-undefined-cannot-read/14344290</div><div class="line"></div><div class="line"># vim themes/phase/layout/_partial/head.ejs</div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://code.jquery.com/jquery-latest.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"></div><div class="line"># replace by:</div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://code.jquery.com/jquery-latest.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://code.jquery.com/jquery-migrate-1.0.0.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<h3 id="文章摘要">文章摘要</h3>
+<p>在需要的地方加上：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--more--&gt;</span></div></pre></td></tr></table></figure>
+
+<h3 id="插入数学公式">插入数学公式</h3>
+<p>Mathjax的语法和LaTeX一致，在markdown中直接插入即可(注意上面我们修改了mathjax默认的inlineMath选项)，下面举些例子，更多语法请参考 <a href="http://www.lsv.ens-cachan.fr/~markey/LaTeX/doc/Companion-chapter8.pdf" target="_blank" rel="external">LaTeX Higher Mathematics</a>：</p>
+<p><a href="http://blog.163.com/goldman2000@126/blog/static/167296895201221242646561/" target="_blank" rel="external">LaTeX入门</a></p>
+<p>插入方程组:</p>
+<p>\begin{aligned}<br>\dot{x} &amp; = \sigma(y-x) \\<br>\dot{y} &amp; = \rho x - y - xz \\<br>\dot{z} &amp; = -\beta z + xy<br>\end{aligned}</p>
+<p>插入矩阵：</p>
+<p>\begin{bmatrix}<br>1 &amp; 2\\<br>3 &amp; 4<br>\end{bmatrix}</p>
+<p>薛定谔方程：</p>
+<p>$$ \hbar\frac{\partial \psi}{\partial t}<br>= \frac{-\hbar^2}{2m} \left(<br>\frac{\partial^2}{\partial x^2}</p>
+<ul>
+<li>\frac{\partial^2}{\partial y^2}</li>
+<li>\frac{\partial^2}{\partial z^2}<br>\right<br>) \psi + V \psi. $$</li>
+</ul>
+<p>see: <a href="http://www.winterland.me/2013/12/hexo-mathjax/" target="_blank" rel="external">http://www.winterland.me/2013/12/hexo-mathjax/</a></p>
+<p>vim themesfolder/layout/_partial/mathjax.ejs</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- mathjax config similar to math.stackexchange --&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/x-mathjax-config"</span>&gt;</span><span class="javascript"></span></div><div class="line">MathJax.Hub.Config({</div><div class="line">    tex2jax: {</div><div class="line">        inlineMath: [ [<span class="string">'$'</span>,<span class="string">'$'</span>], [<span class="string">"\\("</span>,<span class="string">"\\)"</span>]  ],</div><div class="line">        processEscapes: <span class="literal">true</span></div><div class="line"></div><div class="line">    }</div><div class="line"></div><div class="line">});</div><div class="line"><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/x-mathjax-config"</span>&gt;</span><span class="javascript"></span></div><div class="line">MathJax.Hub.Config({</div><div class="line">    tex2jax: {</div><div class="line">        skipTags: [<span class="string">'script'</span>, <span class="string">'noscript'</span>, <span class="string">'style'</span>, <span class="string">'textarea'</span>, <span class="string">'pre'</span>, <span class="string">'code'</span>]</div><div class="line"></div><div class="line">    }</div><div class="line"></div><div class="line">});</div><div class="line"><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/x-mathjax-config"</span>&gt;</span><span class="javascript"></span></div><div class="line">MathJax.Hub.Queue(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">var</span> all = MathJax.Hub.getAllJax(), i;</div><div class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i &lt; all.length; i += <span class="number">1</span>) {</div><div class="line">        all[i].SourceElement().parentNode.className += <span class="string">' has-jax'</span>;</div><div class="line"></div><div class="line">    }</div><div class="line"></div><div class="line">});</div><div class="line"><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<h3 id="自定义页面">自定义页面</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo n page <span class="string">"about"</span></div></pre></td></tr></table></figure>
+
+<h3 id="加载慢的问题">加载慢的问题</h3>
+<p>通常是因为加载外部资源超时，例如google开放的jquery库等。修改即可。</p>
+<h3 id="常用命令">常用命令</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">hexo clean  <span class="comment"># deploy到github时，有时需要先运行该命令，例如修改样式时</span></div><div class="line">hexo g</div><div class="line">hexo d</div><div class="line">hexo s</div><div class="line">hexo n <span class="string">"title"</span>   <span class="comment"># 生成文章</span></div></pre></td></tr></table></figure>
+
+
+    
+    
+    <footer class="meta">
+      
+  <div class="cats">
+<a href="/categories/Record/">Record</a></div>
+
+      
+  <div class="tags">
+<a href="/tags/hexo/">hexo</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
     <h1 class="title"><a href="/2014/10/13/vim/markdown中快速进行表格对齐/">在markdown中快速进行表格对齐</a></h1>
   
 
@@ -581,63 +666,6 @@
       
   <div class="tags">
 <a href="/tags/vim/">vim</a><a href="/tags/vimscript/">vimscript</a></div>
-
-      
-    </footer>
-    
-  </div>
-  
-</article>
-
-  
-    <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <header>
-    
-  
-    <h1 class="title"><a href="/2014/09/18/vim/vim的模式/">vim的模式</a></h1>
-  
-
-    <time datetime="2014-09-18T07:36:31.000Z">
-  <span class="day">18</span><span class="month">9月</span>
-</time>
-  </header>
-  <div class="entry-content">
-    
-      <h2 id="通常模式(n)">通常模式(n)</h2>
-<p>在其它任何一个模式下,用ESC或者 ctrl+c 键可以退到通常模式</p>
-<h2 id="插入模式(i)">插入模式(i)</h2>
-<p>在这个模式下,vim像一个常见的编辑器.在通常模式下,用i或者a可以进行本模式,当然,还有一些其它命令也可以.</p>
-<h2 id="可视模式(v)">可视模式(v)</h2>
-<p>在这个模式下,可以使用hjkl进行选择.然后进行copy,paste或者其它操作. 在通常模式下,用 <strong>v or shift+v</strong> 命令进行可视模式.</p>
-<h2 id="列块操作模式(V)">列块操作模式(V)</h2>
-<p>这是块操作模式. 在通常模式下,用 <strong>ctrl+v</strong> 进入本模式.</p>
-<p>例如注释多行代码等（ <strong>I, #, ESC</strong> ）</p>
-<p>还有 <strong>行尾列块操作模式</strong> ：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gg, ctrl+v, <span class="constant">G</span>, <span class="variable">$,</span> <span class="constant">A</span></div></pre></td></tr></table></figure>
-
-<h2 id="修改模式(R)">修改模式(R)</h2>
-<p>这是改写的模式.很多软件法用insert键来完成这个切换.在vim中,从通常模式用R即可进入改写模式.</p>
-
-    
-    
-    <footer class="meta">
-      
-      
-  <div class="tags">
-<a href="/tags/vim/">vim</a></div>
 
       
     </footer>
